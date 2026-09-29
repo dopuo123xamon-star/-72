@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-database-compat.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg:#05030c;--gold:#ffd966;--purple:#b06eff;--green:#4ade80;--red:#ef4444;--blue:#5096ff;--text:#f0e9ff;--muted:#8b76ad;--line:rgba(160,100,255,.14);--card:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.92))}
@@ -45,9 +45,12 @@ body:not(.is-nikita) .editable-field,body:not(.is-nikita) .staff-photo,body:not(
 .ws-lbl{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.6px;font-weight:700;margin-top:.5rem}
 .welcome-divider{position:relative;z-index:1;text-align:center;color:#5f4d7a;font-size:.76rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:1.4rem 0 1rem}
 .code-input{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,215,0,.35);border-radius:1rem;padding:1.1rem 3rem 1.1rem 1.2rem;color:var(--gold);font-family:ui-monospace,monospace;font-size:1.4rem;text-align:center;letter-spacing:8px;font-weight:700;outline:none;margin-bottom:.8rem;position:relative;z-index:1}
+.code-input:focus{border-color:var(--gold);box-shadow:0 0 30px -5px rgba(255,215,0,.5)}
+.code-input::placeholder{letter-spacing:4px;color:#8b76ad}
 .code-wrap{position:relative;z-index:1}
-.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0}
-.welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);width:100%;position:relative;z-index:1;margin-bottom:.7rem}
+.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0;line-height:1}
+.welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);transition:transform .2s;width:100%;position:relative;z-index:1;margin-bottom:.7rem;box-shadow:0 20px 45px -12px rgba(255,215,0,.75)}
+.welcome-btn:hover{transform:translateY(-3px)}
 .welcome-status{min-height:1.2rem;font-size:.88rem;font-weight:800;text-align:center;position:relative;z-index:1;margin-top:.6rem}
 .welcome-status.ok{color:var(--green)}
 .welcome-status.err{color:var(--red)}
@@ -64,9 +67,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.96);border-bott
 .nav-role.blacklib{background:rgba(200,200,200,.15);color:#e6e6e6;border-color:rgba(200,200,200,.5)}
 .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:.5rem;box-shadow:0 0 12px var(--red);animation:pulse 1.5s infinite;vertical-align:middle}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-.nav-tabs{display:flex;gap:.2rem;padding:.5rem 0 0;overflow-x:auto;scrollbar-width:none}
+.nav-tabs{display:flex;gap:.2rem;padding:.5rem 0 0;overflow-x:auto;border-top:1px solid rgba(160,100,255,.08);scrollbar-width:none}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{padding:.9rem 1.1rem;background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer;font-family:inherit;font-size:.86rem;border-bottom:2px solid transparent;white-space:nowrap;position:relative}
+.nav-tab:hover{color:#f0e6ff}
 .nav-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .nav-tab.active[data-page="staff-bl"]{color:#e6e6e6;border-bottom-color:#e6e6e6}
 .nav-tab .badge-unread{position:absolute;top:.5rem;right:.35rem;min-width:18px;height:18px;padding:0 5px;background:var(--red);color:#fff;font-size:.65rem;font-weight:800;border-radius:100px;display:flex;align-items:center;justify-content:center}
@@ -77,7 +81,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.96);border-bott
 .live-pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.2s infinite;display:inline-block}
 .ticker-sep{color:#5f4d7a;font-size:1.2rem}
 .section-page{display:none}
-.section-page.active{display:block}
+.section-page.active{display:block;animation:fadePage .45s cubic-bezier(.22,1,.36,1)}
+@keyframes fadePage{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .hero{padding:3rem 0 2rem;text-align:center}
 .live-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.4);color:#ff9b9b;font-size:.72rem;font-weight:800;padding:.6rem 1.3rem;border-radius:100px;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.8rem}
 .live-badge.blue{background:rgba(80,150,255,.1);border-color:rgba(80,150,255,.4);color:#9bc9ff}
@@ -97,7 +102,8 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .subtitle{font-size:1.08rem;color:#b0a0c8;max-width:720px;margin:0 auto 1.5rem;line-height:1.7}
 .result-hero{max-width:960px;margin:0 auto 2.5rem;background:linear-gradient(155deg,#1c1136,#0d0620);border:1px solid rgba(255,215,0,.32);border-radius:2.4rem;padding:2.8rem 2rem 2.2rem;position:relative}
 .result-head{text-align:center;margin-bottom:2.2rem}
-.trophy{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#ffd966,#b8860b);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1rem}
+.trophy{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#ffd966,#b8860b);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1rem;animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
 .final-score{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center;padding:2rem 1.5rem;background:linear-gradient(135deg,rgba(140,80,220,.1),rgba(255,215,0,.06));border:1px solid rgba(255,215,0,.28);border-radius:1.8rem;margin-bottom:1.5rem}
 .score-side{text-align:center}
 .score-avatar{width:70px;height:70px;border-radius:20px;margin:0 auto .8rem;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.8rem;overflow:hidden}
@@ -111,13 +117,14 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .score-divider{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#5f4d7a;text-align:center}
 .verdict{text-align:center;padding:1.2rem 1.5rem;border-radius:1.2rem;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.35);color:#d8cce8;font-size:1.05rem}
 .versus{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:1.5rem;max-width:960px;margin:3rem auto 1.5rem}
-.fighter{background:var(--card);border:2px solid rgba(160,100,255,.28);border-radius:2rem;padding:1.6rem 1.5rem 2.2rem;text-align:center;position:relative}
+.fighter{background:var(--card);border:2px solid rgba(160,100,255,.28);border-radius:2rem;padding:1.6rem 1.5rem 2.2rem;text-align:center;transition:transform .3s;position:relative}
+.fighter:hover{transform:translateY(-6px)}
 .fighter-flag{height:180px;border-radius:1.4rem;background:linear-gradient(135deg,#8c50dc,#b06eff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:-50px;z-index:1;padding:10px}
 .fighter.blacklib .fighter-flag{background:linear-gradient(135deg,#1a1a1a,#3d3d3d)}
 .fighter-flag img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;z-index:1;padding:8px}
 .fighter-flag .flag-placeholder{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:#0e0720;z-index:2;position:relative;text-align:center;padding:0 1rem}
 .fighter.blacklib .fighter-flag .flag-placeholder{color:var(--gold)}
-.fighter-emblem{width:100px;height:100px;border-radius:50%;margin:0 auto 1.2rem;border:4px solid #0d0620;background:linear-gradient(135deg,#8c50dc,#b06eff);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0e0720;position:relative;z-index:2;overflow:hidden}
+.fighter-emblem{width:100px;height:100px;border-radius:50%;margin:0 auto 1.2rem;border:4px solid #0d0620;background:linear-gradient(135deg,#8c50dc,#b06eff);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0e0720;position:relative;z-index:2;overflow:hidden;box-shadow:0 18px 45px -12px rgba(0,0,0,.9)}
 .fighter.blacklib .fighter-emblem{background:linear-gradient(135deg,#1a1a1a,#3d3d3d);color:var(--gold)}
 .fighter-emblem img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;border-radius:50%;padding:6px}
 .fighter-name{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900;margin-bottom:.4rem}
@@ -132,7 +139,8 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .fighter-stats .n{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;background:linear-gradient(120deg,#fff5c4,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
 .fighter-stats .n.red{background:linear-gradient(120deg,#ff9b9b,#ef4444);-webkit-background-clip:text;background-clip:text;color:transparent}
 .fighter-stats .l{display:block;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:.4rem}
-.vs-badge{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,#c9a3ff,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .5rem;align-self:center;margin-top:80px}
+.vs-badge{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,#c9a3ff,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;animation:vsBeat 2s ease-in-out infinite;padding:0 .5rem;align-self:center;margin-top:80px}
+@keyframes vsBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 .program-card,.raised-box,.form-wrap,.top-donors,.tg-field,.call-start,.countdown-wrap,.support-choice{max-width:960px;margin:0 auto 2rem;background:var(--card);border:1px solid rgba(255,215,0,.18);border-radius:2rem;padding:2.2rem 2.4rem;position:relative}
 .program-head{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(160,100,255,.14)}
 .program-icon{width:56px;height:56px;border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(140,80,220,.25));border:1px solid rgba(255,215,0,.4);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
@@ -159,6 +167,7 @@ body.is-nikita .admin-panel{display:block}
 .admin-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--gold)}
 .admin-head p{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
 .admin-desc{font-size:.86rem;color:#b0a0c8;line-height:1.6;margin-bottom:1.2rem}
+.admin-desc strong{color:var(--gold)}
 .admin-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .admin-row label{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.4rem}
 .admin-row input,.admin-row select{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,215,0,.3);border-radius:.85rem;padding:.9rem 1rem;color:var(--gold);font-size:1rem;font-weight:700;font-family:inherit;outline:none;margin:0}
@@ -178,7 +187,8 @@ body.is-nikita .admin-panel{display:block}
 .event-date{margin-top:1.7rem;font-size:.94rem;color:#a98fd0;text-align:center}
 .event-date strong{color:var(--gold)}
 .staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
-.staff-card{background:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.95));border:1px solid rgba(160,100,255,.2);border-radius:2rem;padding:2rem 1.6rem}
+.staff-card{background:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.95));border:1px solid rgba(160,100,255,.2);border-radius:2rem;padding:2rem 1.6rem;transition:transform .35s,border-color .35s}
+.staff-card:hover{transform:translateY(-8px);border-color:rgba(255,215,0,.5)}
 .staff-photo{width:128px;height:150px;border-radius:24px;overflow:hidden;margin-bottom:1.2rem;border:2px solid rgba(255,215,0,.4);position:relative;background:linear-gradient(135deg,#181028,#0a0618);display:flex;align-items:center;justify-content:center}
 .staff-photo img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;opacity:0;z-index:1}
 .staff-photo img.loaded{opacity:1}
@@ -221,6 +231,7 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .bl-text small{display:block;font-size:.78rem;color:#a0a0a0;font-weight:500;margin-top:.25rem}
 .bl-team-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:#e6e6e6;letter-spacing:.5px;text-transform:uppercase;text-align:center;margin-bottom:1.4rem;display:block}
 .staff-card.bl-card{background:linear-gradient(155deg,rgba(40,40,44,.85),rgba(15,15,18,.95));border-color:rgba(200,200,200,.28)}
+.staff-card.bl-card:hover{border-color:rgba(200,200,200,.9)}
 .staff-card.bl-card .staff-title{color:#e6e6e6}
 .access-box{max-width:760px;margin:0 auto 1.5rem;background:var(--card);border:2px solid rgba(80,150,255,.4);border-radius:2rem;padding:2rem;display:flex;align-items:center;gap:1.4rem}
 .access-box.verified{border-color:rgba(255,215,0,.6)}
@@ -246,7 +257,7 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .tg-field label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.6px;font-weight:800;margin-bottom:.5rem}
 .tg-field input{width:100%;background:rgba(0,0,0,.35);border:1px solid rgba(34,158,217,.32);border-radius:.9rem;padding:1rem 1.15rem;color:#fff;font-size:1rem;font-family:inherit;outline:none;margin:0}
 .tg-field small{display:block;font-size:.76rem;color:var(--muted);margin-top:.8rem;font-style:italic}
-.tg-field small strong{color:var(--gold)}
+.tg-field small strong{color:var(--gold);font-style:normal}
 .call-start{text-align:center}
 .call-start-icon{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#4a90d9,#5096ff);display:flex;align-items:center;justify-content:center;font-size:3.4rem;margin:0 auto 1.6rem}
 .call-start h3{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;margin-bottom:.7rem}
@@ -275,6 +286,7 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .form-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem}
 input,textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.2);border-radius:1rem;padding:1rem 1.15rem;color:#f0e6ff;font-size:.96rem;font-family:inherit;outline:none;margin-bottom:.9rem}
 input::placeholder,textarea::placeholder{color:#6d5a8a}
+input:focus,textarea:focus{border-color:rgba(255,215,0,.7)}
 textarea{resize:vertical;min-height:100px}
 .input-label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.5rem}
 .btn{width:100%;padding:1.2rem;border:none;border-radius:1.1rem;font-weight:800;font-size:1.02rem;color:#fff;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#7a3ac8,#b06eff);display:flex;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem}
@@ -291,6 +303,7 @@ textarea{resize:vertical;min-height:100px}
 .support-choice-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch}
 .support-choice-btn{background:rgba(255,255,255,.03);border:2px solid rgba(160,100,255,.25);border-radius:1.5rem;padding:1.2rem .9rem;cursor:pointer;font-family:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.7rem;position:relative}
 .support-choice-btn.selected{border-color:var(--gold);background:linear-gradient(155deg,rgba(255,215,0,.12),rgba(140,80,220,.15))}
+.support-choice-btn.selected::after{content:'✓';position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0e0720;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.9rem}
 .support-choice-flag{width:100%;height:90px;border-radius:.9rem;background:linear-gradient(135deg,#8c50dc,#b06eff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px}
 .support-choice-flag img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;padding:6px}
 .support-choice-flag .flag-mini{font-family:'Playfair Display',serif;font-weight:900;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#0e0720;position:relative;z-index:2}
@@ -325,7 +338,8 @@ textarea{resize:vertical;min-height:100px}
 .chat-status .dot-offline{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5f4d7a;margin-right:3px;vertical-align:middle}
 .chat-back{margin-left:auto;padding:.55rem 1rem;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(160,100,255,.3);color:#c9a3ff;font-weight:800;font-size:.76rem;cursor:pointer;font-family:inherit}
 .chat-messages{flex:1;overflow-y:auto;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.9rem}
-.chat-row{display:flex;gap:.6rem;align-items:flex-end;max-width:100%}
+.chat-row{display:flex;gap:.6rem;align-items:flex-end;max-width:100%;animation:msgIn .3s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .chat-row.me{flex-direction:row-reverse;align-self:flex-end}
 .chat-row.them{align-self:flex-start}
 .chat-row.sys{align-self:center;justify-content:center;max-width:90%}
@@ -373,7 +387,7 @@ textarea{resize:vertical;min-height:100px}
 .host-flag.on{background:var(--gold);box-shadow:0 0 15px var(--gold)}
 .host-flag.bl{background:#e6e6e6;box-shadow:0 0 15px #e6e6e6}
 .toast-container{position:fixed;top:80px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:340px;pointer-events:none}
-.toast{background:linear-gradient(135deg,rgba(140,80,220,.96),rgba(80,40,140,.98));border:1px solid rgba(255,215,0,.55);border-radius:1.2rem;padding:1rem 1.2rem;color:#fff;box-shadow:0 20px 50px -15px rgba(0,0,0,.9);pointer-events:auto;cursor:pointer;animation:toastIn .4s cubic-bezier(.34,1.3,.64,1)}
+.toast{background:linear-gradient(135deg,rgba(140,80,220,.96),rgba(80,40,140,.98));border:1px solid rgba(255,215,0,.55);border-radius:1.2rem;padding:1rem 1.2rem;color:#fff;box-shadow:0 20px 50px -15px rgba(0,0,0,.9);animation:toastIn .4s cubic-bezier(.34,1.3,.64,1);pointer-events:auto;cursor:pointer}
 .toast .t-title{font-weight:900;font-size:.85rem;color:#ffd966;margin-bottom:.25rem;font-family:'Playfair Display',serif}
 .toast .t-text{font-size:.92rem;line-height:1.4;color:#f0eaff}
 .toast .t-time{font-size:.68rem;opacity:.7;margin-top:.3rem}
@@ -497,7 +511,10 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="fighter-name">Никита</div>
         <div class="fighter-role">Автор · Защита</div>
         <div class="fighter-desc">Победитель дебатов сегодня — 2:0</div>
-        <div class="fighter-badges"><span class="fighter-support">💜 <span data-support-count="nikita">0</span></span><span class="fighter-funded">💰 <span data-fund="nikita">0 ₽</span></span></div>
+        <div class="fighter-badges">
+          <span class="fighter-support">💜 <span data-support-count="nikita">0</span></span>
+          <span class="fighter-funded">💰 <span data-fund="nikita">0 ₽</span></span>
+        </div>
         <div class="fighter-stats"><div><span class="n">2</span><span class="l">Победа</span></div><div><span class="n">100%</span><span class="l">Рейтинг</span></div><div><span class="n">1</span><span class="l">Дебат</span></div></div>
       </div>
       <div class="vs-badge">VS</div>
@@ -507,20 +524,24 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="fighter-name">Чёрный либерал</div>
         <div class="fighter-role">Оппонент · Критика</div>
         <div class="fighter-desc">Проиграл сегодня 0:2, готов к реваншу</div>
-        <div class="fighter-badges"><span class="fighter-support">💜 <span data-support-count="blacklib">0</span></span><span class="fighter-funded">💰 <span data-fund="blacklib">0 ₽</span></span></div>
+        <div class="fighter-badges">
+          <span class="fighter-support">💜 <span data-support-count="blacklib">0</span></span>
+          <span class="fighter-funded">💰 <span data-fund="blacklib">0 ₽</span></span>
+        </div>
         <div class="fighter-stats"><div><span class="n red">0</span><span class="l">Победа</span></div><div><span class="n red">0%</span><span class="l">Рейтинг</span></div><div><span class="n">1</span><span class="l">Дебат</span></div></div>
       </div>
     </div>
   </section>
+
   <section class="wrap" style="padding-bottom:2rem">
     <div class="program-card">
       <div class="program-head"><div class="program-icon">📋</div><div><h3>Программа новых дебатов</h3><p>Расписание · 4 раунда + финал</p></div></div>
       <ul class="program-list">
-        <li><div class="program-time">21:00</div><div class="program-body"><h4>Открытие</h4><p>Вступительные слова сторон.</p></div></li>
-        <li><div class="program-time">21:15</div><div class="program-body"><h4>Раунд 1 · Свобода информации</h4><p>Открытый доступ к данным.</p></div></li>
-        <li><div class="program-time">21:45</div><div class="program-body"><h4>Раунд 2 · Финансирование</h4><p>Спонсорство, гранты, прозрачность.</p></div></li>
-        <li><div class="program-time">22:15</div><div class="program-body"><h4>Раунд 3 · Будущее</h4><p>Стратегия, монетизация, сообщество.</p></div></li>
-        <li><div class="program-time">22:45</div><div class="program-body"><h4>Финал · Вопросы</h4><p>Ответы и голосование.</p></div></li>
+        <li><div class="program-time">21:00</div><div class="program-body"><h4>Открытие · Приветствие сторон</h4><p>Вступительные слова Никиты и Чёрного либерала.</p></div></li>
+        <li><div class="program-time">21:15</div><div class="program-body"><h4>Раунд 1 · Свобода информации</h4><p>Открытый доступ к данным и роль независимых платформ.</p></div></li>
+        <li><div class="program-time">21:45</div><div class="program-body"><h4>Раунд 2 · Финансирование проектов</h4><p>Спонсорство, гранты, прозрачность бюджета.</p></div></li>
+        <li><div class="program-time">22:15</div><div class="program-body"><h4>Раунд 3 · Будущее платформы</h4><p>Стратегия, монетизация, сообщество и технологии.</p></div></li>
+        <li><div class="program-time">22:45</div><div class="program-body"><h4>Финал · Вопросы зрителей</h4><p>Ответы на вопросы и голосование.</p></div></li>
       </ul>
     </div>
 
@@ -534,19 +555,23 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 
     <div class="admin-panel" id="adminPanel">
       <div class="admin-head"><span style="font-size:1.7rem">👑</span><h3>Панель управления</h3><p>Только для Никиты</p></div>
-      <p class="admin-desc">Добавляй донаты, редактируй.</p>
+      <p class="admin-desc">Добавляй донаты, редактируй — <strong>всё сохраняется локально</strong>.</p>
       <div class="admin-row">
         <div><label>Сумма, ₽</label><input type="number" id="adminAmount" placeholder="500" min="1"></div>
-        <div><label>Партия</label><select id="adminCandidate"><option value="Никита">🏴 Народный Фронт</option><option value="Чёрный либерал">🏴 Либеральный Союз</option></select></div>
+        <div><label>Партия</label><select id="adminCandidate"><option value="Никита">🏴 Народный Фронт (Никита)</option><option value="Чёрный либерал">🏴 Либеральный Союз (ЧЛ)</option></select></div>
       </div>
       <div class="admin-row">
         <div><label>Имя донатера</label><input type="text" id="adminDonorName" placeholder="Аноним"></div>
-        <div><label>Кол-во</label><input type="number" id="adminDonors" placeholder="1" min="1" value="1"></div>
+        <div><label>Кол-во донатов</label><input type="number" id="adminDonors" placeholder="1" min="1" value="1"></div>
       </div>
-      <div class="admin-buttons"><button class="admin-btn add" id="adminAdd">➕ Добавить донат</button></div>
+      <div class="admin-buttons">
+        <button class="admin-btn add" id="adminAdd">➕ Добавить донат</button>
+      </div>
       <div class="admin-status" id="adminStatus"></div>
       <div class="admin-section-title">🚪 Сменить роль</div>
-      <div class="admin-buttons"><button class="admin-btn reset" id="logoutBtn">Выйти</button></div>
+      <div class="admin-buttons">
+        <button class="admin-btn reset" id="logoutBtn">Выйти</button>
+      </div>
     </div>
 
     <div class="countdown-wrap">
@@ -564,16 +589,16 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 
 <main class="section-page" id="page-chat">
   <section class="wrap" style="padding-top:2rem">
-    <div class="live-badge purple"><span class="dot purple"></span>Firebase Realtime</div>
+    <div class="live-badge purple"><span class="dot purple"></span>Мессенджер · Firebase</div>
     <h1 style="text-align:center"><span class="title-grad purple">Чат Никиты и Чёрного либерала</span></h1>
-    <p class="subtitle" style="text-align:center;margin-bottom:1.5rem">Мгновенные сообщения · Работает без VPN</p>
+    <p class="subtitle" style="text-align:center;margin-bottom:1.5rem">Мгновенная доставка · без VPN</p>
     <div class="chat-guest-warning" id="chatGuestWarning" style="display:none">👀 Ты вошёл как гость. Писать не можешь.</div>
     <div class="chat-wrap">
       <div class="chat-header">
         <div class="chat-avatar">ЧЛ</div>
         <div>
           <div class="chat-name">Никита ↔ Чёрный либерал</div>
-          <div class="chat-status" id="chatStatusLine">● Firebase подключён</div>
+          <div class="chat-status" id="chatStatusLine">● синхронизация через Firebase</div>
         </div>
         <button class="chat-back" id="chatClear" style="display:none">Очистить</button>
       </div>
@@ -597,11 +622,15 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       <div class="access-badge" id="accessBadge">🔒 Гость</div>
     </div>
     <div class="lock-wrapper locked" id="lockWrapper">
-      <div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">Только для участников</div><div class="lock-hint">Войди с кодом</div></div>
+      <div class="lock-overlay">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-text">Только для участников</div>
+        <div class="lock-hint">Войди с кодом Никиты или Чёрного либерала</div>
+      </div>
       <div class="tg-field">
         <h3>📱 Telegram</h3>
-        <label for="tgTarget">Кому звонишь</label>
-        <input type="text" id="tgTarget" placeholder="nickname" autocomplete="off">
+        <label for="tgTarget">Кому звонишь (username без @)</label>
+        <input type="text" id="tgTarget" placeholder="navallny" autocomplete="off">
         <small>В РФ Telegram работает <strong>только с VPN</strong>.</small>
         <button class="big-btn tg" id="tgCallBtn" style="margin-top:1rem">Открыть Telegram</button>
       </div>
@@ -610,7 +639,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <h3>Jitsi-комната</h3>
         <p>Работает в РФ <strong>без VPN</strong>.</p>
         <div class="srv-list">
-          <button type="button" class="srv-btn active" data-server="meet.jit.si"><strong>meet.jit.si</strong> ✅</button>
+          <button type="button" class="srv-btn active" data-server="meet.jit.si"><strong>meet.jit.si</strong> ✅ РФ</button>
           <button type="button" class="srv-btn" data-server="meet.ffmuc.net"><strong>meet.ffmuc.net</strong> ⚠</button>
         </div>
         <button class="big-btn jitsi" id="jitsiBtn">Создать комнату</button>
@@ -642,25 +671,25 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="staff-desc editable-field" data-field="desc" data-key="nikita">Ведущий дебатов. Рейтинг 73%.</div>
       </div>
       <div class="staff-card">
-        <div class="staff-photo" data-name="navalny" data-color="gold" data-wiki="Навальный, Алексей Анатольевич"><img alt="navalny" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Н</span></div>
+        <div class="staff-photo" data-name="navalny" data-color="gold" data-wiki="Навальный, Алексей Анатольевич|Алексей Навальный"><img alt="navalny" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Н</span></div>
         <span class="staff-role red editable-field" data-field="role" data-key="navalny">Скандальный коррупционер</span>
         <div class="staff-name editable-field" data-field="name" data-key="navalny">Навальный</div>
         <div class="staff-title editable-field" data-field="title" data-key="navalny">Фембой горничная</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="navalny">Отвечает за тексты.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="navalny">Скандальный коррупционер в образе фембоя-горничной.</div>
       </div>
       <div class="staff-card">
         <div class="staff-photo" data-name="shtefanov" data-color="blue" data-wiki="Штефанов, Александр Юрьевич"><img alt="shtefanov" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Ш</span></div>
         <span class="staff-role head editable-field" data-field="role" data-key="shtefanov">Историк</span>
         <div class="staff-name editable-field" data-field="name" data-key="shtefanov">Штефанов</div>
         <div class="staff-title editable-field" data-field="title" data-key="shtefanov">Супер альтушка</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="shtefanov">Разбирается в истории.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="shtefanov">Разбирается в истории, но выглядит как супер альтушка.</div>
       </div>
       <div class="staff-card">
         <div class="staff-photo" data-name="kac" data-color="green" data-wiki="Кац, Максим Евгеньевич"><img alt="kac" loading="lazy" referrerpolicy="no-referrer"><span class="initial">К</span></div>
         <span class="staff-role advisor editable-field" data-field="role" data-key="kac">Аналитик</span>
         <div class="staff-name editable-field" data-field="name" data-key="kac">Кац</div>
         <div class="staff-title editable-field" data-field="title" data-key="kac">Копается в цифрах</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="kac">Готовит факты к дебатам.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="kac">Готовит факты и статистику к дебатам.</div>
       </div>
     </div>
   </section>
@@ -674,10 +703,10 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
   <section class="wrap" style="padding-bottom:4rem">
     <div class="bl-section">
       <div class="staff-flag bl-flag" data-staff-flag="staff-bl" style="margin-bottom:2rem"><span class="staff-flag-label">Либеральный Союз</span></div>
-      <div class="bl-head"><div class="bl-crown">♟</div><h2>Программа штаба</h2><p>Три тезиса</p></div>
+      <div class="bl-head"><div class="bl-crown">♟</div><h2>Программа штаба</h2><p>Три тезиса · Наша позиция</p></div>
       <ul class="bl-program-list">
-        <li><div class="bl-num">1</div><div class="bl-text">Россия — лучшая страна<small>Великая история и народ.</small></div></li>
-        <li><div class="bl-num">2</div><div class="bl-text">Либерализм — лучшая идеология<small>Свобода и права.</small></div></li>
+        <li><div class="bl-num">1</div><div class="bl-text">Россия — лучшая страна<small>Великая история, культура и народ.</small></div></li>
+        <li><div class="bl-num">2</div><div class="bl-text">Либерализм — лучшая идеология<small>Свобода, права человека, рынок.</small></div></li>
         <li><div class="bl-num">3</div><div class="bl-text">Бисмарк — лучший правитель<small>Объединил Германию.</small></div></li>
       </ul>
       <h3 class="bl-team-title">Команда</h3>
@@ -701,7 +730,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
           <span class="staff-role red editable-field" data-field="role" data-key="bondarenko">Идеолог</span>
           <div class="staff-name editable-field" data-field="name" data-key="bondarenko">Николай Бондаренко</div>
           <div class="staff-title editable-field" data-field="title" data-key="bondarenko">Отвечает за смыслы</div>
-          <div class="staff-desc editable-field" data-field="desc" data-key="bondarenko">«Больше дела — меньше слов».</div>
+          <div class="staff-desc editable-field" data-field="desc" data-key="bondarenko">«Больше дела — меньше слов». КПРФ.</div>
         </div>
         <div class="staff-card bl-card">
           <div class="staff-photo" data-name="yulia" data-color="steel" data-wiki="Навальная, Юлия Борисовна"><img alt="yulia" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Ю</span></div>
@@ -724,7 +753,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <div class="bet-grid">
       <div class="bet-card">
         <div class="bet-event-head"><div class="bet-event-icon">🥊</div><div><div class="bet-event-title">Дебаты · Никита vs ЧЛ</div><div class="bet-event-sub">Скоро</div></div></div>
-        <div class="bet-choice-label">Кто победит? ↓</div>
+        <div class="bet-choice-label">Кто победит? <span style="color:var(--gold)">↓</span></div>
         <div class="bet-choices">
           <div class="bet-choice" data-event="Дебаты" data-outcome="Победа Никиты" data-odd="1.85"><div><div class="bet-choice-name">Никита</div></div><div class="bet-choice-odd">1.85</div></div>
           <div class="bet-choice" data-event="Дебаты" data-outcome="Победа Чёрного либерала" data-odd="2.10"><div><div class="bet-choice-name">Чёрный либерал</div></div><div class="bet-choice-odd">2.10</div></div>
@@ -734,7 +763,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       </div>
       <div class="bet-card">
         <div class="bet-event-head"><div class="bet-event-icon">📱</div><div><div class="bet-event-title">Shorts · наша нарезка</div><div class="bet-event-sub">После дебатов</div></div></div>
-        <div class="bet-choice-label">Что будет? ↓</div>
+        <div class="bet-choice-label">Что будет? <span style="color:var(--gold)">↓</span></div>
         <div class="bet-choices">
           <div class="bet-choice" data-event="Shorts" data-outcome="Победа нашей версии" data-odd="1.75"><div><div class="bet-choice-name">Наша нарезка выстрелит</div></div><div class="bet-choice-odd">1.75</div></div>
           <div class="bet-choice" data-event="Shorts" data-outcome="Победа альтернативной" data-odd="2.30"><div><div class="bet-choice-name">У конкурентов лучше</div></div><div class="bet-choice-odd">2.30</div></div>
@@ -912,9 +941,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 <script>
 "use strict";
 
-/* ============================================================
-   FIREBASE CONFIG
-   ============================================================ */
+/* Firebase config */
 const firebaseConfig = {
   apiKey: "AIzaSyD6N3H_N6IqemD4zhw1GqAKZRbpayHtn3U",
   authDomain: "inaogenty.firebaseapp.com",
@@ -929,11 +956,9 @@ const fbDb = firebase.database();
 const fbChatRef = fbDb.ref('chat');
 const fbPresenceRef = fbDb.ref('presence');
 
-/* ============================================================
-   КОНСТАНТЫ
-   ============================================================ */
 const SITE_VERSION = '18';
-const SITE_BUILD_TIME = '29.09.2026 21:00';
+const SITE_BUILD_TIME = '29.09.2026 22:30';
+
 const GOAL = 300000;
 const DEBATE_TARGET_ISO = '2026-12-31T21:00:00';
 const _k = [0x7A, 0x1B, 0x5C, 0x2E, 0x9F, 0x42];
@@ -949,6 +974,7 @@ const LS_MEDIA = 'inaogenty_media_cache_v3';
 const LS_PHOTOS = 'inaogenty_custom_photos_v3';
 const LS_TEXTS = 'inaogenty_custom_texts_v3';
 const LS_DEVICE = 'inaogenty_device_id_v1';
+const LS_CHAT = 'inaogenty_chat_v8';
 const LS_LAST_DONATE = 'inaogenty_last_donate_v1';
 const DONATE_COOLDOWN_MS = 20000;
 const CHAT_SEND_COOLDOWN_MS = 300;
@@ -968,12 +994,12 @@ let presenceMap = {};
 
 const DEFAULT_TEXTS = {
   nikita:    { role: 'Глава штаба', name: 'Никита', title: 'Автор · делает всё', desc: 'Ведущий дебатов. Рейтинг 73%.' },
-  navalny:   { role: 'Скандальный коррупционер', name: 'Навальный', title: 'Фембой горничная', desc: 'Отвечает за тексты.' },
-  shtefanov: { role: 'Историк', name: 'Штефанов', title: 'Супер альтушка', desc: 'Разбирается в истории.' },
-  kac:       { role: 'Аналитик', name: 'Кац', title: 'Копается в цифрах', desc: 'Готовит факты.' },
+  navalny:   { role: 'Скандальный коррупционер', name: 'Навальный', title: 'Фембой горничная', desc: 'Скандальный коррупционер в образе фембоя-горничной.' },
+  shtefanov: { role: 'Историк', name: 'Штефанов', title: 'Супер альтушка', desc: 'Разбирается в истории, но выглядит как супер альтушка.' },
+  kac:       { role: 'Аналитик', name: 'Кац', title: 'Копается в цифрах', desc: 'Готовит факты и статистику к дебатам.' },
   blacklib:  { role: 'Лидер штаба', name: 'Чёрный либерал', title: 'Капитан оппозиции', desc: 'Взял 3 темы из 11.' },
   yavlinsky: { role: 'Главный экономист', name: 'Явлинский', title: 'Архитектор реформ', desc: 'Автор программы «500 дней».' },
-  bondarenko:{ role: 'Идеолог', name: 'Николай Бондаренко', title: 'Отвечает за смыслы', desc: '«Больше дела — меньше слов».' },
+  bondarenko:{ role: 'Идеолог', name: 'Николай Бондаренко', title: 'Отвечает за смыслы', desc: '«Больше дела — меньше слов». КПРФ.' },
   yulia:     { role: 'Голос штаба', name: 'Юлия Навальная', title: 'Представляет движение', desc: 'Символ сопротивления.' }
 };
 const DEFAULT_WIKI = {
@@ -999,14 +1025,14 @@ function getMediaCache(){ try { return JSON.parse(localStorage.getItem(LS_MEDIA)
 function getDonations(){ try { return JSON.parse(localStorage.getItem(LS_DONATIONS)) || []; } catch(e){ return []; } }
 function saveDonations(list){ try { localStorage.setItem(LS_DONATIONS, JSON.stringify(list.slice(-1000))); } catch(e){} }
 
-/* ============================================================
-   ЧАТ Firebase
-   ============================================================ */
+/* ЧАТ FIREBASE */
 let chatMessages = [];
 let chatPageActive = false, unreadChat = 0, chatConnected = false;
 let lastChatSentAt = 0;
 let chatInitDone = false;
 
+function saveChat(){ try { localStorage.setItem(LS_CHAT, JSON.stringify(chatMessages.slice(-500))); } catch(e){} }
+function loadChatCache(){ try { chatMessages = JSON.parse(localStorage.getItem(LS_CHAT)) || []; } catch(e){ chatMessages = []; } }
 function validName(n){ if (n === 'Никита' || n === 'Чёрный либерал' || n === 'system') return n; return 'Гость'; }
 function senderName(){ if (userRole === 'nikita') return 'Никита'; if (userRole === 'blacklib') return 'Чёрный либерал'; return null; }
 function updateChatSender(){
@@ -1045,8 +1071,9 @@ function buildMsg(m){
   if (!isMe){ const n = document.createElement('div'); n.className = 'msg-name'; n.textContent = m.from; body.appendChild(n); }
   const b = document.createElement('div'); b.className = 'msg ' + (isMe ? 'me' : 'them');
   b.textContent = m.text;
+  if (m._pending) b.style.opacity = '0.55';
   const t = document.createElement('span'); t.className = 'msg-time';
-  t.textContent = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  t.textContent = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}) + (m._pending ? ' ⏳' : '');
   b.appendChild(t); body.appendChild(b); row.appendChild(body); return row;
 }
 function updateUnreadBadge(){ const b = $('chatUnread'); if (!b) return; if (unreadChat > 0){ b.textContent = unreadChat > 99 ? '99+' : unreadChat; b.style.display = 'flex'; } else b.style.display = 'none'; }
@@ -1091,12 +1118,14 @@ function subscribeChat(){
     if (!v || typeof v.text !== 'string') return;
     const id = snap.key;
     if (chatMessages.some(m => m.id === id)) return;
-    const msg = { id, from: validName(String(v.from || 'Гость')), text: String(v.text).slice(0, 500), time: Number(v.time) || Date.now() };
+    const msg = { id, from: validName(String(v.from || 'Гость')), text: String(v.text).slice(0, 500), time: Number(v.time) || Date.now(), device: v.device || null };
+    if (msg.device === DEVICE_ID) chatMessages = chatMessages.filter(m => !(m._pending && m.text === msg.text));
     chatMessages.push(msg);
     chatMessages.sort((a,b) => (a.time||0) - (b.time||0));
     if (chatMessages.length > 500) chatMessages = chatMessages.slice(-500);
-    renderChat();
+    saveChat(); renderChat();
     chatConnected = true;
+    setSyncIndicator('ok', 'Firebase · OK');
     const me = senderName();
     if (msg.from !== me && msg.from !== 'system' && !chatPageActive){
       unreadChat++; updateUnreadBadge(); playPing();
@@ -1107,11 +1136,11 @@ function subscribeChat(){
   });
   fbChatRef.limitToLast(200).on('child_removed', (snap) => {
     chatMessages = chatMessages.filter(m => m.id !== snap.key);
-    renderChat();
+    saveChat(); renderChat();
   });
   fbDb.ref('.info/connected').on('value', (snap) => {
     chatConnected = !!snap.val();
-    setSyncIndicator(chatConnected ? 'ok' : 'err', chatConnected ? 'Firebase OK' : 'Нет связи');
+    setSyncIndicator(chatConnected ? 'ok' : 'err', chatConnected ? 'Firebase · OK' : 'Нет связи');
   });
 }
 
@@ -1122,16 +1151,27 @@ async function sendChat(text){
   const now = Date.now();
   if (now - lastChatSentAt < CHAT_SEND_COOLDOWN_MS) return;
   lastChatSentAt = now;
+  const localId = 'me-' + DEVICE_ID + '-' + now;
+  chatMessages.push({ id: localId, from: me, text, time: now, device: DEVICE_ID, _pending: true });
+  saveChat(); renderChat();
+  const box = $('chatMessages'); if (box) box.scrollTop = box.scrollHeight;
   try {
-    await fbChatRef.push({ from: me, text, time: now });
-  } catch(e){ alert('Ошибка отправки: ' + e.message); }
+    await fbChatRef.push({ from: me, text, time: now, device: DEVICE_ID });
+    setTimeout(() => {
+      const idx = chatMessages.findIndex(m => m.id === localId);
+      if (idx >= 0){ chatMessages.splice(idx, 1); saveChat(); renderChat(); }
+    }, 2000);
+  } catch(e){
+    const idx = chatMessages.findIndex(m => m.id === localId);
+    if (idx >= 0){ chatMessages[idx]._pending = false; chatMessages[idx].text = text + ' ⚠'; saveChat(); renderChat(); }
+  }
 }
 $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); const inp = $('chatInput'); const text = inp.value; inp.value = ''; sendChat(text); inp.focus(); });
 $('chatClear').addEventListener('click', async () => {
   if (userRole !== 'nikita') return;
   if (!confirm('Очистить чат у всех?')) return;
   try { await fbChatRef.remove(); } catch(e){}
-  chatMessages = []; renderChat();
+  chatMessages = []; saveChat(); renderChat();
 });
 
 /* PRESENCE */
@@ -1142,7 +1182,8 @@ function formatLastSeen(ts){
   if (min < 60) return 'был ' + min + ' мин назад';
   const hr = Math.floor(min / 60);
   if (hr < 24) return 'был ' + hr + ' ч назад';
-  return 'был ' + Math.floor(hr / 24) + ' дн назад';
+  const d = Math.floor(hr / 24);
+  return 'был ' + d + ' дн назад';
 }
 function renderPresenceLine(){
   const el = $('chatStatusLine'); if (!el) return;
@@ -1161,7 +1202,7 @@ let presenceHeartbeat = null;
 function startPresence(){
   fbPresenceRef.on('value', (snap) => {
     const v = snap.val() || {};
-    Object.keys(v).forEach(k => { if (v[k] && v[k].time) presenceMap[k] = { time: v[k].time }; });
+    Object.keys(v).forEach(k => { if (v[k] && v[k].time) presenceMap[k] = { time: v[k].time, device: v[k].device }; });
     renderPresenceLine();
   });
   if (presenceHeartbeat) clearInterval(presenceHeartbeat);
@@ -1172,8 +1213,8 @@ function updatePresence(){
   const me = senderName(); if (!me) return;
   if (presenceRef) try { presenceRef.onDisconnect().cancel(); } catch(e){}
   presenceRef = fbPresenceRef.child(me);
-  presenceRef.set({ time: Date.now() });
-  presenceRef.onDisconnect().set({ time: Date.now() });
+  presenceRef.set({ time: Date.now(), device: DEVICE_ID });
+  presenceRef.onDisconnect().set({ time: Date.now(), device: DEVICE_ID });
 }
 
 /* ФАЙЛЫ */
@@ -1193,7 +1234,8 @@ async function uploadBlobToHost(blob, filename, onProgress){
   const tasks = [
     (async () => { try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', blob, filename); const xhr = new XMLHttpRequest(); xhr.open('POST', 'https://catbox.moe/user/api.php'); xhr.upload.onprogress = (e) => { if (onProgress && e.lengthComputable) onProgress(e.loaded / e.total); }; return await new Promise((resolve, reject) => { xhr.onload = () => { if (xhr.status === 200){ const t = xhr.responseText.trim(); if (t.startsWith('http')) resolve(t); else reject(); } else reject(); }; xhr.onerror = () => reject(); xhr.timeout = 60000; xhr.ontimeout = () => reject(); xhr.send(fd); }); } catch(e){ return null; } })(),
     tryUpload('https://litterbox.catbox.moe/resources/internals/api.php', 'fileToUpload'),
-    tryUpload('https://0x0.st', 'file')
+    tryUpload('https://0x0.st', 'file'),
+    tryUpload('https://uguu.se/upload.php', 'files[]')
   ];
   try { return await Promise.any(tasks.map(p => p.then(r => { if (r) return r; throw new Error(); }))); } catch(e){ return null; }
 }
@@ -1209,7 +1251,9 @@ async function compressImage(file, maxSize = 700, quality = 0.75){
           if (w > maxSize || h > maxSize){ if (w > h){ h = Math.round(h * maxSize / w); w = maxSize; } else { w = Math.round(w * maxSize / h); h = maxSize; } }
           const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
           const ctx = canvas.getContext('2d'); ctx.fillStyle = '#0d0620'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL('image/jpeg', quality));
+          let out = canvas.toDataURL('image/jpeg', quality);
+          if (out.length > 400000) out = canvas.toDataURL('image/jpeg', 0.6);
+          resolve(out);
         } catch(err){ const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); }
       };
       img.onerror = () => { const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); };
@@ -1298,7 +1342,6 @@ function renderTopDonors(){
   });
 }
 
-/* МОДАЛКА МЕДИА */
 let mediaModalCallbackUrl = null, mediaModalCallbackFile = null;
 function openMediaModal(label, onUrl, onFile){ if (userRole !== 'nikita'){ alert('🔒 Только Никита'); return; } mediaModalCallbackUrl = onUrl; mediaModalCallbackFile = onFile; $('mediaModal').classList.add('active'); $('mediaModalSub').textContent = label; $('mediaUrlInput').value = ''; }
 const _mModal = $('mediaModal');
@@ -1390,7 +1433,6 @@ document.querySelectorAll('.quick-bet').forEach(b => { b.addEventListener('click
 $('betAmount').addEventListener('input', function(){ const a = parseFloat(this.value) || 0; $('payoutAmount').textContent = Math.round(a*currentOdd).toLocaleString('ru-RU') + ' ₽'; });
 $('betForm').addEventListener('submit', e => { e.preventDefault(); submitForm(e.target, $('betStatus'), 'Ставка принята!'); setTimeout(closeModal, 2000); });
 
-/* ТАБЫ */
 document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
@@ -1404,21 +1446,18 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
   });
 });
 
-/* ОБРАТНЫЙ ОТСЧЁТ + ЧАСЫ */
 const DEBATE_TARGET = new Date(DEBATE_TARGET_ISO).getTime();
 function updateCountdown(){ const diff = Math.max(0, DEBATE_TARGET - Date.now()); const d = Math.floor(diff/86400000); const h = Math.floor((diff%86400000)/3600000); const m = Math.floor((diff%3600000)/60000); const s = Math.floor((diff%60000)/1000); const set = (id,v) => { const e=$(id); if(e) e.textContent=v; }; set('cdDays', String(d).padStart(2,'0')); set('cdHours', String(h).padStart(2,'0')); set('cdMinutes', String(m).padStart(2,'0')); set('cdSeconds', String(s).padStart(2,'0')); set('tickerCountdown', d+'д '+h+'ч '+m+'м'); const line = $('eventDateLine'); if (line){ if (diff <= 0) line.innerHTML = '🎉 <strong>Дебаты идут прямо сейчас!</strong>'; else { const dt = new Date(DEBATE_TARGET); line.innerHTML = 'Начало: <strong>' + dt.toLocaleDateString('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' }) + ' · ' + dt.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + '</strong>'; } } }
 setInterval(updateCountdown, 1000); updateCountdown();
 function updateLiveTime(){ const el = $('liveTime'); if (el) el.textContent = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
 setInterval(updateLiveTime, 1000); updateLiveTime();
 
-/* ЗВОНКИ */
 let selectedServer = 'meet.jit.si';
 document.querySelectorAll('.srv-btn[data-server]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.srv-btn[data-server]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); selectedServer = btn.dataset.server; }); });
 $('tgCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const nick = $('tgTarget').value.trim().replace(/^@/,'').toLowerCase(); if (!nick || !/^[a-zA-Z0-9_]{3,32}$/.test(nick)){ alert('Ник латиницей'); return; } localStorage.setItem('inaogenty_tg_last', nick); window.open('https://t.me/' + encodeURIComponent(nick), '_blank'); });
 $('jitsiBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = 'https://' + selectedServer + '/inaogenty-' + Math.random().toString(36).slice(2,10); if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {}); window.open(link, '_blank'); setTimeout(() => alert('🔗 ' + link), 600); });
 $('joinCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = $('joinLink').value.trim(); if (!link){ alert('Вставь ссылку'); return; } window.open(link, '_blank'); });
 
-/* ADMIN */
 $('adminAdd').addEventListener('click', () => {
   const amt = parseFloat($('adminAmount').value) || 0;
   const dn = parseInt($('adminDonors').value) || 0;
@@ -1432,7 +1471,6 @@ $('adminAdd').addEventListener('click', () => {
   setTimeout(() => st.className = 'admin-status', 3500);
 });
 
-/* СТАРТ */
 const year = new Date().getFullYear();
 if ($('welYear')) $('welYear').textContent = year;
 if ($('footYear')) $('footYear').textContent = year;
@@ -1441,9 +1479,12 @@ if ($('footYear')) $('footYear').textContent = year;
   const badge = $('versionBadge'), text = $('verText');
   if (badge && text){
     text.textContent = 'Версия v' + SITE_VERSION + ' (Firebase) · ' + SITE_BUILD_TIME;
+    badge.classList.add('updating');
+    setTimeout(() => badge.classList.remove('updating'), 2000);
   }
 })();
 
+loadChatCache();
 applyCustomTexts();
 applyAllCachedMedia();
 renderAllFromDonations();
@@ -1476,6 +1517,7 @@ setTimeout(() => {
 
 document.addEventListener('visibilitychange', () => { if (!document.hidden){ if (senderName()) updatePresence(); } });
 window.addEventListener('focus', () => { if (senderName()) updatePresence(); });
+window.addEventListener('beforeunload', () => { try { if (presenceRef){ presenceRef.remove(); } } catch(e){} });
 
 setInterval(() => { renderPresenceLine(); }, 10000);
 </script>
