@@ -28,10 +28,6 @@ body.locked > *:not(.welcome){display:none !important}
 .sync-indicator.err{border-color:rgba(239,68,68,.6);color:#ff9b9b}
 .sync-indicator .dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;animation:pulse 1.5s infinite}
 body:not(.is-nikita) .editable-field,body:not(.is-nikita) .staff-photo,body:not(.is-nikita) .fighter-flag,body:not(.is-nikita) .fighter-emblem,body:not(.is-nikita) .staff-flag{pointer-events:none}
-.freeze-banner{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:998;padding:.6rem 1.4rem;border-radius:100px;font-size:.8rem;font-weight:900;background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.6);color:var(--gold);box-shadow:0 10px 30px -10px rgba(255,215,0,.6);backdrop-filter:blur(8px);pointer-events:none}
-.freeze-banner::before{content:'🔒 '}
-body.site-frozen .freeze-banner{display:block}
-body.site-frozen .admin-panel,body.site-frozen .staff-photo.editable,body.site-frozen .fighter-flag.editable,body.site-frozen .fighter-emblem.editable,body.site-frozen .staff-flag.editable{pointer-events:none !important;filter:grayscale(.5);opacity:.7}
 .honeypot{position:absolute !important;left:-9999px !important;width:1px;height:1px;opacity:0;pointer-events:none}
 .welcome{position:fixed;inset:0;z-index:1000;background:radial-gradient(700px circle at 50% 30%,rgba(140,80,220,.22),transparent 60%),#05030c;display:flex;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto}
 .welcome.hidden{display:none}
@@ -51,7 +47,6 @@ body.site-frozen .admin-panel,body.site-frozen .staff-photo.editable,body.site-f
 .code-input::placeholder{letter-spacing:4px;color:#8b76ad}
 .code-wrap{position:relative;z-index:1}
 .code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0;line-height:1;transition:background .2s}
-.code-eye:hover{background:rgba(255,215,0,.2)}
 .welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);transition:transform .2s;width:100%;position:relative;z-index:1;margin-bottom:.7rem;box-shadow:0 20px 45px -12px rgba(255,215,0,.75)}
 .welcome-btn:hover{transform:translateY(-3px)}
 .welcome-status{min-height:1.2rem;font-size:.88rem;font-weight:800;text-align:center;position:relative;z-index:1;margin-top:.6rem}
@@ -76,7 +71,6 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.96);border-bott
 .nav-tab:hover{color:#f0e6ff}
 .nav-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .nav-tab.active[data-page="staff-bl"]{color:#e6e6e6;border-bottom-color:#e6e6e6}
-.nav-tab.active[data-page="archive"]{color:#9bc9ff;border-bottom-color:#9bc9ff}
 .nav-tab .badge-unread{position:absolute;top:.5rem;right:.35rem;min-width:18px;height:18px;padding:0 5px;background:var(--red);color:#fff;font-size:.65rem;font-weight:800;border-radius:100px;display:flex;align-items:center;justify-content:center}
 .ticker{background:linear-gradient(90deg,rgba(239,68,68,.09),rgba(255,215,0,.06),rgba(140,80,220,.09));border-top:1px solid rgba(255,215,0,.14);border-bottom:1px solid rgba(255,215,0,.14);padding:.8rem 0}
 .ticker-inner{display:flex;align-items:center;gap:2rem;font-size:.86rem;color:#d8cce8;justify-content:center;flex-wrap:wrap;padding:0 1.5rem}
@@ -175,15 +169,11 @@ body.is-nikita .admin-panel{display:block}
 .admin-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .admin-row label{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.4rem}
 .admin-row input,.admin-row select{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,215,0,.3);border-radius:.85rem;padding:.9rem 1rem;color:var(--gold);font-size:1rem;font-weight:700;font-family:inherit;outline:none;margin:0}
-.admin-buttons{display:grid;grid-template-columns:2fr 1fr;gap:.7rem}
+.admin-buttons{display:grid;gap:.7rem}
 .admin-btn{padding:1rem;border:none;border-radius:.9rem;font-weight:800;font-size:.92rem;cursor:pointer;font-family:inherit;transition:transform .15s}
 .admin-btn:hover{transform:translateY(-2px)}
 .admin-btn.add{background:linear-gradient(135deg,#4ade80,#22c55e);color:#0e0720}
 .admin-btn.reset{background:rgba(220,80,80,.1);color:#ff9b9b;border:1px solid rgba(220,80,80,.35)}
-.admin-btn.save{background:linear-gradient(135deg,#4a90d9,#5096ff);color:#fff}
-.admin-btn.load{background:linear-gradient(135deg,#8c50dc,#b06eff);color:#fff}
-.admin-btn.restore{background:linear-gradient(135deg,#4ade80,#22c55e);color:#0e0720}
-.admin-btn.lock{background:linear-gradient(135deg,#ffd966,#f0c14b);color:#0e0720}
 .admin-btn.publish{background:linear-gradient(135deg,#8c50dc,#b06eff,#ffd966);color:#0e0720}
 .admin-status{margin-top:1rem;font-size:.86rem;font-weight:800;text-align:center;min-height:1.2rem}
 .admin-status.ok{color:var(--green)}
@@ -191,8 +181,7 @@ body.is-nikita .admin-panel{display:block}
 .admin-section-title{font-size:.74rem;color:var(--gold);text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin:1.5rem 0 .8rem;border-top:1px dashed rgba(255,215,0,.25);padding-top:1.2rem}
 .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:640px;margin:0 auto}
 .countdown-label{font-size:.76rem;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:3.5px;margin-bottom:1.8rem;text-align:center}
-.cd-box{background:linear-gradient(155deg,rgba(40,22,68,.75),rgba(20,10,38,.9));border:1px solid rgba(255,215,0,.18);border-radius:1.5rem;padding:1.6rem .5rem;transition:transform .25s}
-.cd-box:hover{border-color:rgba(255,215,0,.55);transform:translateY(-5px)}
+.cd-box{background:linear-gradient(155deg,rgba(40,22,68,.75),rgba(20,10,38,.9));border:1px solid rgba(255,215,0,.18);border-radius:1.5rem;padding:1.6rem .5rem}
 .cd-num{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5.6vw,3rem);font-weight:900;line-height:1;background:linear-gradient(120deg,#fff5c4,#ffd966,#b8860b);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center}
 .cd-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-top:.6rem;text-align:center}
 .event-date{margin-top:1.7rem;font-size:.94rem;color:#a98fd0;text-align:center}
@@ -381,9 +370,10 @@ textarea{resize:vertical;min-height:100px}
 .chat-wrap{max-width:820px;margin:0 auto;background:linear-gradient(155deg,rgba(20,12,36,.95),rgba(10,6,20,.99));border:1px solid rgba(160,100,255,.25);border-radius:2rem;overflow:hidden;display:flex;flex-direction:column;height:calc(100vh - 240px);min-height:540px}
 .chat-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.4rem;border-bottom:1px solid rgba(160,100,255,.2);background:linear-gradient(180deg,rgba(30,18,55,.95),rgba(15,9,30,.85))}
 .chat-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#1a1a1a,#3d3d3d);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.1rem;flex-shrink:0;position:relative}
-.chat-avatar::after{content:'';position:absolute;bottom:1px;right:1px;width:13px;height:13px;border-radius:50%;background:#4ade80;border:2px solid #0a0614}
 .chat-name{font-family:'Playfair Display',serif;font-weight:900;font-size:1.15rem;line-height:1.15}
-.chat-status{font-size:.74rem;color:#8ef0b0;margin-top:.15rem}
+.chat-status{font-size:.74rem;color:#8ef0b0;margin-top:.15rem;line-height:1.4}
+.chat-status .dot-online{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px #4ade80;margin-right:3px;vertical-align:middle}
+.chat-status .dot-offline{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5f4d7a;margin-right:3px;vertical-align:middle}
 .chat-back{margin-left:auto;padding:.55rem 1rem;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(160,100,255,.3);color:#c9a3ff;font-weight:800;font-size:.76rem;cursor:pointer;font-family:inherit}
 .chat-messages{flex:1;overflow-y:auto;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.9rem}
 .chat-row{display:flex;gap:.6rem;align-items:flex-end;max-width:100%;animation:msgIn .3s ease-out}
@@ -468,7 +458,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 <body class="locked">
 
 <div class="sync-indicator" id="syncIndicator"><span class="dot"></span><span id="syncText">Загрузка...</span></div>
-<div class="freeze-banner" id="freezeBanner">Сайт заморожен Никитой</div>
 
 <div class="welcome" id="welcome">
   <div class="welcome-box">
@@ -506,7 +495,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <nav class="nav-tabs">
       <button class="nav-tab active" data-page="debates">🥊 Дебаты</button>
       <button class="nav-tab" data-page="chat">💬 Чат <span class="badge-unread" id="chatUnread" style="display:none">0</span></button>
-      <button class="nav-tab" data-page="archive">🎬 Архив</button>
       <button class="nav-tab" data-page="call">📹 Звонок</button>
       <button class="nav-tab" data-page="staff-n">👥 Штаб Н</button>
       <button class="nav-tab" data-page="staff-bl">♟ Штаб ЧЛ</button>
@@ -607,46 +595,24 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       </div>
       <div class="admin-buttons">
         <button class="admin-btn add" id="adminAdd">➕ Добавить донат</button>
-        <button class="admin-btn reset" id="adminReset">🔄 Сброс локальный</button>
       </div>
       <div class="admin-status" id="adminStatus"></div>
 
       <div class="admin-section-title">🌍 Синхронизация с друзьями</div>
-      <div class="admin-buttons" style="grid-template-columns:1fr">
+      <div class="admin-buttons">
         <button class="admin-btn publish" id="publishBtn">🌍 Опубликовать всё друзьям</button>
       </div>
       <div class="admin-status" id="publishStatus"></div>
 
       <div class="admin-section-title">💾 Скачать готовый файл</div>
       <p class="admin-desc" style="font-size:.82rem">Скачает этот же сайт, но со всеми твоими фото, текстами, донатами и чатом внутри.</p>
-      <div class="admin-buttons" style="grid-template-columns:1fr">
+      <div class="admin-buttons">
         <button class="admin-btn publish" id="downloadHtmlBtn">💾 Скачать HTML со всем содержимым</button>
       </div>
       <div class="admin-status" id="downloadHtmlStatus"></div>
 
-      <div class="admin-section-title">📋 Для TrebEdit (вручную)</div>
-      <p class="admin-desc" style="font-size:.82rem">Получи код и вставь его в HTML перед <code>&lt;/body&gt;</code>.</p>
-      <div class="admin-buttons" style="grid-template-columns:1fr">
-        <button class="admin-btn publish" id="bootstrapBtn">📋 Вшить данные в TrebEdit</button>
-      </div>
-
-      <div class="admin-section-title">🔒 Заморозка сайта</div>
-      <div class="admin-buttons" style="grid-template-columns:1fr 1fr">
-        <button class="admin-btn lock" id="freezeBtn">🔒 Заморозить</button>
-        <button class="admin-btn restore" id="unfreezeBtn">🔓 Разморозить</button>
-      </div>
-      <div class="admin-status" id="freezeStatus"></div>
-
-      <div class="admin-section-title">📦 Сохранение</div>
-      <div class="admin-buttons" style="grid-template-columns:1fr 1fr">
-        <button class="admin-btn save" id="exportBtn">📥 Скачать снапшот</button>
-        <button class="admin-btn load" id="importBtn">📤 Загрузить снапшот</button>
-      </div>
-      <input type="file" id="importFileInput" accept=".json" style="display:none">
-      <div class="admin-status" id="snapshotStatus"></div>
-
       <div class="admin-section-title">🚪 Сменить роль</div>
-      <div class="admin-buttons" style="grid-template-columns:1fr">
+      <div class="admin-buttons">
         <button class="admin-btn reset" id="logoutBtn">Выйти</button>
       </div>
     </div>
@@ -684,46 +650,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <input id="chatInput" placeholder="Выбери роль чтобы писать..." maxlength="500" disabled>
         <button type="submit" class="chat-send" id="chatSend" disabled>➤</button>
       </form>
-    </div>
-  </section>
-</main>
-
-<main class="section-page" id="page-archive">
-  <section class="wrap hero">
-    <div class="live-badge blue"><span class="dot blue"></span>Записи дебатов</div>
-    <h1><span class="title-grad blue">Архив дебатов</span></h1>
-    <p class="subtitle">Записывай прямо на сайте — файл сам загрузится в облако</p>
-  </section>
-  <section class="wrap" style="padding-bottom:3rem">
-    <div class="archive-panel">
-      <h3>🎬 Записать новые дебаты</h3>
-      <p class="hint">Пишет экран + микрофон + звук системы.</p>
-      <div class="rec-quality-row" style="margin-bottom:1rem">
-        <button type="button" class="rec-quality-btn" data-recq="low"><strong>480p</strong><small>1.5 Мбит/с</small></button>
-        <button type="button" class="rec-quality-btn active" data-recq="mid"><strong>720p HD</strong><small>3 Мбит/с</small></button>
-        <button type="button" class="rec-quality-btn" data-recq="high"><strong>1080p FHD</strong><small>6 Мбит/с</small></button>
-      </div>
-      <input type="text" id="recTitle" placeholder="Название: Дебаты №3" maxlength="100">
-      <button class="big-btn record" id="archRecStartBtn">⏺ Начать запись дебатов</button>
-      <button class="big-btn secondary" id="archRecStopBtn" style="display:none;margin-top:.7rem">⏹ Остановить и залить</button>
-      <div class="rec-timer" id="archRecTimer">00:00:00</div>
-      <div class="rec-upload-bar" id="archUploadBar"><div class="rec-upload-bar-fill" id="archUploadFill"></div></div>
-      <div class="rec-status" id="archRecStatus"></div>
-    </div>
-    <div class="archive-panel">
-      <h3>📥 Загрузить готовое видео</h3>
-      <p class="hint">Если у тебя уже есть запись — загрузи её сюда.</p>
-      <div class="rec-upload-zone">
-        <p>Поддерживается любое видео (mp4, webm)</p>
-        <button class="big-btn gold" id="archFileBtn">📁 Выбрать файл</button>
-        <input type="file" id="archFileInput" accept="video/*,audio/*" style="display:none">
-        <div class="rec-status" id="archFileStatus"></div>
-        <div class="rec-upload-bar" id="archFileUploadBar"><div class="rec-upload-bar-fill" id="archFileUploadFill"></div></div>
-      </div>
-    </div>
-    <div class="archive-panel">
-      <h3>🎞 Все записи (<span id="recCount">0</span>)</h3>
-      <ul class="recordings-list" id="recordingsList"></ul>
     </div>
   </section>
 </main>
@@ -1049,20 +975,20 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
   </div>
 </div>
 
-<div class="modal-overlay" id="bootstrapModal">
-  <div class="modal" style="max-width:720px">
-    <button class="modal-close" id="bootstrapClose">×</button>
-    <div class="modal-title">📋 Данные для TrebEdit</div>
-    <p style="font-size:.88rem;color:#a98fd0;line-height:1.6;margin-bottom:1rem">
-      1. Нажми <strong>«Скопировать»</strong>.<br>
-      2. Открой свой HTML в TrebEdit.<br>
-      3. Найди <code>&lt;/body&gt;</code> в самом конце.<br>
-      4. Вставь скопированный код <strong>перед</strong> <code>&lt;/body&gt;</code>.<br>
-      5. Сохрани файл.
+<div class="modal-overlay" id="mediaModal">
+  <div class="modal" style="max-width:520px">
+    <button class="modal-close" id="mediaModalClose">×</button>
+    <div class="modal-title">📷 Заменить изображение</div>
+    <p style="font-size:.82rem;color:#8b76ad;margin-bottom:1.2rem" id="mediaModalSub">—</p>
+    <label class="input-label">URL картинки</label>
+    <input type="text" id="mediaUrlInput" placeholder="https://i.imgur.com/..." autocomplete="off">
+    <button type="button" class="big-btn gold" id="mediaUrlSave" style="margin-top:.3rem">📤 Сохранить URL</button>
+    <div style="text-align:center;color:#5f4d7a;font-size:.84rem;font-weight:800;margin:1rem 0;letter-spacing:1px">— или —</div>
+    <button type="button" class="big-btn secondary" id="mediaFileUpload">📁 Загрузить файл из телефона</button>
+    <p style="font-size:.78rem;color:#8b76ad;margin-top:1rem;line-height:1.6;font-style:italic">
+      <strong style="color:#ffd966;font-style:normal">URL</strong> — если уже есть ссылка.
+      <strong style="color:#ffd966;font-style:normal">Файл</strong> — сожмётся и зальётся в облако.
     </p>
-    <textarea id="bootstrapCode" readonly style="font-family:ui-monospace,monospace;font-size:.72rem;min-height:240px;background:rgba(0,0,0,.5);color:#ffd966;width:100%;border:1px solid rgba(255,215,0,.4);border-radius:1rem;padding:1rem;margin:0"></textarea>
-    <button class="big-btn gold" id="bootstrapCopyBtn" style="margin-top:.8rem">📎 Скопировать в буфер</button>
-    <div class="status" id="bootstrapCopyStatus"></div>
   </div>
 </div>
 
@@ -1086,6 +1012,7 @@ const CODE_NIKITA = deobf(_cn);
 const CODE_BLACKLIB = deobf(_cb);
 
 const NTFY_CHAT = 'inaogenty-chat-mirror-7x9k2z';
+const NTFY_PRESENCE = 'inaogenty-presence-7x9k2z';
 const NTFY_STATE = 'inaogenty-state-v5-fast';
 const SS_ROLE = 'inaogenty_role_v4';
 const LS_DONATIONS = 'inaogenty_donations_v3';
@@ -1096,14 +1023,14 @@ const LS_DEVICE = 'inaogenty_device_id_v1';
 const LS_LAST_SNAP_TS = 'inaogenty_last_snap_ts_v1';
 const LS_LAST_SNAP_URL = 'inaogenty_last_snap_url_v1';
 const LS_RECORDINGS = 'inaogenty_recordings_v1';
-const LS_FROZEN = 'inaogenty_frozen_v1';
 const LS_CHAT = 'inaogenty_chat_v2';
 const LS_LAST_DONATE = 'inaogenty_last_donate_v1';
 const DONATE_COOLDOWN_MS = 20000;
 const CHAT_SEND_COOLDOWN_MS = 400;
+const PRESENCE_INTERVAL_MS = 15000;    // шлём heartbeat каждые 15 сек
+const PRESENCE_ONLINE_THRESHOLD = 40000; // если heartbeat < 40 сек — онлайн
 
 let userRole = 'guest';
-let isFrozen = localStorage.getItem(LS_FROZEN) === 'true';
 const $ = (id) => document.getElementById(id);
 const fmt = (n) => (n || 0).toLocaleString('ru-RU') + ' ₽';
 const ckey = (c) => c === 'Никита' ? 'nikita' : c === 'Чёрный либерал' ? 'blacklib' : null;
@@ -1113,6 +1040,9 @@ const DEVICE_ID = (() => {
   if (!id){ id = 'dev_' + Date.now() + '_' + Math.random().toString(36).slice(2,8); try { localStorage.setItem(LS_DEVICE, id); } catch(e){} }
   return id;
 })();
+
+// Онлайн-статусы: { 'Никита': { time: ..., device: ... }, 'Чёрный либерал': {...} }
+let presenceMap = {};
 
 const DEFAULT_TEXTS = {
   nikita:    { role: 'Глава штаба', name: 'Никита', title: 'Автор · делает всё', desc: 'Ведущий дебатов. Рейтинг 73%.' },
@@ -1150,6 +1080,94 @@ function getRecordings(){ try { return JSON.parse(localStorage.getItem(LS_RECORD
 function saveDonations(list){ try { localStorage.setItem(LS_DONATIONS, JSON.stringify(list.slice(-1000))); } catch(e){} }
 function saveRecordings(list){ try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(list.slice(0, 100))); } catch(e){} }
 
+/* ============================================================
+   PRESENCE — онлайн статус
+   ============================================================ */
+function formatLastSeen(ts){
+  const diff = Date.now() - ts;
+  if (diff < 40000) return 'онлайн';
+  const min = Math.floor(diff / 60000);
+  if (min < 60) return 'был ' + min + ' мин назад';
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return 'был ' + hr + ' ч назад';
+  const d = Math.floor(hr / 24);
+  return 'был ' + d + ' дн назад';
+}
+
+function renderPresenceLine(){
+  const el = $('chatStatusLine');
+  if (!el) return;
+  const me = senderName();
+  const others = ['Никита', 'Чёрный либерал'].filter(n => n !== me);
+
+  // Если гость — показываем оба
+  const names = me ? others : ['Никита', 'Чёрный либерал'];
+
+  const parts = names.map(n => {
+    const p = presenceMap[n];
+    if (!p || !p.time){
+      return '<span class="dot-offline"></span>' + n + ' был давно';
+    }
+    const isOnline = (Date.now() - p.time) < PRESENCE_ONLINE_THRESHOLD;
+    const cls = isOnline ? 'dot-online' : 'dot-offline';
+    return '<span class="' + cls + '"></span>' + n + ' — ' + formatLastSeen(p.time);
+  });
+
+  el.innerHTML = parts.join(' · ');
+}
+
+async function sendPresence(){
+  const me = senderName();
+  if (!me) return;
+  try {
+    await fetch('https://ntfy.sh/' + NTFY_PRESENCE, {
+      method: 'POST',
+      body: JSON.stringify({ from: me, time: Date.now(), device: DEVICE_ID }),
+      headers: { 'X-Title': 'presence' }
+    });
+  } catch(e){}
+}
+
+async function pollPresence(){
+  try {
+    const r = await fetch('https://ntfy.sh/' + NTFY_PRESENCE + '/json?poll=1&since=1h');
+    if (!r.ok) return;
+    const text = await r.text();
+    text.trim().split('\n').forEach(line => {
+      if (!line) return;
+      try {
+        const outer = JSON.parse(line);
+        if (outer.event !== 'message' || !outer.message) return;
+        let data; try { data = JSON.parse(outer.message); } catch(e){ return; }
+        if (!data || !data.from) return;
+        if (data.from !== 'Никита' && data.from !== 'Чёрный либерал') return;
+        if (!presenceMap[data.from] || data.time > presenceMap[data.from].time){
+          presenceMap[data.from] = { time: data.time || Date.now(), device: data.device };
+        }
+      } catch(e){}
+    });
+    renderPresenceLine();
+  } catch(e){}
+}
+
+let presenceHeartbeatTimer = null;
+let presencePollTimer = null;
+
+function startPresence(){
+  sendPresence();
+  if (presenceHeartbeatTimer) clearInterval(presenceHeartbeatTimer);
+  presenceHeartbeatTimer = setInterval(() => {
+    if (senderName()) sendPresence();
+  }, PRESENCE_INTERVAL_MS);
+  if (presencePollTimer) clearInterval(presencePollTimer);
+  presencePollTimer = setInterval(pollPresence, 5000);
+  pollPresence();
+  renderPresenceLine();
+}
+
+/* ============================================================
+   ЗАГРУЗКА ФАЙЛОВ
+   ============================================================ */
 async function uploadBlobToHost(blob, filename, onProgress){
   const tryUpload = async (url, fieldName) => {
     try {
@@ -1280,7 +1298,7 @@ async function loadAllStaffPhotos(){
 }
 
 function saveCustomText(key, field, value){
-  if (isFrozen || userRole !== 'nikita') return;
+  if (userRole !== 'nikita') return;
   const all = getCustomTexts(); if (!all[key]) all[key] = {}; all[key][field] = value;
   try { localStorage.setItem(LS_TEXTS, JSON.stringify(all)); } catch(e){}
   publishSnapshotDebounced();
@@ -1295,13 +1313,13 @@ function applyCustomTexts(){
 }
 
 async function saveCustomPhoto(name, dataUrl){
-  if (isFrozen || userRole !== 'nikita') return;
+  if (userRole !== 'nikita') return;
   let finalUrl = dataUrl;
   if (dataUrl && dataUrl.startsWith('data:')){
     setSyncIndicator('sending', 'Загружаю в облако...');
     const up = await base64ToUrl(dataUrl, name + '.jpg');
     if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); }
-    else { setSyncIndicator('err', 'Фото локально (снапшот)'); finalUrl = dataUrl; }
+    else { setSyncIndicator('err', 'Фото локально'); finalUrl = dataUrl; }
   }
   const all = getCustomPhotos(); all[name] = finalUrl;
   try { localStorage.setItem(LS_PHOTOS, JSON.stringify(all)); } catch(e){}
@@ -1309,13 +1327,13 @@ async function saveCustomPhoto(name, dataUrl){
 }
 
 async function saveMediaCache(target, url){
-  if (isFrozen || userRole !== 'nikita') return;
+  if (userRole !== 'nikita') return;
   let finalUrl = url;
   if (url && url.startsWith('data:')){
     setSyncIndicator('sending', 'Загружаю...');
     const up = await base64ToUrl(url, target + '.jpg');
     if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); }
-    else { setSyncIndicator('err', 'Флаг локально (снапшот)'); finalUrl = url; }
+    else { setSyncIndicator('err', 'Флаг локально'); finalUrl = url; }
   }
   const c = getMediaCache(); c[target] = finalUrl;
   try { localStorage.setItem(LS_MEDIA, JSON.stringify(c)); } catch(e){}
@@ -1398,7 +1416,6 @@ function addRecording(rec){
   list.unshift(rec); saveRecordings(list); renderRecordings(); publishSnapshotDebounced();
 }
 function deleteRecording(id){
-  if (isFrozen){ alert('🔒 Заморожено'); return; }
   if (userRole !== 'nikita'){ alert('Только Никита'); return; }
   if (!confirm('Удалить запись?')) return;
   saveRecordings(getRecordings().filter(x => x.id !== id)); renderRecordings(); publishSnapshotDebounced();
@@ -1408,7 +1425,7 @@ function fmtDate(ts){ const d = new Date(ts); return d.toLocaleDateString('ru-RU
 function renderRecordings(){
   const box = $('recordingsList'); if (!box) return;
   const list = getRecordings();
-  $('recCount').textContent = list.length;
+  const cnt = $('recCount'); if (cnt) cnt.textContent = list.length;
   box.innerHTML = '';
   if (!list.length){ const li = document.createElement('li'); li.className = 'rec-empty'; li.textContent = '💤 Записей пока нет'; box.appendChild(li); return; }
   list.forEach(rec => {
@@ -1423,7 +1440,7 @@ function renderRecordings(){
     const dl = document.createElement('a'); dl.className = 'rec-action-btn'; dl.href = rec.url; dl.download = rec.title || 'debate';
     dl.textContent = '⬇ Скачать'; dl.target = '_blank'; dl.rel = 'noopener';
     actions.appendChild(dl);
-    if (userRole === 'nikita' && !isFrozen){
+    if (userRole === 'nikita'){
       const del = document.createElement('button'); del.className = 'rec-action-btn danger'; del.textContent = '🗑 Удалить';
       del.onclick = () => deleteRecording(rec.id); actions.appendChild(del);
     }
@@ -1439,13 +1456,12 @@ let chatMessages = [];
 try { chatMessages = JSON.parse(localStorage.getItem(LS_CHAT)) || []; } catch(e){ chatMessages = []; }
 let chatPageActive = false, unreadChat = 0, chatConnected = false;
 let lastChatSentAt = 0;
-let chatLastSnapTime = 0, chatLastCount = 0;
 
 function senderName(){ if (userRole === 'nikita') return 'Никита'; if (userRole === 'blacklib') return 'Чёрный либерал'; return null; }
 function updateChatSender(){
   const inp = $('chatInput'), btn = $('chatSend'); if (!inp) return;
   const me = senderName();
-  if (!me){ inp.disabled = true; btn.disabled = true; inp.placeholder = '👀 Только участники могут писать'; }
+  if (!me){ inp.disabled = true; btn.disabled = true; inp.placeholder = '👀 Войди с кодом чтобы писать'; }
   else { inp.disabled = false; btn.disabled = false; inp.placeholder = 'Напиши как ' + me + '...'; }
 }
 function updateChatGuestWarning(){
@@ -1481,7 +1497,6 @@ function pushMsg(m){
   renderChat();
   const me = senderName();
   if (!chatPageActive && m.from !== me && m.from !== 'system'){ unreadChat++; updateUnreadBadge(); playPing(); }
-  maybePublishChat();
 }
 function updateUnreadBadge(){ const b = $('chatUnread'); if (!b) return; if (unreadChat > 0){ b.textContent = unreadChat > 99 ? '99+' : unreadChat; b.style.display = 'flex'; } else b.style.display = 'none'; }
 function playPing(){ try { const ctx = window.AudioContext ? new window.AudioContext() : null; if (!ctx) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.type='sine'; o.frequency.value=880; g.gain.value=0.06; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.15); } catch(e){} }
@@ -1519,38 +1534,58 @@ async function loadChatHistoryFromNtfy(){
     if (incoming.length){ console.log('[chat] подтянуто из ntfy:', incoming.length); mergeChatMessages(incoming); }
   } catch(e){}
 }
-function maybePublishChat(){
-  if (userRole !== 'nikita' && userRole !== 'blacklib') return;
-  if (isFrozen) return;
-  const now = Date.now();
-  const diff = chatMessages.length - chatLastCount;
-  if (diff >= 10 || now - chatLastSnapTime > 45000){ chatLastSnapTime = now; chatLastCount = chatMessages.length; publishSnapshotDebounced(); }
-}
+
 let chatES = null;
-function startChatStream(){
-  if (chatES) return;
+let chatPollTimer = null;
+
+async function pollChat(){
   try {
-    chatES = new EventSource('https://ntfy.sh/' + NTFY_CHAT + '/sse');
-    chatES.onopen = () => { chatConnected = true; updateChatStatus(); };
-    chatES.onmessage = (ev) => {
-      chatConnected = true; updateChatStatus();
+    const r = await fetch('https://ntfy.sh/' + NTFY_CHAT + '/json?poll=1&since=30s');
+    if (!r.ok) return;
+    const text = await r.text();
+    let got = 0;
+    text.trim().split('\n').forEach(line => {
+      if (!line) return;
       try {
-        const outer = JSON.parse(ev.data);
-        if (!outer || !outer.message) return;
-        let data; try { data = JSON.parse(outer.message); } catch(e){ data = { from: 'Гость', text: outer.message, time: Date.now() }; }
+        const outer = JSON.parse(line);
+        if (outer.event !== 'message' || !outer.message) return;
+        let data; try { data = JSON.parse(outer.message); } catch(e){ return; }
+        if (!data || !data.text) return;
         if (data.device && data.device === DEVICE_ID) return;
         const fromRaw = String(data.from || 'Гость');
         const from = (fromRaw === 'Никита' || fromRaw === 'Чёрный либерал' || fromRaw === 'system') ? fromRaw : 'Гость';
-        pushMsg({ from, text: String(data.text || '').slice(0,500), time: data.time || Date.now(), id: outer.id || ('ntfy-' + Math.random()) });
+        const before = chatMessages.length;
+        pushMsg({ from, text: String(data.text).slice(0,500), time: data.time || Date.now(), id: outer.id || ('poll-' + Math.random()) });
+        if (chatMessages.length > before) got++;
       } catch(e){}
-    };
-    chatES.onerror = () => { chatConnected = false; updateChatStatus(); };
+    });
+    if (got > 0){ chatConnected = true; }
   } catch(e){}
 }
-function updateChatStatus(){
-  const l = $('chatStatusLine'); if (!l) return;
-  if (chatConnected){ l.textContent = '● синхронизация через облако'; l.style.color = '#8ef0b0'; }
-  else { l.textContent = '○ подключаемся...'; l.style.color = '#8b76ad'; }
+
+function startChatStream(){
+  if (!chatES){
+    try {
+      chatES = new EventSource('https://ntfy.sh/' + NTFY_CHAT + '/sse');
+      chatES.onopen = () => { chatConnected = true; };
+      chatES.onmessage = (ev) => {
+        chatConnected = true;
+        try {
+          const outer = JSON.parse(ev.data);
+          if (!outer || !outer.message) return;
+          let data; try { data = JSON.parse(outer.message); } catch(e){ data = { from: 'Гость', text: outer.message, time: Date.now() }; }
+          if (data.device && data.device === DEVICE_ID) return;
+          const fromRaw = String(data.from || 'Гость');
+          const from = (fromRaw === 'Никита' || fromRaw === 'Чёрный либерал' || fromRaw === 'system') ? fromRaw : 'Гость';
+          pushMsg({ from, text: String(data.text || '').slice(0,500), time: data.time || Date.now(), id: outer.id || ('ntfy-' + Math.random()) });
+        } catch(e){}
+      };
+      chatES.onerror = () => { chatConnected = false; };
+    } catch(e){}
+  }
+  if (chatPollTimer) clearInterval(chatPollTimer);
+  chatPollTimer = setInterval(pollChat, 4000);
+  pollChat();
 }
 async function sendChat(text){
   const me = senderName();
@@ -1561,13 +1596,16 @@ async function sendChat(text){
   lastChatSentAt = now;
   const payload = { from: me, text, time: now, device: DEVICE_ID };
   pushMsg({ from: me, text, time: payload.time, id: 'me-' + now + '-' + Math.random().toString(36).slice(2,7) });
-  try { await fetch('https://ntfy.sh/' + NTFY_CHAT, { method: 'POST', body: JSON.stringify(payload), headers: { 'X-Title': me } }); } catch(e){}
+  try {
+    await fetch('https://ntfy.sh/' + NTFY_CHAT, { method: 'POST', body: JSON.stringify(payload), headers: { 'X-Title': me } });
+    chatConnected = true;
+  } catch(e){}
 }
 $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); const inp = $('chatInput'); const text = inp.value; inp.value = ''; sendChat(text); inp.focus(); });
 $('chatClear').addEventListener('click', () => { if (userRole !== 'nikita') return; if (!confirm('Очистить?')) return; chatMessages = []; try { localStorage.setItem(LS_CHAT, '[]'); } catch(e){} renderChat(); });
 
 function buildSnapshot(){
-  return { version: 12, deviceId: DEVICE_ID, timestamp: Date.now(), texts: getCustomTexts(), photos: getCustomPhotos(), media: getMediaCache(), donations: getDonations(), recordings: getRecordings(), chat: chatMessages.slice(-200) };
+  return { version: 12, deviceId: DEVICE_ID, timestamp: Date.now(), texts: getCustomTexts(), photos: getCustomPhotos(), media: getMediaCache(), donations: getDonations(), recordings: getRecordings() };
 }
 async function uploadJsonSnapshot(jsonString){
   try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: fd }); if (r.ok){ const url = (await r.text()).trim(); if (url.startsWith('http')) return url; } } catch(e){}
@@ -1620,7 +1658,6 @@ async function downloadAndApplySnapshot(url, time, force){
     if (snap.donations) try { localStorage.setItem(LS_DONATIONS, JSON.stringify(snap.donations)); } catch(e){}
     if (snap.recordings) try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(snap.recordings)); } catch(e){}
     try { localStorage.setItem(LS_LAST_SNAP_TS, String(snap.timestamp || Date.now())); localStorage.setItem(LS_LAST_SNAP_URL, url); lastSnapTsSeen = snap.timestamp || Date.now(); } catch(e){}
-    if (snap.chat) mergeChatMessages(snap.chat);
     applyCustomTexts();
     document.querySelectorAll('.staff-photo').forEach(el => { const img = el.querySelector('img'); if (img){ img.classList.remove('loaded'); img.removeAttribute('src'); } });
     document.querySelectorAll('.fighter-flag').forEach(el => { el.querySelectorAll('img').forEach(i => i.remove()); const ph = el.querySelector('.flag-placeholder'); if (ph) ph.style.display = ''; });
@@ -1693,50 +1730,44 @@ function applyBootstrapOnLoad(){
       if (boot.media) localStorage.setItem(LS_MEDIA, JSON.stringify(boot.media));
       if (boot.donations) localStorage.setItem(LS_DONATIONS, JSON.stringify(boot.donations));
       if (boot.recordings) localStorage.setItem(LS_RECORDINGS, JSON.stringify(boot.recordings));
-      if (boot.chat) mergeChatMessages(boot.chat);
       localStorage.setItem(LS_LAST_SNAP_TS, String(bootTs));
       console.log('[bootstrap] данные из HTML применены');
     } catch(e){ console.warn('[bootstrap]', e); }
   }
 }
 
-function buildBootstrapCode(){
-  const snap = buildSnapshot();
-  snap._bootstrap = true;
-  const json = JSON.stringify(snap).replace(/<\//g, '<\\/');
-  return '<script>window.__BOOTSTRAP__=' + json + ';<\/script>';
-}
-
 let mediaModalCallbackUrl = null, mediaModalCallbackFile = null;
 function openMediaModal(label, onUrl, onFile){
-  if (isFrozen || userRole !== 'nikita'){ alert('🔒 Только Никита'); return; }
+  if (userRole !== 'nikita'){ alert('🔒 Только Никита'); return; }
   mediaModalCallbackUrl = onUrl; mediaModalCallbackFile = onFile;
-  $('mediaModal').classList.add('active'); $('mediaModalSub').textContent = label; $('mediaUrlInput').value = '';
+  $('mediaModal').classList.add('active');
+  $('mediaModalSub').textContent = label;
+  $('mediaUrlInput').value = '';
 }
 const _mModal = $('mediaModal');
 if (_mModal){
-  $('mediaModalClose').addEventListener('click', () => { $('mediaModal').classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; });
-  _mModal.addEventListener('click', e => { if (e.target === _mModal){ $('mediaModal').classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; } });
+  $('mediaModalClose').addEventListener('click', () => { _mModal.classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; });
+  _mModal.addEventListener('click', e => { if (e.target === _mModal){ _mModal.classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; } });
   $('mediaUrlSave').addEventListener('click', () => {
     const url = $('mediaUrlInput').value.trim();
     if (!url){ alert('Вставь ссылку'); return; }
     if (!/^https?:\/\//i.test(url)){ alert('Ссылка должна начинаться с http'); return; }
     if (mediaModalCallbackUrl) mediaModalCallbackUrl(url);
-    $('mediaModal').classList.remove('active');
+    _mModal.classList.remove('active');
   });
   $('mediaFileUpload').addEventListener('click', () => {
     const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
     inp.onchange = async () => {
       const f = inp.files && inp.files[0]; if (!f) return;
       $('mediaModalSub').textContent = '🗜 Сжимаю...';
-      try { const b64 = await compressImage(f, 700, 0.75); if (mediaModalCallbackFile) mediaModalCallbackFile(b64); $('mediaModalSub').textContent = '✅'; setTimeout(() => $('mediaModal').classList.remove('active'), 600); } catch(err){ alert('Ошибка'); }
+      try { const b64 = await compressImage(f, 700, 0.75); if (mediaModalCallbackFile) mediaModalCallbackFile(b64); $('mediaModalSub').textContent = '✅'; setTimeout(() => _mModal.classList.remove('active'), 600); } catch(err){ alert('Ошибка'); }
     };
     inp.click();
   });
 }
 
 function applyEditPermissions(){
-  const canEditNikita = (userRole === 'nikita') && !isFrozen;
+  const canEditNikita = (userRole === 'nikita');
   document.body.classList.toggle('is-nikita', userRole === 'nikita');
   document.body.classList.toggle('is-blacklib', userRole === 'blacklib');
   document.querySelectorAll('.staff-photo').forEach(el => el.classList.toggle('editable', canEditNikita));
@@ -1746,7 +1777,7 @@ function applyEditPermissions(){
 function makePhotosReplaceable(){
   document.querySelectorAll('.staff-photo').forEach(el => {
     el.addEventListener('click', () => {
-      if (userRole !== 'nikita' || isFrozen) return;
+      if (userRole !== 'nikita') return;
       const name = photoName(el);
       openMediaModal('фото: ' + name,
         (url) => { const img = el.querySelector('img'); if (img){ img.src = url; img.classList.add('loaded'); } saveCustomPhoto(name, url); },
@@ -1757,7 +1788,7 @@ function makePhotosReplaceable(){
 function makeTextsEditable(){
   document.querySelectorAll('.editable-field').forEach(el => {
     el.addEventListener('click', () => {
-      if (userRole !== 'nikita' || isFrozen || el.getAttribute('contenteditable') === 'true') return;
+      if (userRole !== 'nikita' || el.getAttribute('contenteditable') === 'true') return;
       el.setAttribute('contenteditable', 'true'); el.focus();
       const r = document.createRange(); r.selectNodeContents(el);
       const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
@@ -1773,19 +1804,19 @@ function makeTextsEditable(){
 function makeFighterMediaEditable(){
   document.querySelectorAll('.fighter-flag').forEach(flag => {
     const id = flag.dataset.fighter;
-    flag.addEventListener('click', () => { if (userRole !== 'nikita' || isFrozen) return;
+    flag.addEventListener('click', () => { if (userRole !== 'nikita') return;
       openMediaModal('флаг: ' + id, (url) => { applyMedia(id + '_flag', url); saveMediaCache(id + '_flag', url); }, (b64) => { applyMedia(id + '_flag', b64); saveMediaCache(id + '_flag', b64); });
     });
   });
   document.querySelectorAll('.fighter-emblem').forEach(emb => {
     const id = emb.dataset.fighter;
-    emb.addEventListener('click', () => { if (userRole !== 'nikita' || isFrozen) return;
+    emb.addEventListener('click', () => { if (userRole !== 'nikita') return;
       openMediaModal('герб: ' + id, (url) => { applyMedia(id + '_emblem', url); saveMediaCache(id + '_emblem', url); }, (b64) => { applyMedia(id + '_emblem', b64); saveMediaCache(id + '_emblem', b64); });
     });
   });
   document.querySelectorAll('.staff-flag').forEach(el => {
     const id = el.dataset.staffFlag;
-    el.addEventListener('click', () => { if (userRole !== 'nikita' || isFrozen) return;
+    el.addEventListener('click', () => { if (userRole !== 'nikita') return;
       const target = id === 'staff-n' ? 'staff_n_flag' : 'staff_bl_flag';
       openMediaModal('флаг штаба', (url) => { applyMedia(target, url); saveMediaCache(target, url); }, (b64) => { applyMedia(target, b64); saveMediaCache(target, b64); });
     });
@@ -1825,13 +1856,11 @@ $('welcomeEnterBtn').addEventListener('click', () => {
 });
 $('welcomeCode').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('welcomeEnterBtn').click(); });
 
-/* Кнопки "показать/скрыть" пароль */
 function togglePassword(inputId, btn){
   const inp = $(inputId); if (!inp || !btn) return;
   const hidden = inp.type === 'password';
   inp.type = hidden ? 'text' : 'password';
   btn.textContent = hidden ? '🙈' : '👁';
-  btn.setAttribute('aria-label', hidden ? 'Скрыть' : 'Показать');
 }
 const welcomeEye = $('welcomeEye');
 if (welcomeEye) welcomeEye.addEventListener('click', () => togglePassword('welcomeCode', welcomeEye));
@@ -1850,7 +1879,7 @@ function showWelcome(){
   try { sessionStorage.removeItem(SS_ROLE); } catch(e){}
   $('welcomeCode').value = '';
   if ($('welcomeCode')) $('welcomeCode').type = 'password';
-  if (welcomeEye){ welcomeEye.textContent = '👁'; welcomeEye.setAttribute('aria-label', 'Показать'); }
+  if (welcomeEye) welcomeEye.textContent = '👁';
   const st = $('welcomeStatus');
   if (st){ st.textContent = ''; st.className = 'welcome-status'; }
   setRole('guest');
@@ -1862,6 +1891,9 @@ $('logoutBtn').addEventListener('click', () => {
 function setRole(role){
   userRole = role; try { sessionStorage.setItem(SS_ROLE, role); } catch(e){}
   updateRoleBadge(); updateHostUI(); updateAccessUI(); updateLockUI(); updateChatSender(); updateChatGuestWarning(); applyEditPermissions(); renderChat(); renderRecordings();
+  // Отправляем heartbeat сразу
+  if (senderName()) sendPresence();
+  renderPresenceLine();
 }
 function updateRoleBadge(){
   const el = $('navRole'); if (!el) return;
@@ -1886,366 +1918,6 @@ function updateAccessUI(){
 }
 function updateLockUI(){ const w = $('lockWrapper'); if (!w) return; const can = (userRole === 'nikita' || userRole === 'blacklib'); w.classList.toggle('locked', !can); }
 
-(function(){
-  const startBtn = document.getElementById('archRecStartBtn'), stopBtn = document.getElementById('archRecStopBtn'), timerEl = document.getElementById('archRecTimer'), statusEl = document.getElementById('archRecStatus'), uploadBar = document.getElementById('archUploadBar'), uploadFill = document.getElementById('archUploadFill');
-  if (!startBtn) return;
-  let stream = null, recorder = null, totalStart = 0, timerInt = null, mimeType = 'video/webm', quality = 'mid', collectChunks = [];
-  const QUALITY = { low: { w: 854, h: 480, bitrate: 1500000, fps: 24 }, mid: { w: 1280, h: 720, bitrate: 3000000, fps: 30 }, high: { w: 1920, h: 1080, bitrate: 6000000, fps: 30 } };
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = 'rec-status ' + (cls || ''); }
-  function updateTimer(){ const s = Math.floor((Date.now() - totalStart) / 1000); timerEl.textContent = pad(Math.floor(s/3600)) + ':' + pad(Math.floor((s%3600)/60)) + ':' + pad(s%60); }
-  document.querySelectorAll('[data-recq]').forEach(btn => btn.addEventListener('click', () => {
-    if (recorder && recorder.state === 'recording'){ alert('Останови'); return; }
-    document.querySelectorAll('[data-recq]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); quality = btn.dataset.recq;
-  }));
-  async function start(){
-    if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-    if (isFrozen){ alert('🔒 Заморожено'); return; }
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia){ setStatus('❌ Не поддерживается', 'recording'); return; }
-    const q = QUALITY[quality];
-    try { stream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: q.fps, max: q.fps }, width: { ideal: q.w }, height: { ideal: q.h } }, audio: true }); }
-    catch(err){ setStatus('❌ Нет доступа', 'recording'); return; }
-    try {
-      const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const dest = audioCtx.createMediaStreamDestination();
-      if (stream.getAudioTracks().length > 0){ const sysSrc = audioCtx.createMediaStreamSource(new MediaStream(stream.getAudioTracks())); sysSrc.connect(dest); }
-      const micSrc = audioCtx.createMediaStreamSource(micStream); micSrc.connect(dest);
-      const finalStream = new MediaStream();
-      stream.getVideoTracks().forEach(t => finalStream.addTrack(t));
-      dest.stream.getAudioTracks().forEach(t => finalStream.addTrack(t));
-      stream = finalStream;
-    } catch(err){ setStatus('⚠ Без микрофона', 'recording'); }
-    mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus') ? 'video/webm;codecs=vp9,opus' : 'video/webm';
-    collectChunks = [];
-    try { recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: q.bitrate, audioBitsPerSecond: 128000 }); }
-    catch(err){ setStatus('❌ ' + err.message, 'recording'); return; }
-    recorder.ondataavailable = e => { if (e.data && e.data.size > 0) collectChunks.push(e.data); };
-    recorder.onstop = async () => {
-      try {
-        const blob = new Blob(collectChunks, { type: mimeType.split(';')[0] });
-        setStatus('📤 Заливаю (' + (blob.size/1024/1024).toFixed(1) + ' МБ)...', 'uploading');
-        uploadBar.classList.add('show'); uploadFill.style.width = '0%';
-        const url = await uploadBlobToHost(blob, 'debate-' + Date.now() + '.webm', (p) => { uploadFill.style.width = Math.round(p * 100) + '%'; });
-        if (!url){ setStatus('❌ Не залилось', 'recording'); return; }
-        const author = userRole === 'nikita' ? 'Никита' : userRole === 'blacklib' ? 'Чёрный либерал' : 'Гость';
-        const title = ($('recTitle').value || '').trim() || 'Дебаты';
-        const dur = Math.floor((Date.now() - totalStart) / 1000);
-        const duration = pad(Math.floor(dur/3600)) + ':' + pad(Math.floor(dur/60 % 60)) + ':' + pad(dur % 60);
-        addRecording({ title, url, size: blob.size, time: Date.now(), duration, author, mime: 'video/webm' });
-        setStatus('✅ Загружено!', 'done'); uploadFill.style.width = '100%'; $('recTitle').value = '';
-        setTimeout(() => { uploadBar.classList.remove('show'); setStatus('', ''); }, 5000);
-      } catch(e){ setStatus('❌ ' + e.message, 'recording'); }
-    };
-    recorder.start(3000);
-    totalStart = Date.now(); updateTimer(); timerInt = setInterval(updateTimer, 1000);
-    timerEl.classList.add('show'); startBtn.style.display = 'none'; stopBtn.style.display = 'flex';
-    setStatus('🔴 Запись идёт · ' + q.w + 'p', 'recording');
-    stream.getVideoTracks()[0].onended = () => stop();
-  }
-  function stop(){
-    if (recorder && recorder.state !== 'inactive'){ try { recorder.stop(); } catch(e){} }
-    if (timerInt){ clearInterval(timerInt); timerInt = null; }
-    setTimeout(() => { try { if (stream) stream.getTracks().forEach(t => t.stop()); } catch(e){} stream = null; }, 500);
-    startBtn.style.display = 'flex'; stopBtn.style.display = 'none';
-    setTimeout(() => { timerEl.classList.remove('show'); }, 2000);
-  }
-  startBtn.addEventListener('click', start); stopBtn.addEventListener('click', stop);
-})();
-
-(function(){
-  const btn = document.getElementById('archFileBtn'), inp = document.getElementById('archFileInput'), statusEl = document.getElementById('archFileStatus'), bar = document.getElementById('archFileUploadBar'), fill = document.getElementById('archFileUploadFill');
-  if (!btn) return;
-  function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = 'rec-status ' + (cls || ''); }
-  btn.addEventListener('click', () => inp.click());
-  inp.addEventListener('change', async () => {
-    const f = inp.files && inp.files[0]; if (!f) return;
-    if (userRole === 'guest'){ alert('🔒 Только участники'); inp.value = ''; return; }
-    setStatus('📤 Загружаю (' + (f.size/1024/1024).toFixed(1) + ' МБ)...', 'uploading');
-    bar.classList.add('show'); fill.style.width = '0%';
-    try {
-      const url = await uploadBlobToHost(f, f.name, (p) => { fill.style.width = Math.round(p * 100) + '%'; });
-      if (!url){ setStatus('❌ Не залилось', 'recording'); return; }
-      const author = userRole === 'nikita' ? 'Никита' : userRole === 'blacklib' ? 'Чёрный либерал' : 'Гость';
-      const title = ($('recTitle').value || '').trim() || f.name.replace(/\.[^.]+$/, '');
-      addRecording({ title, url, size: f.size, time: Date.now(), duration: '', author, mime: f.type || 'video/webm' });
-      setStatus('✅ Загружено!', 'done'); fill.style.width = '100%'; $('recTitle').value = '';
-      setTimeout(() => { bar.classList.remove('show'); setStatus('', ''); }, 5000);
-    } catch(e){ setStatus('❌ Ошибка: ' + e.message, 'recording'); }
-    inp.value = '';
-  });
-})();
-
-$('adminAdd').addEventListener('click', () => {
-  if (isFrozen){ alert('🔒 Заморожено'); return; }
-  const amt = parseFloat($('adminAmount').value) || 0;
-  const dn = parseInt($('adminDonors').value) || 0;
-  const cand = $('adminCandidate').value;
-  const name = ($('adminDonorName').value || '').trim() || 'Аноним';
-  const st = $('adminStatus');
-  if (amt <= 0){ st.textContent = '⚠ Введи сумму'; st.className = 'admin-status err'; setTimeout(() => st.className = 'admin-status', 2500); return; }
-  addDonation({ candidate: cand, amount: amt, name, time: Date.now(), source: 'admin', count: dn });
-  publishSnapshotDebounced();
-  st.textContent = '✅ Добавлено ' + fmt(amt); st.className = 'admin-status ok';
-  $('adminAmount').value = ''; $('adminDonors').value = '1'; $('adminDonorName').value = '';
-  setTimeout(() => st.className = 'admin-status', 3500);
-});
-$('adminReset').addEventListener('click', () => {
-  if (!confirm('Сброс локально?')) return;
-  localStorage.removeItem(LS_DONATIONS); localStorage.removeItem(LS_LAST_SNAP_TS);
-  renderAllFromDonations();
-  const st = $('adminStatus'); st.textContent = '🔄 Сброшено'; st.className = 'admin-status ok';
-  setTimeout(() => st.className = 'admin-status', 3000);
-});
-$('publishBtn').addEventListener('click', async () => {
-  if (isFrozen){ alert('🔒 Заморожено'); return; }
-  const st = $('publishStatus');
-  st.textContent = '📦 Публикую...'; st.className = 'admin-status';
-  try {
-    setSyncIndicator('sending', 'Конвертирую...');
-    const photos = getCustomPhotos(); let changed = false;
-    await Promise.allSettled(Object.keys(photos).map(async (k) => { if (photos[k] && photos[k].startsWith('data:')){ const up = await base64ToUrl(photos[k], k + '.jpg'); if (up && !up.startsWith('data:')){ photos[k] = up; changed = true; } } }));
-    if (changed) try { localStorage.setItem(LS_PHOTOS, JSON.stringify(photos)); } catch(e){}
-    const media = getMediaCache(); let changedM = false;
-    await Promise.allSettled(Object.keys(media).map(async (k) => { if (media[k] && media[k].startsWith('data:')){ const up = await base64ToUrl(media[k], k + '.jpg'); if (up && !up.startsWith('data:')){ media[k] = up; changedM = true; } } }));
-    if (changedM) try { localStorage.setItem(LS_MEDIA, JSON.stringify(media)); } catch(e){}
-    await publishSnapshot(true);
-    st.textContent = '✅ Опубликовано!'; st.className = 'admin-status ok';
-    setTimeout(() => st.className = 'admin-status', 8000);
-  } catch(e){ st.textContent = '❌ Ошибка: ' + e.message; st.className = 'admin-status err'; }
-});
-function applyFreezeState(){
-  document.body.classList.toggle('site-frozen', isFrozen);
-  const st = $('freezeStatus');
-  if (st){ st.textContent = isFrozen ? '🔒 Заморожено' : ''; st.className = 'admin-status ' + (isFrozen ? 'ok' : ''); }
-  applyEditPermissions();
-}
-$('freezeBtn').addEventListener('click', () => { if (!confirm('Заморозить?')) return; isFrozen = true; localStorage.setItem(LS_FROZEN, 'true'); applyFreezeState(); publishSnapshotDebounced(); });
-$('unfreezeBtn').addEventListener('click', () => { if (!confirm('Разморозить?')) return; isFrozen = false; localStorage.setItem(LS_FROZEN, 'false'); applyFreezeState(); });
-$('exportBtn').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(buildSnapshot(), null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'inaogenty-snapshot-' + new Date().toISOString().slice(0,10) + '.json'; a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
-$('importBtn').addEventListener('click', () => $('importFileInput').click());
-$('importFileInput').addEventListener('change', () => {
-  const f = $('importFileInput').files && $('importFileInput').files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = () => {
-    try {
-      const snap = JSON.parse(r.result);
-      if (!snap || typeof snap !== 'object') throw new Error('bad');
-      if (snap.texts) try { localStorage.setItem(LS_TEXTS, JSON.stringify(snap.texts)); } catch(e){}
-      if (snap.photos) try { localStorage.setItem(LS_PHOTOS, JSON.stringify(snap.photos)); } catch(e){}
-      if (snap.media) try { localStorage.setItem(LS_MEDIA, JSON.stringify(snap.media)); } catch(e){}
-      if (snap.donations) try { localStorage.setItem(LS_DONATIONS, JSON.stringify(snap.donations)); } catch(e){}
-      if (snap.recordings) try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(snap.recordings)); } catch(e){}
-      if (snap.chat) mergeChatMessages(snap.chat);
-      applyCustomTexts(); applyAllCachedMedia(); renderAllFromDonations(); renderRecordings();
-      document.querySelectorAll('.staff-photo').forEach(el => { const img = el.querySelector('img'); if (img){ img.classList.remove('loaded'); img.removeAttribute('src'); } });
-      loadAllStaffPhotos(); publishSnapshotDebounced();
-    } catch(e){}
-    $('importFileInput').value = '';
-  };
-  r.readAsText(f);
-});
-
-async function downloadSelfContainedHTML(){
-  const st = $('downloadHtmlStatus');
-  if (isFrozen){ alert('🔒 Заморожено'); return; }
-  if (userRole !== 'nikita'){ alert('Только Никита'); return; }
-  st.className = 'admin-status'; st.textContent = '📦 Собираю файл...';
-  try {
-    setSyncIndicator('sending', 'Готовлю данные...');
-    const photos = getCustomPhotos();
-    await Promise.allSettled(Object.keys(photos).map(async (k) => { if (photos[k] && photos[k].startsWith('data:')){ const up = await base64ToUrl(photos[k], k + '.jpg'); if (up && !up.startsWith('data:')) photos[k] = up; } }));
-    localStorage.setItem(LS_PHOTOS, JSON.stringify(photos));
-    const media = getMediaCache();
-    await Promise.allSettled(Object.keys(media).map(async (k) => { if (media[k] && media[k].startsWith('data:')){ const up = await base64ToUrl(media[k], k + '.jpg'); if (up && !up.startsWith('data:')) media[k] = up; } }));
-    localStorage.setItem(LS_MEDIA, JSON.stringify(media));
-  } catch(e){}
-  st.textContent = '📦 Формирую HTML...';
-  try {
-    let html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    html = html.replace(/<script>window\.__BOOTSTRAP__[\s\S]*?<\/script>\s*/g, '');
-    const snap = buildSnapshot();
-    const json = JSON.stringify(snap).replace(/<\//g, '<\\/');
-    const boot = '<script>window.__BOOTSTRAP__=' + json + ';<\/script>\n';
-    if (html.includes('</body>')) html = html.replace('</body>', boot + '</body>');
-    else html += boot;
-    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url;
-    const now = new Date(); const pad = (n) => String(n).padStart(2,'0');
-    a.download = 'inaogenty-' + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + '-' + pad(now.getHours()) + pad(now.getMinutes()) + '.html';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    const sizeMb = (blob.size / 1024 / 1024).toFixed(2);
-    st.className = 'admin-status ok'; st.textContent = '✅ Скачано (' + sizeMb + ' МБ)!';
-    setSyncIndicator('ok', 'Готово');
-    setTimeout(() => { st.className = 'admin-status'; st.textContent = ''; }, 8000);
-  } catch(e){ st.className = 'admin-status err'; st.textContent = '❌ ' + e.message; setSyncIndicator('err', 'Ошибка'); }
-}
-
-function openBootstrapModal(){
-  if (isFrozen){ alert('🔒 Заморожено'); return; }
-  if (userRole !== 'nikita'){ alert('Только Никита'); return; }
-  $('bootstrapCode').value = buildBootstrapCode();
-  $('bootstrapModal').classList.add('active');
-  const st = $('bootstrapCopyStatus'); st.className = 'status'; st.textContent = '';
-}
-$('bootstrapBtn').addEventListener('click', openBootstrapModal);
-$('bootstrapClose').addEventListener('click', () => $('bootstrapModal').classList.remove('active'));
-$('bootstrapModal').addEventListener('click', e => { if (e.target === $('bootstrapModal')) $('bootstrapModal').classList.remove('active'); });
-$('bootstrapCopyBtn').addEventListener('click', async () => {
-  const ta = $('bootstrapCode'), st = $('bootstrapCopyStatus');
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(ta.value); }
-    else { ta.removeAttribute('readonly'); ta.select(); document.execCommand('copy'); ta.setAttribute('readonly', ''); }
-    st.className = 'status success'; st.textContent = '✅ Скопировано! Вставь в TrebEdit перед </body>';
-    setTimeout(() => { st.className = 'status'; st.textContent = ''; }, 5000);
-  } catch(e){ ta.removeAttribute('readonly'); ta.select(); st.className = 'status error'; st.textContent = '⚠ Выдели и скопируй вручную'; }
-});
-$('downloadHtmlBtn').addEventListener('click', downloadSelfContainedHTML);
-
-const tgTarget = $('tgTarget');
-tgTarget.value = localStorage.getItem('inaogenty_tg_last') || '';
-let selectedServer = 'meet.jit.si';
-document.querySelectorAll('.srv-btn[data-server]').forEach(btn => {
-  btn.addEventListener('click', () => { document.querySelectorAll('.srv-btn[data-server]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); selectedServer = btn.dataset.server; });
-});
-$('tgCallBtn').addEventListener('click', () => {
-  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-  const nick = tgTarget.value.trim().replace(/^@/,'').toLowerCase();
-  if (!nick || !/^[a-zA-Z0-9_]{3,32}$/.test(nick)){ alert('Ник латиницей'); return; }
-  localStorage.setItem('inaogenty_tg_last', nick);
-  window.open('https://t.me/' + encodeURIComponent(nick), '_blank');
-});
-$('jitsiBtn').addEventListener('click', () => {
-  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-  const link = 'https://' + selectedServer + '/inaogenty-' + Math.random().toString(36).slice(2,10);
-  if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {});
-  window.open(link, '_blank'); setTimeout(() => alert('🔗 ' + link), 600);
-});
-$('joinCallBtn').addEventListener('click', () => {
-  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-  const link = $('joinLink').value.trim(); if (!link){ alert('Вставь ссылку'); return; }
-  window.open(link, '_blank');
-});
-
-(function(){
-  const startBtn = document.getElementById('recStartBtn'), stopBtn = document.getElementById('recStopBtn'), status = document.getElementById('recStatus'), timerEl = document.getElementById('recTimer');
-  if (!startBtn) return;
-  let mediaRecorder = null, chunks = [], timerInt = null, startedAt = 0, audioCtx = null, micStream = null, tabStream = null;
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function setStatus(msg, color){ status.textContent = msg; status.style.color = color || '#a98fd0'; }
-  function updateTimer(){ const s = Math.floor((Date.now() - startedAt) / 1000); timerEl.textContent = pad(Math.floor(s/60)) + ':' + pad(s%60); }
-  function cleanup(){ try { if (micStream) micStream.getTracks().forEach(t => t.stop()); } catch(e){} try { if (tabStream) tabStream.getTracks().forEach(t => t.stop()); } catch(e){} try { if (audioCtx && audioCtx.state !== 'closed') audioCtx.close(); } catch(e){} micStream = null; tabStream = null; audioCtx = null; }
-  async function start(){
-    if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-    if (!navigator.mediaDevices){ setStatus('❌ Не поддерживается', '#ff9b9b'); return; }
-    chunks = [];
-    try { micStream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch(err){ setStatus('❌ Микрофон', '#ff9b9b'); return; }
-    try { tabStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }); tabStream.getVideoTracks().forEach(t => t.stop()); } catch(err){ tabStream = null; }
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const dest = audioCtx.createMediaStreamDestination();
-    const micSrc = audioCtx.createMediaStreamSource(micStream); micSrc.connect(dest);
-    let hasTab = false;
-    if (tabStream && tabStream.getAudioTracks().length > 0){ hasTab = true; const tabSrc = audioCtx.createMediaStreamSource(tabStream); tabSrc.connect(dest); }
-    const mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/webm';
-    try { mediaRecorder = new MediaRecorder(dest.stream, { mimeType: mime, audioBitsPerSecond: 128000 }); } catch(err){ setStatus('❌ ' + err.message, '#ff9b9b'); cleanup(); return; }
-    mediaRecorder.ondataavailable = e => { if (e.data && e.data.size > 0) chunks.push(e.data); };
-    mediaRecorder.onstop = () => {
-      try {
-        const blob = new Blob(chunks, { type: mime.split(';')[0] });
-        const url = URL.createObjectURL(blob);
-        const d = new Date(); const stamp = d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + '_' + pad(d.getHours()) + '-' + pad(d.getMinutes());
-        const a = document.createElement('a'); a.href = url; a.download = 'zapis-zvonka-' + stamp + '.webm';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(() => URL.revokeObjectURL(url), 3000);
-        setStatus('✅ Файл (' + (blob.size/1024/1024).toFixed(1) + ' МБ)', '#8ef0b0');
-      } catch(err){ setStatus('❌', '#ff9b9b'); }
-    };
-    mediaRecorder.start(1000); startedAt = Date.now(); updateTimer(); timerInt = setInterval(updateTimer, 1000);
-    startBtn.style.display = 'none'; stopBtn.style.display = 'flex'; timerEl.style.display = 'block';
-    setStatus(hasTab ? '🔴 Микрофон + вкладка' : '🔴 Только микрофон', hasTab ? '#8ef0b0' : '#ffd966');
-  }
-  function stop(){
-    if (mediaRecorder && mediaRecorder.state !== 'inactive'){ try { mediaRecorder.stop(); } catch(e){} }
-    if (timerInt){ clearInterval(timerInt); timerInt = null; }
-    cleanup(); startBtn.style.display = 'flex'; stopBtn.style.display = 'none';
-    setTimeout(() => { timerEl.style.display = 'none'; }, 1500);
-  }
-  startBtn.addEventListener('click', start); stopBtn.addEventListener('click', stop);
-})();
-
-(function(){
-  const startBtn = document.getElementById('scrStartBtn'), stopBtn = document.getElementById('scrStopBtn'), statusEl = document.getElementById('scrStatus'), timerEl = document.getElementById('scrTimer'), chunkEl = document.getElementById('scrChunkInfo');
-  if (!startBtn) return;
-  let stream = null, recorder = null, totalStart = 0, timerInt = null, chunkTimer = null, chunkIndex = 0, totalBytes = 0, mimeType = 'video/webm', quality = 'mid', chunkMinutes = 30;
-  const QUALITY = { low: { w: 854, h: 480, bitrate: 1500000, fps: 24 }, mid: { w: 1280, h: 720, bitrate: 3000000, fps: 30 }, high: { w: 1920, h: 1080, bitrate: 6000000, fps: 30 } };
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function setStatus(msg, color){ statusEl.textContent = msg; statusEl.style.color = color || '#a98fd0'; }
-  function updateTimer(){ const s = Math.floor((Date.now() - totalStart) / 1000); timerEl.textContent = pad(Math.floor(s/3600)) + ':' + pad(Math.floor((s%3600)/60)) + ':' + pad(s%60); }
-  function fmtSizeB(bytes){ if (bytes < 1024*1024) return Math.round(bytes/1024) + ' КБ'; if (bytes < 1024*1024*1024) return (bytes/1024/1024).toFixed(1) + ' МБ'; return (bytes/1024/1024/1024).toFixed(2) + ' ГБ'; }
-  function updateChunkInfo(){ chunkEl.textContent = '📦 Кусков: ' + chunkIndex + ' · ' + fmtSizeB(totalBytes); }
-  function downloadChunk(blob, index){
-    if (!blob || blob.size < 1000) return;
-    const d = new Date(); const stamp = d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()) + '_' + pad(d.getHours()) + '-' + pad(d.getMinutes()) + '-' + pad(d.getSeconds());
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'screen-' + stamp + '-part' + String(index).padStart(2,'0') + '.webm';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(() => URL.revokeObjectURL(url), 5000);
-    totalBytes += blob.size; chunkIndex++; updateChunkInfo();
-  }
-  async function start(){
-    if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia){ setStatus('❌ Не поддерживается', '#ff9b9b'); return; }
-    const q = QUALITY[quality];
-    try { stream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: q.fps, max: q.fps }, width: { ideal: q.w }, height: { ideal: q.h } }, audio: true }); }
-    catch(err){ setStatus('❌ Экран', '#ff9b9b'); return; }
-    try {
-      const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const dest = audioCtx.createMediaStreamDestination();
-      if (stream.getAudioTracks().length > 0){ const sysSrc = audioCtx.createMediaStreamSource(new MediaStream(stream.getAudioTracks())); sysSrc.connect(dest); }
-      const micSrc = audioCtx.createMediaStreamSource(micStream); micSrc.connect(dest);
-      const finalStream = new MediaStream();
-      stream.getVideoTracks().forEach(t => finalStream.addTrack(t));
-      dest.stream.getAudioTracks().forEach(t => finalStream.addTrack(t));
-      stream = finalStream;
-    } catch(err){ setStatus('⚠ Без микрофона', '#ffd966'); }
-    mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus') ? 'video/webm;codecs=vp9,opus' : 'video/webm';
-    chunkIndex = 0; totalBytes = 0; updateChunkInfo();
-    startNewSegment();
-    totalStart = Date.now(); timerInt = setInterval(updateTimer, 1000);
-    timerEl.style.display = 'block'; startBtn.style.display = 'none'; stopBtn.style.display = 'flex';
-    setStatus('🔴 ' + q.w + 'p@' + q.fps + 'fps · куски ' + chunkMinutes + ' мин', '#8ef0b0');
-    stream.getVideoTracks()[0].onended = () => stop();
-  }
-  function startNewSegment(){
-    const q = QUALITY[quality];
-    try { recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: q.bitrate, audioBitsPerSecond: 128000 }); }
-    catch(err){ setStatus('❌ ' + err.message, '#ff9b9b'); return; }
-    const idx = chunkIndex + 1;
-    let segChunks = [];
-    recorder.ondataavailable = e => { if (e.data && e.data.size > 0) segChunks.push(e.data); };
-    recorder.onstop = () => { try { if (segChunks.length){ const blob = new Blob(segChunks, { type: mimeType.split(';')[0] }); downloadChunk(blob, idx); setStatus('💾 Кусок ' + idx, '#ffd966'); } } catch(e){} segChunks = []; };
-    recorder.start(3000);
-    if (chunkTimer) clearTimeout(chunkTimer);
-    chunkTimer = setTimeout(() => { if (recorder && recorder.state === 'recording'){ const old = recorder; old.onstop = (function(orig){ return function(){ orig.call(old); if (recorder === old && stream && stream.active !== false) startNewSegment(); }; })(old.onstop); try { old.stop(); } catch(e){} } }, chunkMinutes * 60 * 1000);
-  }
-  function stop(){
-    if (chunkTimer){ clearTimeout(chunkTimer); chunkTimer = null; }
-    if (recorder && recorder.state !== 'inactive'){ try { recorder.stop(); } catch(e){} }
-    setTimeout(() => { try { if (stream) stream.getTracks().forEach(t => t.stop()); } catch(e){} stream = null; }, 500);
-    if (timerInt){ clearInterval(timerInt); timerInt = null; }
-    startBtn.style.display = 'flex'; stopBtn.style.display = 'none';
-    setStatus('✅ Кусков: ' + chunkIndex, '#8ef0b0');
-    setTimeout(() => { timerEl.style.display = 'none'; }, 2000);
-  }
-  startBtn.addEventListener('click', start); stopBtn.addEventListener('click', stop);
-})();
-
 function showStatus(el, type, msg){ el.className = 'status ' + type; el.textContent = msg; if (type !== 'loading') setTimeout(() => el.className = 'status', 9000); }
 function applyAnon(form){ const n = form.querySelector('input[name="Имя"]'); if (n && n.value.trim() === '') n.value = 'Аноним'; }
 async function submitForm(form, statusEl, successMsg, onSuccess){
@@ -2265,7 +1937,7 @@ async function submitForm(form, statusEl, successMsg, onSuccess){
     showStatus(statusEl, 'success', '✅ ' + successMsg);
     try { if (onSuccess) onSuccess(new FormData(form)); } catch(e){}
     form.reset();
-  } else showStatus(statusEl, 'error', '❌ Не отправилось. Проверь связь и попробуй снова.');
+  } else showStatus(statusEl, 'error', '❌ Не отправилось. Попробуй ещё раз.');
   if (btn){ btn.disabled = false; btn.textContent = orig; }
 }
 document.querySelectorAll('#donateForm .amt').forEach(b => {
@@ -2354,8 +2026,32 @@ setInterval(updateCountdown, 1000); updateCountdown();
 function updateLiveTime(){ const el = $('liveTime'); if (el) el.textContent = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
 setInterval(updateLiveTime, 1000); updateLiveTime();
 
+let selectedServer = 'meet.jit.si';
+document.querySelectorAll('.srv-btn[data-server]').forEach(btn => {
+  btn.addEventListener('click', () => { document.querySelectorAll('.srv-btn[data-server]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); selectedServer = btn.dataset.server; });
+});
+$('tgCallBtn').addEventListener('click', () => {
+  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
+  const nick = $('tgTarget').value.trim().replace(/^@/,'').toLowerCase();
+  if (!nick || !/^[a-zA-Z0-9_]{3,32}$/.test(nick)){ alert('Ник латиницей'); return; }
+  localStorage.setItem('inaogenty_tg_last', nick);
+  window.open('https://t.me/' + encodeURIComponent(nick), '_blank');
+});
+$('jitsiBtn').addEventListener('click', () => {
+  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
+  const link = 'https://' + selectedServer + '/inaogenty-' + Math.random().toString(36).slice(2,10);
+  if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {});
+  window.open(link, '_blank'); setTimeout(() => alert('🔗 ' + link), 600);
+});
+$('joinCallBtn').addEventListener('click', () => {
+  if (userRole === 'guest'){ alert('🔒 Только участники'); return; }
+  const link = $('joinLink').value.trim(); if (!link){ alert('Вставь ссылку'); return; }
+  window.open(link, '_blank');
+});
+
 const year = new Date().getFullYear();
-$('welYear').textContent = year; $('footYear').textContent = year;
+if ($('welYear')) $('welYear').textContent = year;
+if ($('footYear')) $('footYear').textContent = year;
 
 applyBootstrapOnLoad();
 applyCustomTexts();
@@ -2369,7 +2065,7 @@ updateAccessUI();
 updateLockUI();
 updateChatSender();
 updateChatGuestWarning();
-applyFreezeState();
+applyEditPermissions();
 setSyncIndicator('ok', 'Готово');
 
 (function(){
@@ -2399,12 +2095,24 @@ setTimeout(() => {
   loadAllStaffPhotos();
   loadChatHistoryFromNtfy();
   startChatStream();
-  updateChatStatus();
+  startPresence();
   startSnapshotSubscription();
 }, 100);
 
 setTimeout(() => { loadLatestSnapshot(); }, 500);
-setInterval(() => { if (userRole === 'nikita' && !isFrozen) publishSnapshot(false); }, 900000);
+
+// Обновляем "был X мин назад" каждые 10 сек
+setInterval(() => {
+  renderPresenceLine();
+  // Очищаем устаревшие записи > 1 час
+  const now = Date.now();
+  Object.keys(presenceMap).forEach(k => { if (now - presenceMap[k].time > 3600000) delete presenceMap[k]; });
+}, 10000);
+
+// При закрытии окна отправляем "вышел" (не обязательно — heartbeat перестанет идти)
+window.addEventListener('beforeunload', () => {
+  // ничего не делаем — статус обновится по времени
+});
 </script>
 </body>
 </html>
