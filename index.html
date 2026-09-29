@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg:#05030c;--gold:#ffd966;--purple:#b06eff;--green:#4ade80;--red:#ef4444;--blue:#5096ff;--text:#f0e9ff;--muted:#8b76ad;--line:rgba(160,100,255,.14);--card:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.92))}
@@ -43,12 +45,9 @@ body:not(.is-nikita) .editable-field,body:not(.is-nikita) .staff-photo,body:not(
 .ws-lbl{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.6px;font-weight:700;margin-top:.5rem}
 .welcome-divider{position:relative;z-index:1;text-align:center;color:#5f4d7a;font-size:.76rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:1.4rem 0 1rem}
 .code-input{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,215,0,.35);border-radius:1rem;padding:1.1rem 3rem 1.1rem 1.2rem;color:var(--gold);font-family:ui-monospace,monospace;font-size:1.4rem;text-align:center;letter-spacing:8px;font-weight:700;outline:none;margin-bottom:.8rem;position:relative;z-index:1}
-.code-input:focus{border-color:var(--gold);box-shadow:0 0 30px -5px rgba(255,215,0,.5)}
-.code-input::placeholder{letter-spacing:4px;color:#8b76ad}
 .code-wrap{position:relative;z-index:1}
-.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0;line-height:1}
-.welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);transition:transform .2s;width:100%;position:relative;z-index:1;margin-bottom:.7rem;box-shadow:0 20px 45px -12px rgba(255,215,0,.75)}
-.welcome-btn:hover{transform:translateY(-3px)}
+.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0}
+.welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);width:100%;position:relative;z-index:1;margin-bottom:.7rem}
 .welcome-status{min-height:1.2rem;font-size:.88rem;font-weight:800;text-align:center;position:relative;z-index:1;margin-top:.6rem}
 .welcome-status.ok{color:var(--green)}
 .welcome-status.err{color:var(--red)}
@@ -65,10 +64,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.96);border-bott
 .nav-role.blacklib{background:rgba(200,200,200,.15);color:#e6e6e6;border-color:rgba(200,200,200,.5)}
 .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:.5rem;box-shadow:0 0 12px var(--red);animation:pulse 1.5s infinite;vertical-align:middle}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-.nav-tabs{display:flex;gap:.2rem;padding:.5rem 0 0;overflow-x:auto;border-top:1px solid rgba(160,100,255,.08);scrollbar-width:none}
+.nav-tabs{display:flex;gap:.2rem;padding:.5rem 0 0;overflow-x:auto;scrollbar-width:none}
 .nav-tabs::-webkit-scrollbar{display:none}
 .nav-tab{padding:.9rem 1.1rem;background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer;font-family:inherit;font-size:.86rem;border-bottom:2px solid transparent;white-space:nowrap;position:relative}
-.nav-tab:hover{color:#f0e6ff}
 .nav-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .nav-tab.active[data-page="staff-bl"]{color:#e6e6e6;border-bottom-color:#e6e6e6}
 .nav-tab .badge-unread{position:absolute;top:.5rem;right:.35rem;min-width:18px;height:18px;padding:0 5px;background:var(--red);color:#fff;font-size:.65rem;font-weight:800;border-radius:100px;display:flex;align-items:center;justify-content:center}
@@ -79,8 +77,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,6,16,.96);border-bott
 .live-pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.2s infinite;display:inline-block}
 .ticker-sep{color:#5f4d7a;font-size:1.2rem}
 .section-page{display:none}
-.section-page.active{display:block;animation:fadePage .45s cubic-bezier(.22,1,.36,1)}
-@keyframes fadePage{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.section-page.active{display:block}
 .hero{padding:3rem 0 2rem;text-align:center}
 .live-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(239,68,68,.09);border:1px solid rgba(239,68,68,.4);color:#ff9b9b;font-size:.72rem;font-weight:800;padding:.6rem 1.3rem;border-radius:100px;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.8rem}
 .live-badge.blue{background:rgba(80,150,255,.1);border-color:rgba(80,150,255,.4);color:#9bc9ff}
@@ -100,8 +97,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .subtitle{font-size:1.08rem;color:#b0a0c8;max-width:720px;margin:0 auto 1.5rem;line-height:1.7}
 .result-hero{max-width:960px;margin:0 auto 2.5rem;background:linear-gradient(155deg,#1c1136,#0d0620);border:1px solid rgba(255,215,0,.32);border-radius:2.4rem;padding:2.8rem 2rem 2.2rem;position:relative}
 .result-head{text-align:center;margin-bottom:2.2rem}
-.trophy{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#ffd966,#b8860b);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1rem;animation:trophyFloat 3s ease-in-out infinite}
-@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+.trophy{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#ffd966,#b8860b);display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 1rem}
 .final-score{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center;padding:2rem 1.5rem;background:linear-gradient(135deg,rgba(140,80,220,.1),rgba(255,215,0,.06));border:1px solid rgba(255,215,0,.28);border-radius:1.8rem;margin-bottom:1.5rem}
 .score-side{text-align:center}
 .score-avatar{width:70px;height:70px;border-radius:20px;margin:0 auto .8rem;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.8rem;overflow:hidden}
@@ -115,14 +111,13 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .score-divider{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:#5f4d7a;text-align:center}
 .verdict{text-align:center;padding:1.2rem 1.5rem;border-radius:1.2rem;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.35);color:#d8cce8;font-size:1.05rem}
 .versus{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:1.5rem;max-width:960px;margin:3rem auto 1.5rem}
-.fighter{background:var(--card);border:2px solid rgba(160,100,255,.28);border-radius:2rem;padding:1.6rem 1.5rem 2.2rem;text-align:center;transition:transform .3s;position:relative}
-.fighter:hover{transform:translateY(-6px)}
+.fighter{background:var(--card);border:2px solid rgba(160,100,255,.28);border-radius:2rem;padding:1.6rem 1.5rem 2.2rem;text-align:center;position:relative}
 .fighter-flag{height:180px;border-radius:1.4rem;background:linear-gradient(135deg,#8c50dc,#b06eff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:-50px;z-index:1;padding:10px}
 .fighter.blacklib .fighter-flag{background:linear-gradient(135deg,#1a1a1a,#3d3d3d)}
 .fighter-flag img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;z-index:1;padding:8px}
 .fighter-flag .flag-placeholder{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:#0e0720;z-index:2;position:relative;text-align:center;padding:0 1rem}
 .fighter.blacklib .fighter-flag .flag-placeholder{color:var(--gold)}
-.fighter-emblem{width:100px;height:100px;border-radius:50%;margin:0 auto 1.2rem;border:4px solid #0d0620;background:linear-gradient(135deg,#8c50dc,#b06eff);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0e0720;position:relative;z-index:2;overflow:hidden;box-shadow:0 18px 45px -12px rgba(0,0,0,.9)}
+.fighter-emblem{width:100px;height:100px;border-radius:50%;margin:0 auto 1.2rem;border:4px solid #0d0620;background:linear-gradient(135deg,#8c50dc,#b06eff);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0e0720;position:relative;z-index:2;overflow:hidden}
 .fighter.blacklib .fighter-emblem{background:linear-gradient(135deg,#1a1a1a,#3d3d3d);color:var(--gold)}
 .fighter-emblem img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;border-radius:50%;padding:6px}
 .fighter-name{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900;margin-bottom:.4rem}
@@ -137,8 +132,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .fighter-stats .n{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;background:linear-gradient(120deg,#fff5c4,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
 .fighter-stats .n.red{background:linear-gradient(120deg,#ff9b9b,#ef4444);-webkit-background-clip:text;background-clip:text;color:transparent}
 .fighter-stats .l{display:block;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:.4rem}
-.vs-badge{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,#c9a3ff,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;animation:vsBeat 2s ease-in-out infinite;padding:0 .5rem;align-self:center;margin-top:80px}
-@keyframes vsBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.vs-badge{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,#c9a3ff,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .5rem;align-self:center;margin-top:80px}
 .program-card,.raised-box,.form-wrap,.top-donors,.tg-field,.call-start,.countdown-wrap,.support-choice{max-width:960px;margin:0 auto 2rem;background:var(--card);border:1px solid rgba(255,215,0,.18);border-radius:2rem;padding:2.2rem 2.4rem;position:relative}
 .program-head{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(160,100,255,.14)}
 .program-icon{width:56px;height:56px;border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(140,80,220,.25));border:1px solid rgba(255,215,0,.4);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
@@ -165,16 +159,13 @@ body.is-nikita .admin-panel{display:block}
 .admin-head h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--gold)}
 .admin-head p{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
 .admin-desc{font-size:.86rem;color:#b0a0c8;line-height:1.6;margin-bottom:1.2rem}
-.admin-desc strong{color:var(--gold)}
 .admin-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
 .admin-row label{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.4rem}
 .admin-row input,.admin-row select{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,215,0,.3);border-radius:.85rem;padding:.9rem 1rem;color:var(--gold);font-size:1rem;font-weight:700;font-family:inherit;outline:none;margin:0}
 .admin-buttons{display:grid;gap:.7rem}
-.admin-btn{padding:1rem;border:none;border-radius:.9rem;font-weight:800;font-size:.92rem;cursor:pointer;font-family:inherit;transition:transform .15s}
-.admin-btn:hover{transform:translateY(-2px)}
+.admin-btn{padding:1rem;border:none;border-radius:.9rem;font-weight:800;font-size:.92rem;cursor:pointer;font-family:inherit}
 .admin-btn.add{background:linear-gradient(135deg,#4ade80,#22c55e);color:#0e0720}
 .admin-btn.reset{background:rgba(220,80,80,.1);color:#ff9b9b;border:1px solid rgba(220,80,80,.35)}
-.admin-btn.publish{background:linear-gradient(135deg,#8c50dc,#b06eff,#ffd966);color:#0e0720}
 .admin-status{margin-top:1rem;font-size:.86rem;font-weight:800;text-align:center;min-height:1.2rem}
 .admin-status.ok{color:var(--green)}
 .admin-status.err{color:var(--red)}
@@ -187,8 +178,7 @@ body.is-nikita .admin-panel{display:block}
 .event-date{margin-top:1.7rem;font-size:.94rem;color:#a98fd0;text-align:center}
 .event-date strong{color:var(--gold)}
 .staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
-.staff-card{background:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.95));border:1px solid rgba(160,100,255,.2);border-radius:2rem;padding:2rem 1.6rem;transition:transform .35s,border-color .35s}
-.staff-card:hover{transform:translateY(-8px);border-color:rgba(255,215,0,.5)}
+.staff-card{background:linear-gradient(155deg,rgba(30,16,55,.85),rgba(14,7,26,.95));border:1px solid rgba(160,100,255,.2);border-radius:2rem;padding:2rem 1.6rem}
 .staff-photo{width:128px;height:150px;border-radius:24px;overflow:hidden;margin-bottom:1.2rem;border:2px solid rgba(255,215,0,.4);position:relative;background:linear-gradient(135deg,#181028,#0a0618);display:flex;align-items:center;justify-content:center}
 .staff-photo img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;opacity:0;z-index:1}
 .staff-photo img.loaded{opacity:1}
@@ -231,7 +221,6 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .bl-text small{display:block;font-size:.78rem;color:#a0a0a0;font-weight:500;margin-top:.25rem}
 .bl-team-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:#e6e6e6;letter-spacing:.5px;text-transform:uppercase;text-align:center;margin-bottom:1.4rem;display:block}
 .staff-card.bl-card{background:linear-gradient(155deg,rgba(40,40,44,.85),rgba(15,15,18,.95));border-color:rgba(200,200,200,.28)}
-.staff-card.bl-card:hover{border-color:rgba(200,200,200,.9)}
 .staff-card.bl-card .staff-title{color:#e6e6e6}
 .access-box{max-width:760px;margin:0 auto 1.5rem;background:var(--card);border:2px solid rgba(80,150,255,.4);border-radius:2rem;padding:2rem;display:flex;align-items:center;gap:1.4rem}
 .access-box.verified{border-color:rgba(255,215,0,.6)}
@@ -257,13 +246,12 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .tg-field label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.6px;font-weight:800;margin-bottom:.5rem}
 .tg-field input{width:100%;background:rgba(0,0,0,.35);border:1px solid rgba(34,158,217,.32);border-radius:.9rem;padding:1rem 1.15rem;color:#fff;font-size:1rem;font-family:inherit;outline:none;margin:0}
 .tg-field small{display:block;font-size:.76rem;color:var(--muted);margin-top:.8rem;font-style:italic}
-.tg-field small strong{color:var(--gold);font-style:normal}
+.tg-field small strong{color:var(--gold)}
 .call-start{text-align:center}
 .call-start-icon{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#4a90d9,#5096ff);display:flex;align-items:center;justify-content:center;font-size:3.4rem;margin:0 auto 1.6rem}
 .call-start h3{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;margin-bottom:.7rem}
 .call-start p{color:#b0a0c8;font-size:1rem;margin-bottom:2rem;line-height:1.65}
-.big-btn{width:100%;padding:1.25rem 1.5rem;border:none;border-radius:1.15rem;font-weight:800;font-size:1.02rem;cursor:pointer;font-family:inherit;transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:.7rem}
-.big-btn:hover{transform:translateY(-3px)}
+.big-btn{width:100%;padding:1.25rem 1.5rem;border:none;border-radius:1.15rem;font-weight:800;font-size:1.02rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:.7rem}
 .big-btn.tg{background:linear-gradient(135deg,#229ED9,#34b6e8);color:#fff}
 .big-btn.jitsi{background:linear-gradient(135deg,#4a90d9,#5096ff);color:#fff}
 .big-btn.gold{background:linear-gradient(120deg,#ffd966,#f0c14b);color:#0e0720}
@@ -273,8 +261,7 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .srv-btn.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(160,100,255,.15))}
 .srv-btn.active::after{content:'✓';position:absolute;top:1rem;right:1.1rem;color:var(--gold);font-weight:900;font-size:1.2rem}
 .bet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.5rem;max-width:1040px;margin:0 auto}
-.bet-card{background:var(--card);border:1px solid rgba(160,100,255,.22);border-radius:2rem;padding:2rem;transition:transform .3s,border-color .3s}
-.bet-card:hover{transform:translateY(-5px);border-color:rgba(255,215,0,.45)}
+.bet-card{background:var(--card);border:1px solid rgba(160,100,255,.22);border-radius:2rem;padding:2rem}
 .bet-event-head{display:flex;align-items:center;gap:1rem;padding-bottom:1.3rem;margin-bottom:1.4rem;border-bottom:1px solid rgba(160,100,255,.14)}
 .bet-event-icon{width:58px;height:58px;border-radius:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(140,80,220,.3));border:1px solid rgba(255,215,0,.45)}
 .bet-event-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900}
@@ -282,18 +269,15 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .bet-choice-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:.8rem}
 .bet-choices{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.3rem}
 .bet-choice{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.2rem;border-radius:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.18);cursor:pointer;gap:.9rem}
-.bet-choice:hover{background:rgba(160,100,255,.12);border-color:rgba(255,215,0,.5)}
 .bet-choice-name{color:#f0e6ff;font-weight:800;font-size:.96rem}
 .bet-choice-odd{font-family:'Playfair Display',serif;font-weight:900;color:var(--gold);font-size:1.4rem;padding:.3rem .8rem;border-radius:.7rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.22);flex-shrink:0}
 .bet-card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1.2rem;border-top:1px dashed rgba(160,100,255,.18);font-size:.82rem;color:var(--muted)}
 .form-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem}
 input,textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.2);border-radius:1rem;padding:1rem 1.15rem;color:#f0e6ff;font-size:.96rem;font-family:inherit;outline:none;margin-bottom:.9rem}
 input::placeholder,textarea::placeholder{color:#6d5a8a}
-input:focus,textarea:focus{border-color:rgba(255,215,0,.7)}
 textarea{resize:vertical;min-height:100px}
 .input-label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.5rem}
 .btn{width:100%;padding:1.2rem;border:none;border-radius:1.1rem;font-weight:800;font-size:1.02rem;color:#fff;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#7a3ac8,#b06eff);display:flex;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem}
-.btn:hover{transform:translateY(-3px)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .btn.donate{background:linear-gradient(135deg,#c93a3a,#ef4444,#ffd966)}
 .btn.gold{background:linear-gradient(120deg,#ffd966,#f0c14b);color:#0e0720}
@@ -307,7 +291,6 @@ textarea{resize:vertical;min-height:100px}
 .support-choice-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch}
 .support-choice-btn{background:rgba(255,255,255,.03);border:2px solid rgba(160,100,255,.25);border-radius:1.5rem;padding:1.2rem .9rem;cursor:pointer;font-family:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.7rem;position:relative}
 .support-choice-btn.selected{border-color:var(--gold);background:linear-gradient(155deg,rgba(255,215,0,.12),rgba(140,80,220,.15))}
-.support-choice-btn.selected::after{content:'✓';position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0e0720;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.9rem}
 .support-choice-flag{width:100%;height:90px;border-radius:.9rem;background:linear-gradient(135deg,#8c50dc,#b06eff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px}
 .support-choice-flag img{width:100%;height:100%;object-fit:contain;display:block;position:absolute;inset:0;padding:6px}
 .support-choice-flag .flag-mini{font-family:'Playfair Display',serif;font-weight:900;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:#0e0720;position:relative;z-index:2}
@@ -342,8 +325,7 @@ textarea{resize:vertical;min-height:100px}
 .chat-status .dot-offline{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5f4d7a;margin-right:3px;vertical-align:middle}
 .chat-back{margin-left:auto;padding:.55rem 1rem;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid rgba(160,100,255,.3);color:#c9a3ff;font-weight:800;font-size:.76rem;cursor:pointer;font-family:inherit}
 .chat-messages{flex:1;overflow-y:auto;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.9rem}
-.chat-row{display:flex;gap:.6rem;align-items:flex-end;max-width:100%;animation:msgIn .3s ease-out}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.chat-row{display:flex;gap:.6rem;align-items:flex-end;max-width:100%}
 .chat-row.me{flex-direction:row-reverse;align-self:flex-end}
 .chat-row.them{align-self:flex-start}
 .chat-row.sys{align-self:center;justify-content:center;max-width:90%}
@@ -391,19 +373,18 @@ textarea{resize:vertical;min-height:100px}
 .host-flag.on{background:var(--gold);box-shadow:0 0 15px var(--gold)}
 .host-flag.bl{background:#e6e6e6;box-shadow:0 0 15px #e6e6e6}
 .toast-container{position:fixed;top:80px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:340px;pointer-events:none}
-.toast{background:linear-gradient(135deg,rgba(140,80,220,.96),rgba(80,40,140,.98));border:1px solid rgba(255,215,0,.55);border-radius:1.2rem;padding:1rem 1.2rem;color:#fff;box-shadow:0 20px 50px -15px rgba(0,0,0,.9),0 0 40px -15px rgba(255,215,0,.5);animation:toastIn .4s cubic-bezier(.34,1.3,.64,1);pointer-events:auto;cursor:pointer}
-.toast .t-title{font-weight:900;font-size:.85rem;color:#ffd966;margin-bottom:.25rem;font-family:'Playfair Display',serif;letter-spacing:.5px}
-.toast .t-text{font-size:.92rem;line-height:1.4;word-wrap:break-word;color:#f0eaff}
+.toast{background:linear-gradient(135deg,rgba(140,80,220,.96),rgba(80,40,140,.98));border:1px solid rgba(255,215,0,.55);border-radius:1.2rem;padding:1rem 1.2rem;color:#fff;box-shadow:0 20px 50px -15px rgba(0,0,0,.9);pointer-events:auto;cursor:pointer;animation:toastIn .4s cubic-bezier(.34,1.3,.64,1)}
+.toast .t-title{font-weight:900;font-size:.85rem;color:#ffd966;margin-bottom:.25rem;font-family:'Playfair Display',serif}
+.toast .t-text{font-size:.92rem;line-height:1.4;color:#f0eaff}
 .toast .t-time{font-size:.68rem;opacity:.7;margin-top:.3rem}
 @keyframes toastIn{from{opacity:0;transform:translateX(40px) scale(.9)}to{opacity:1;transform:translateX(0) scale(1)}}
 .toast.out{animation:toastOut .3s ease-out forwards}
-@keyframes toastOut{to{opacity:0;transform:translateX(40px) scale(.9);max-height:0;padding:0;margin:0;overflow:hidden}}
+@keyframes toastOut{to{opacity:0;transform:translateX(40px);max-height:0;padding:0;margin:0;overflow:hidden}}
 @media(max-width:520px){.toast-container{left:12px;right:12px;top:70px;max-width:none}}
 footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6);margin-top:4rem;position:relative;z-index:2}
 .footer-copy{text-align:center;font-size:.82rem;color:#7a6292;line-height:1.8}
 .footer-copy strong{color:var(--gold);font-weight:800}
-.version-badge{display:flex;align-items:center;gap:.55rem;justify-content:center;margin-top:1rem;padding:.6rem 1.2rem;border-radius:100px;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.4);color:#8ef0b0;font-size:.75rem;font-weight:800;font-family:ui-monospace,monospace;letter-spacing:.5px;max-width:fit-content;margin-left:auto;margin-right:auto;transition:all .3s}
-.version-badge.updating{background:rgba(255,215,0,.1);border-color:rgba(255,215,0,.5);color:var(--gold)}
+.version-badge{display:flex;align-items:center;gap:.55rem;justify-content:center;margin-top:1rem;padding:.6rem 1.2rem;border-radius:100px;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.4);color:#8ef0b0;font-size:.75rem;font-weight:800;font-family:ui-monospace,monospace;max-width:fit-content;margin-left:auto;margin-right:auto}
 .version-badge .ver-dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;animation:pulse 1.5s infinite}
 @media(max-width:900px){.staff-grid,.bet-grid{grid-template-columns:1fr}}
 @media(max-width:700px){
@@ -496,7 +477,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <div class="live-badge green"><span class="dot green"></span>Победа сегодня</div>
     <h1><span class="title-grad">Никита против Чёрного либерала</span></h1>
     <p class="subtitle">Победа Никиты со счётом 2:0</p>
-
     <div class="result-hero">
       <div class="result-head">
         <div class="trophy">🏆</div>
@@ -510,7 +490,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       </div>
       <div class="verdict">🎉 <strong style="color:#8ef0b0">Победа Никиты</strong> — 2 : 0</div>
     </div>
-
     <div class="versus">
       <div class="fighter nikita" style="border-color:rgba(140,80,220,.55)">
         <div class="fighter-flag" data-fighter="nikita"><span class="flag-placeholder">Народный Фронт</span></div>
@@ -518,10 +497,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="fighter-name">Никита</div>
         <div class="fighter-role">Автор · Защита</div>
         <div class="fighter-desc">Победитель дебатов сегодня — 2:0</div>
-        <div class="fighter-badges">
-          <span class="fighter-support">💜 <span data-support-count="nikita">0</span></span>
-          <span class="fighter-funded">💰 <span data-fund="nikita">0 ₽</span></span>
-        </div>
+        <div class="fighter-badges"><span class="fighter-support">💜 <span data-support-count="nikita">0</span></span><span class="fighter-funded">💰 <span data-fund="nikita">0 ₽</span></span></div>
         <div class="fighter-stats"><div><span class="n">2</span><span class="l">Победа</span></div><div><span class="n">100%</span><span class="l">Рейтинг</span></div><div><span class="n">1</span><span class="l">Дебат</span></div></div>
       </div>
       <div class="vs-badge">VS</div>
@@ -531,24 +507,20 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="fighter-name">Чёрный либерал</div>
         <div class="fighter-role">Оппонент · Критика</div>
         <div class="fighter-desc">Проиграл сегодня 0:2, готов к реваншу</div>
-        <div class="fighter-badges">
-          <span class="fighter-support">💜 <span data-support-count="blacklib">0</span></span>
-          <span class="fighter-funded">💰 <span data-fund="blacklib">0 ₽</span></span>
-        </div>
+        <div class="fighter-badges"><span class="fighter-support">💜 <span data-support-count="blacklib">0</span></span><span class="fighter-funded">💰 <span data-fund="blacklib">0 ₽</span></span></div>
         <div class="fighter-stats"><div><span class="n red">0</span><span class="l">Победа</span></div><div><span class="n red">0%</span><span class="l">Рейтинг</span></div><div><span class="n">1</span><span class="l">Дебат</span></div></div>
       </div>
     </div>
   </section>
-
   <section class="wrap" style="padding-bottom:2rem">
-    <div class="program-card" style="max-width:960px">
+    <div class="program-card">
       <div class="program-head"><div class="program-icon">📋</div><div><h3>Программа новых дебатов</h3><p>Расписание · 4 раунда + финал</p></div></div>
       <ul class="program-list">
-        <li><div class="program-time">21:00</div><div class="program-body"><h4>Открытие · Приветствие сторон</h4><p>Вступительные слова Никиты и Чёрного либерала.</p></div></li>
-        <li><div class="program-time">21:15</div><div class="program-body"><h4>Раунд 1 · Свобода информации</h4><p>Открытый доступ к данным и роль независимых платформ.</p></div></li>
-        <li><div class="program-time">21:45</div><div class="program-body"><h4>Раунд 2 · Финансирование проектов</h4><p>Спонсорство, гранты, прозрачность бюджета.</p></div></li>
-        <li><div class="program-time">22:15</div><div class="program-body"><h4>Раунд 3 · Будущее платформы</h4><p>Стратегия, монетизация, сообщество и технологии.</p></div></li>
-        <li><div class="program-time">22:45</div><div class="program-body"><h4>Финал · Вопросы зрителей</h4><p>Ответы на вопросы и голосование.</p></div></li>
+        <li><div class="program-time">21:00</div><div class="program-body"><h4>Открытие</h4><p>Вступительные слова сторон.</p></div></li>
+        <li><div class="program-time">21:15</div><div class="program-body"><h4>Раунд 1 · Свобода информации</h4><p>Открытый доступ к данным.</p></div></li>
+        <li><div class="program-time">21:45</div><div class="program-body"><h4>Раунд 2 · Финансирование</h4><p>Спонсорство, гранты, прозрачность.</p></div></li>
+        <li><div class="program-time">22:15</div><div class="program-body"><h4>Раунд 3 · Будущее</h4><p>Стратегия, монетизация, сообщество.</p></div></li>
+        <li><div class="program-time">22:45</div><div class="program-body"><h4>Финал · Вопросы</h4><p>Ответы и голосование.</p></div></li>
       </ul>
     </div>
 
@@ -562,37 +534,19 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 
     <div class="admin-panel" id="adminPanel">
       <div class="admin-head"><span style="font-size:1.7rem">👑</span><h3>Панель управления</h3><p>Только для Никиты</p></div>
-      <p class="admin-desc">Добавляй донаты, редактируй — <strong>всё автоматически расходится всем</strong>.</p>
+      <p class="admin-desc">Добавляй донаты, редактируй.</p>
       <div class="admin-row">
         <div><label>Сумма, ₽</label><input type="number" id="adminAmount" placeholder="500" min="1"></div>
-        <div><label>Партия</label><select id="adminCandidate"><option value="Никита">🏴 Народный Фронт (Никита)</option><option value="Чёрный либерал">🏴 Либеральный Союз (ЧЛ)</option></select></div>
+        <div><label>Партия</label><select id="adminCandidate"><option value="Никита">🏴 Народный Фронт</option><option value="Чёрный либерал">🏴 Либеральный Союз</option></select></div>
       </div>
       <div class="admin-row">
         <div><label>Имя донатера</label><input type="text" id="adminDonorName" placeholder="Аноним"></div>
-        <div><label>Кол-во донатов</label><input type="number" id="adminDonors" placeholder="1" min="1" value="1"></div>
+        <div><label>Кол-во</label><input type="number" id="adminDonors" placeholder="1" min="1" value="1"></div>
       </div>
-      <div class="admin-buttons">
-        <button class="admin-btn add" id="adminAdd">➕ Добавить донат</button>
-      </div>
+      <div class="admin-buttons"><button class="admin-btn add" id="adminAdd">➕ Добавить донат</button></div>
       <div class="admin-status" id="adminStatus"></div>
-
-      <div class="admin-section-title">🌍 Синхронизация с друзьями</div>
-      <div class="admin-buttons">
-        <button class="admin-btn publish" id="publishBtn">🌍 Опубликовать всё друзьям</button>
-      </div>
-      <div class="admin-status" id="publishStatus"></div>
-
-      <div class="admin-section-title">💾 Скачать готовый файл</div>
-      <p class="admin-desc" style="font-size:.82rem">Скачает этот же сайт, но со всеми твоими фото, текстами, донатами внутри.</p>
-      <div class="admin-buttons">
-        <button class="admin-btn publish" id="downloadHtmlBtn">💾 Скачать HTML со всем содержимым</button>
-      </div>
-      <div class="admin-status" id="downloadHtmlStatus"></div>
-
       <div class="admin-section-title">🚪 Сменить роль</div>
-      <div class="admin-buttons">
-        <button class="admin-btn reset" id="logoutBtn">Выйти</button>
-      </div>
+      <div class="admin-buttons"><button class="admin-btn reset" id="logoutBtn">Выйти</button></div>
     </div>
 
     <div class="countdown-wrap">
@@ -610,16 +564,16 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 
 <main class="section-page" id="page-chat">
   <section class="wrap" style="padding-top:2rem">
-    <div class="live-badge purple"><span class="dot purple"></span>Мессенджер · обе стороны</div>
+    <div class="live-badge purple"><span class="dot purple"></span>Firebase Realtime</div>
     <h1 style="text-align:center"><span class="title-grad purple">Чат Никиты и Чёрного либерала</span></h1>
-    <p class="subtitle" style="text-align:center;margin-bottom:1.5rem">Общаются только участники</p>
+    <p class="subtitle" style="text-align:center;margin-bottom:1.5rem">Мгновенные сообщения · Работает без VPN</p>
     <div class="chat-guest-warning" id="chatGuestWarning" style="display:none">👀 Ты вошёл как гость. Писать не можешь.</div>
     <div class="chat-wrap">
       <div class="chat-header">
         <div class="chat-avatar">ЧЛ</div>
         <div>
           <div class="chat-name">Никита ↔ Чёрный либерал</div>
-          <div class="chat-status" id="chatStatusLine">● синхронизация через облако</div>
+          <div class="chat-status" id="chatStatusLine">● Firebase подключён</div>
         </div>
         <button class="chat-back" id="chatClear" style="display:none">Очистить</button>
       </div>
@@ -643,15 +597,11 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       <div class="access-badge" id="accessBadge">🔒 Гость</div>
     </div>
     <div class="lock-wrapper locked" id="lockWrapper">
-      <div class="lock-overlay">
-        <div class="lock-icon">🔒</div>
-        <div class="lock-text">Только для участников</div>
-        <div class="lock-hint">Войди с кодом Никиты или Чёрного либерала</div>
-      </div>
+      <div class="lock-overlay"><div class="lock-icon">🔒</div><div class="lock-text">Только для участников</div><div class="lock-hint">Войди с кодом</div></div>
       <div class="tg-field">
         <h3>📱 Telegram</h3>
-        <label for="tgTarget">Кому звонишь (username без @)</label>
-        <input type="text" id="tgTarget" placeholder="navallny" autocomplete="off">
+        <label for="tgTarget">Кому звонишь</label>
+        <input type="text" id="tgTarget" placeholder="nickname" autocomplete="off">
         <small>В РФ Telegram работает <strong>только с VPN</strong>.</small>
         <button class="big-btn tg" id="tgCallBtn" style="margin-top:1rem">Открыть Telegram</button>
       </div>
@@ -660,7 +610,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <h3>Jitsi-комната</h3>
         <p>Работает в РФ <strong>без VPN</strong>.</p>
         <div class="srv-list">
-          <button type="button" class="srv-btn active" data-server="meet.jit.si"><strong>meet.jit.si</strong> ✅ РФ</button>
+          <button type="button" class="srv-btn active" data-server="meet.jit.si"><strong>meet.jit.si</strong> ✅</button>
           <button type="button" class="srv-btn" data-server="meet.ffmuc.net"><strong>meet.ffmuc.net</strong> ⚠</button>
         </div>
         <button class="big-btn jitsi" id="jitsiBtn">Создать комнату</button>
@@ -692,25 +642,25 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="staff-desc editable-field" data-field="desc" data-key="nikita">Ведущий дебатов. Рейтинг 73%.</div>
       </div>
       <div class="staff-card">
-        <div class="staff-photo" data-name="navalny" data-color="gold" data-wiki="Навальный, Алексей Анатольевич|Алексей Навальный"><img alt="navalny" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Н</span></div>
+        <div class="staff-photo" data-name="navalny" data-color="gold" data-wiki="Навальный, Алексей Анатольевич"><img alt="navalny" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Н</span></div>
         <span class="staff-role red editable-field" data-field="role" data-key="navalny">Скандальный коррупционер</span>
         <div class="staff-name editable-field" data-field="name" data-key="navalny">Навальный</div>
         <div class="staff-title editable-field" data-field="title" data-key="navalny">Фембой горничная</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="navalny">Скандальный коррупционер в образе фембоя-горничной.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="navalny">Отвечает за тексты.</div>
       </div>
       <div class="staff-card">
         <div class="staff-photo" data-name="shtefanov" data-color="blue" data-wiki="Штефанов, Александр Юрьевич"><img alt="shtefanov" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Ш</span></div>
         <span class="staff-role head editable-field" data-field="role" data-key="shtefanov">Историк</span>
         <div class="staff-name editable-field" data-field="name" data-key="shtefanov">Штефанов</div>
         <div class="staff-title editable-field" data-field="title" data-key="shtefanov">Супер альтушка</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="shtefanov">Разбирается в истории, но выглядит как супер альтушка.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="shtefanov">Разбирается в истории.</div>
       </div>
       <div class="staff-card">
         <div class="staff-photo" data-name="kac" data-color="green" data-wiki="Кац, Максим Евгеньевич"><img alt="kac" loading="lazy" referrerpolicy="no-referrer"><span class="initial">К</span></div>
         <span class="staff-role advisor editable-field" data-field="role" data-key="kac">Аналитик</span>
         <div class="staff-name editable-field" data-field="name" data-key="kac">Кац</div>
         <div class="staff-title editable-field" data-field="title" data-key="kac">Копается в цифрах</div>
-        <div class="staff-desc editable-field" data-field="desc" data-key="kac">Готовит факты и статистику к дебатам.</div>
+        <div class="staff-desc editable-field" data-field="desc" data-key="kac">Готовит факты к дебатам.</div>
       </div>
     </div>
   </section>
@@ -724,10 +674,10 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
   <section class="wrap" style="padding-bottom:4rem">
     <div class="bl-section">
       <div class="staff-flag bl-flag" data-staff-flag="staff-bl" style="margin-bottom:2rem"><span class="staff-flag-label">Либеральный Союз</span></div>
-      <div class="bl-head"><div class="bl-crown">♟</div><h2>Программа штаба</h2><p>Три тезиса · Наша позиция</p></div>
+      <div class="bl-head"><div class="bl-crown">♟</div><h2>Программа штаба</h2><p>Три тезиса</p></div>
       <ul class="bl-program-list">
-        <li><div class="bl-num">1</div><div class="bl-text">Россия — лучшая страна<small>Великая история, культура и народ.</small></div></li>
-        <li><div class="bl-num">2</div><div class="bl-text">Либерализм — лучшая идеология<small>Свобода, права человека, рынок.</small></div></li>
+        <li><div class="bl-num">1</div><div class="bl-text">Россия — лучшая страна<small>Великая история и народ.</small></div></li>
+        <li><div class="bl-num">2</div><div class="bl-text">Либерализм — лучшая идеология<small>Свобода и права.</small></div></li>
         <li><div class="bl-num">3</div><div class="bl-text">Бисмарк — лучший правитель<small>Объединил Германию.</small></div></li>
       </ul>
       <h3 class="bl-team-title">Команда</h3>
@@ -751,7 +701,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
           <span class="staff-role red editable-field" data-field="role" data-key="bondarenko">Идеолог</span>
           <div class="staff-name editable-field" data-field="name" data-key="bondarenko">Николай Бондаренко</div>
           <div class="staff-title editable-field" data-field="title" data-key="bondarenko">Отвечает за смыслы</div>
-          <div class="staff-desc editable-field" data-field="desc" data-key="bondarenko">«Больше дела — меньше слов». КПРФ.</div>
+          <div class="staff-desc editable-field" data-field="desc" data-key="bondarenko">«Больше дела — меньше слов».</div>
         </div>
         <div class="staff-card bl-card">
           <div class="staff-photo" data-name="yulia" data-color="steel" data-wiki="Навальная, Юлия Борисовна"><img alt="yulia" loading="lazy" referrerpolicy="no-referrer"><span class="initial">Ю</span></div>
@@ -774,7 +724,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <div class="bet-grid">
       <div class="bet-card">
         <div class="bet-event-head"><div class="bet-event-icon">🥊</div><div><div class="bet-event-title">Дебаты · Никита vs ЧЛ</div><div class="bet-event-sub">Скоро</div></div></div>
-        <div class="bet-choice-label">Кто победит? <span style="color:var(--gold)">↓</span></div>
+        <div class="bet-choice-label">Кто победит? ↓</div>
         <div class="bet-choices">
           <div class="bet-choice" data-event="Дебаты" data-outcome="Победа Никиты" data-odd="1.85"><div><div class="bet-choice-name">Никита</div></div><div class="bet-choice-odd">1.85</div></div>
           <div class="bet-choice" data-event="Дебаты" data-outcome="Победа Чёрного либерала" data-odd="2.10"><div><div class="bet-choice-name">Чёрный либерал</div></div><div class="bet-choice-odd">2.10</div></div>
@@ -784,7 +734,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       </div>
       <div class="bet-card">
         <div class="bet-event-head"><div class="bet-event-icon">📱</div><div><div class="bet-event-title">Shorts · наша нарезка</div><div class="bet-event-sub">После дебатов</div></div></div>
-        <div class="bet-choice-label">Что будет? <span style="color:var(--gold)">↓</span></div>
+        <div class="bet-choice-label">Что будет? ↓</div>
         <div class="bet-choices">
           <div class="bet-choice" data-event="Shorts" data-outcome="Победа нашей версии" data-odd="1.75"><div><div class="bet-choice-name">Наша нарезка выстрелит</div></div><div class="bet-choice-odd">1.75</div></div>
           <div class="bet-choice" data-event="Shorts" data-outcome="Победа альтернативной" data-odd="2.30"><div><div class="bet-choice-name">У конкурентов лучше</div></div><div class="bet-choice-odd">2.30</div></div>
@@ -961,9 +911,29 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 
 <script>
 "use strict";
-const SITE_VERSION = '16';
-const SITE_BUILD_TIME = '29.09.2026 18:30';
 
+/* ============================================================
+   FIREBASE CONFIG
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyD6N3H_N6IqemD4zhw1GqAKZRbpayHtn3U",
+  authDomain: "inaogenty.firebaseapp.com",
+  databaseURL: "https://inaogenty-default-rtdb.firebaseio.com",
+  projectId: "inaogenty",
+  storageBucket: "inaogenty.firebasestorage.app",
+  messagingSenderId: "537777261867",
+  appId: "1:537777261867:web:b9ade495300a82048b096e"
+};
+firebase.initializeApp(firebaseConfig);
+const fbDb = firebase.database();
+const fbChatRef = fbDb.ref('chat');
+const fbPresenceRef = fbDb.ref('presence');
+
+/* ============================================================
+   КОНСТАНТЫ
+   ============================================================ */
+const SITE_VERSION = '18';
+const SITE_BUILD_TIME = '29.09.2026 21:00';
 const GOAL = 300000;
 const DEBATE_TARGET_ISO = '2026-12-31T21:00:00';
 const _k = [0x7A, 0x1B, 0x5C, 0x2E, 0x9F, 0x42];
@@ -973,25 +943,15 @@ const deobf = (arr) => arr.map((b, i) => String.fromCharCode(b ^ _k[i % _k.lengt
 const CODE_NIKITA = deobf(_cn);
 const CODE_BLACKLIB = deobf(_cb);
 
-const NTFY_CHAT = 'inaogenty-chat-mirror-7x9k2z';
-const NTFY_PRESENCE = 'inaogenty-presence-7x9k2z';
-const NTFY_STATE = 'inaogenty-state-v5-fast';
 const SS_ROLE = 'inaogenty_role_v4';
 const LS_DONATIONS = 'inaogenty_donations_v3';
 const LS_MEDIA = 'inaogenty_media_cache_v3';
 const LS_PHOTOS = 'inaogenty_custom_photos_v3';
 const LS_TEXTS = 'inaogenty_custom_texts_v3';
 const LS_DEVICE = 'inaogenty_device_id_v1';
-const LS_LAST_SNAP_TS = 'inaogenty_last_snap_ts_v1';
-const LS_LAST_SNAP_URL = 'inaogenty_last_snap_url_v1';
-const LS_RECORDINGS = 'inaogenty_recordings_v1';
-const LS_CHAT = 'inaogenty_chat_v6';
 const LS_LAST_DONATE = 'inaogenty_last_donate_v1';
 const DONATE_COOLDOWN_MS = 20000;
 const CHAT_SEND_COOLDOWN_MS = 300;
-const PRESENCE_INTERVAL_MS = 15000;
-const PRESENCE_ONLINE_THRESHOLD = 40000;
-const CHAT_POLL_INTERVAL_MS = 4000;
 
 let userRole = 'guest';
 const $ = (id) => document.getElementById(id);
@@ -1008,13 +968,13 @@ let presenceMap = {};
 
 const DEFAULT_TEXTS = {
   nikita:    { role: 'Глава штаба', name: 'Никита', title: 'Автор · делает всё', desc: 'Ведущий дебатов. Рейтинг 73%.' },
-  navalny:   { role: 'Скандальный коррупционер', name: 'Навальный', title: 'Фембой горничная', desc: 'Скандальный коррупционер в образе фембоя-горничной.' },
-  shtefanov: { role: 'Историк', name: 'Штефанов', title: 'Супер альтушка', desc: 'Разбирается в истории, но выглядит как супер альтушка.' },
-  kac:       { role: 'Аналитик', name: 'Кац', title: 'Копается в цифрах', desc: 'Готовит факты и статистику к дебатам.' },
+  navalny:   { role: 'Скандальный коррупционер', name: 'Навальный', title: 'Фембой горничная', desc: 'Отвечает за тексты.' },
+  shtefanov: { role: 'Историк', name: 'Штефанов', title: 'Супер альтушка', desc: 'Разбирается в истории.' },
+  kac:       { role: 'Аналитик', name: 'Кац', title: 'Копается в цифрах', desc: 'Готовит факты.' },
   blacklib:  { role: 'Лидер штаба', name: 'Чёрный либерал', title: 'Капитан оппозиции', desc: 'Взял 3 темы из 11.' },
   yavlinsky: { role: 'Главный экономист', name: 'Явлинский', title: 'Архитектор реформ', desc: 'Автор программы «500 дней».' },
-  bondarenko:{ role: 'Идеолог', name: 'Николай Бондаренко', title: 'Отвечает за смыслы', desc: '«Больше дела — меньше слов». КПРФ.' },
-  yulia:     { role: 'Голос штаба', name: 'Юлия Навальная', title: 'Представляет движение', desc: 'Символ сопротивления.' },
+  bondarenko:{ role: 'Идеолог', name: 'Николай Бондаренко', title: 'Отвечает за смыслы', desc: '«Больше дела — меньше слов».' },
+  yulia:     { role: 'Голос штаба', name: 'Юлия Навальная', title: 'Представляет движение', desc: 'Символ сопротивления.' }
 };
 const DEFAULT_WIKI = {
   solovyov: 'Соловьёв, Владимир Рудольфович',
@@ -1024,7 +984,7 @@ const DEFAULT_WIKI = {
   obama: 'Обама, Барак',
   yavlinsky: 'Явлинский, Григорий Алексеевич',
   bondarenko: 'Бондаренко, Николай Николаевич',
-  yulia: 'Навальная, Юлия Борисовна',
+  yulia: 'Навальная, Юлия Борисовна'
 };
 
 function setSyncIndicator(state, text){
@@ -1037,22 +997,16 @@ function getCustomTexts(){ try { return JSON.parse(localStorage.getItem(LS_TEXTS
 function getCustomPhotos(){ try { return JSON.parse(localStorage.getItem(LS_PHOTOS)) || {}; } catch(e){ return {}; } }
 function getMediaCache(){ try { return JSON.parse(localStorage.getItem(LS_MEDIA)) || {}; } catch(e){ return {}; } }
 function getDonations(){ try { return JSON.parse(localStorage.getItem(LS_DONATIONS)) || []; } catch(e){ return []; } }
-function getRecordings(){ try { return JSON.parse(localStorage.getItem(LS_RECORDINGS)) || []; } catch(e){ return []; } }
 function saveDonations(list){ try { localStorage.setItem(LS_DONATIONS, JSON.stringify(list.slice(-1000))); } catch(e){} }
-function saveRecordings(list){ try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(list.slice(0, 100))); } catch(e){} }
 
-/* ЧАТ */
+/* ============================================================
+   ЧАТ Firebase
+   ============================================================ */
 let chatMessages = [];
-try { chatMessages = JSON.parse(localStorage.getItem(LS_CHAT)) || []; } catch(e){ chatMessages = []; }
-chatMessages = chatMessages.filter(m => !m._pending || (Date.now() - m.time) < 30000);
-
 let chatPageActive = false, unreadChat = 0, chatConnected = false;
 let lastChatSentAt = 0;
-let chatPollTimer = null;
-let chatES = null;
-let chatESReconnectTimer = null;
+let chatInitDone = false;
 
-function saveChat(){ try { localStorage.setItem(LS_CHAT, JSON.stringify(chatMessages.slice(-500))); } catch(e){} }
 function validName(n){ if (n === 'Никита' || n === 'Чёрный либерал' || n === 'system') return n; return 'Гость'; }
 function senderName(){ if (userRole === 'nikita') return 'Никита'; if (userRole === 'blacklib') return 'Чёрный либерал'; return null; }
 function updateChatSender(){
@@ -1078,7 +1032,7 @@ function renderChat(){
   } else {
     chatMessages.forEach(m => box.appendChild(buildMsg(m)));
   }
-  if (wasNearBottom) box.scrollTop = box.scrollHeight;
+  if (wasNearBottom || chatPageActive) box.scrollTop = box.scrollHeight;
 }
 function buildMsg(m){
   const me = senderName(); const isSys = m.from === 'system'; const isMe = me && m.from === me;
@@ -1091,19 +1045,13 @@ function buildMsg(m){
   if (!isMe){ const n = document.createElement('div'); n.className = 'msg-name'; n.textContent = m.from; body.appendChild(n); }
   const b = document.createElement('div'); b.className = 'msg ' + (isMe ? 'me' : 'them');
   b.textContent = m.text;
-  if (m._pending) b.style.opacity = '0.55';
   const t = document.createElement('span'); t.className = 'msg-time';
-  t.textContent = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}) + (m._pending ? ' · ⏳' : '');
+  t.textContent = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
   b.appendChild(t); body.appendChild(b); row.appendChild(body); return row;
 }
 function updateUnreadBadge(){ const b = $('chatUnread'); if (!b) return; if (unreadChat > 0){ b.textContent = unreadChat > 99 ? '99+' : unreadChat; b.style.display = 'flex'; } else b.style.display = 'none'; }
-
-async function requestNotifPermission(){
-  if (!('Notification' in window)) return;
-  if (Notification.permission === 'default'){
-    try { await Notification.requestPermission(); } catch(e){}
-  }
-}
+function playPing(){ try { const ctx = window.AudioContext ? new window.AudioContext() : null; if (!ctx) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.type='sine'; o.frequency.value=880; g.gain.value=0.06; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.15); } catch(e){} }
+async function requestNotifPermission(){ if (!('Notification' in window)) return; if (Notification.permission === 'default'){ try { await Notification.requestPermission(); } catch(e){} } }
 function showSystemNotif(title, body){
   try {
     if (!('Notification' in window)) return;
@@ -1116,8 +1064,7 @@ function showSystemNotif(title, body){
 function showToast(title, text, time){
   const cont = $('toastContainer'); if (!cont) return;
   while (cont.children.length >= 3) cont.removeChild(cont.firstChild);
-  const el = document.createElement('div');
-  el.className = 'toast';
+  const el = document.createElement('div'); el.className = 'toast';
   const t1 = document.createElement('div'); t1.className = 't-title'; t1.textContent = title;
   const t2 = document.createElement('div'); t2.className = 't-text'; t2.textContent = text;
   const t3 = document.createElement('div'); t3.className = 't-time'; t3.textContent = new Date(time || Date.now()).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
@@ -1135,122 +1082,37 @@ function navigateToChat(){
   window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(() => { const box = $('chatMessages'); if (box) box.scrollTop = box.scrollHeight; }, 100);
 }
-function playPing(){ try { const ctx = window.AudioContext ? new window.AudioContext() : null; if (!ctx) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.type='sine'; o.frequency.value=880; g.gain.value=0.06; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.15); } catch(e){} }
 
-function addMessage(msg, opts){
-  opts = opts || {};
-  if (msg.id && chatMessages.some(m => m.id === msg.id)) return false;
-  const dup = chatMessages.some(m =>
-    !m._pending && m.from === msg.from && m.text === msg.text &&
-    Math.abs((m.time || 0) - (msg.time || 0)) < 5000 &&
-    (msg.device ? m.device === msg.device : true)
-  );
-  if (dup) return false;
-  if (msg.device === DEVICE_ID){
-    chatMessages = chatMessages.filter(m => !(m._pending && m.text === msg.text && m.from === msg.from));
-  }
-  chatMessages.push(msg);
-  chatMessages = chatMessages.sort((a,b) => (a.time||0) - (b.time||0)).slice(-500);
-  saveChat();
-  renderChat();
-  const me = senderName();
-  if (!opts.silent && msg.from !== me && msg.from !== 'system'){
-    unreadChat++;
-    updateUnreadBadge();
-    playPing();
-    if (navigator.vibrate) try { navigator.vibrate([80, 40, 80]); } catch(e){}
-    if (!chatPageActive){
+function subscribeChat(){
+  if (chatInitDone) return;
+  chatInitDone = true;
+  fbChatRef.limitToLast(200).on('child_added', (snap) => {
+    const v = snap.val();
+    if (!v || typeof v.text !== 'string') return;
+    const id = snap.key;
+    if (chatMessages.some(m => m.id === id)) return;
+    const msg = { id, from: validName(String(v.from || 'Гость')), text: String(v.text).slice(0, 500), time: Number(v.time) || Date.now() };
+    chatMessages.push(msg);
+    chatMessages.sort((a,b) => (a.time||0) - (b.time||0));
+    if (chatMessages.length > 500) chatMessages = chatMessages.slice(-500);
+    renderChat();
+    chatConnected = true;
+    const me = senderName();
+    if (msg.from !== me && msg.from !== 'system' && !chatPageActive){
+      unreadChat++; updateUnreadBadge(); playPing();
+      if (navigator.vibrate) try { navigator.vibrate([80, 40, 80]); } catch(e){}
       showToast(msg.from, msg.text, msg.time);
       showSystemNotif(msg.from, msg.text);
     }
-  }
-  return true;
-}
-
-function startChatSSE(){
-  if (chatES && chatES.readyState !== EventSource.CLOSED) return;
-  try {
-    chatES = new EventSource('https://ntfy.sh/' + NTFY_CHAT + '/sse');
-    chatES.onopen = () => { chatConnected = true; };
-    chatES.onmessage = (ev) => {
-      chatConnected = true;
-      try {
-        const outer = JSON.parse(ev.data);
-        if (!outer || !outer.message) return;
-        let data;
-        try { data = JSON.parse(outer.message); } catch(e){ return; }
-        if (!data || typeof data.text !== 'string') return;
-        if (data.device === DEVICE_ID) return;
-        addMessage({
-          id: outer.id || ('sse-' + Math.random()),
-          from: validName(String(data.from || 'Гость')),
-          text: String(data.text).slice(0, 500),
-          time: Number(data.time) || Date.now(),
-          device: data.device || null
-        });
-      } catch(e){}
-    };
-    chatES.onerror = () => {
-      chatConnected = false;
-      try { chatES.close(); } catch(e){}
-      chatES = null;
-      if (chatESReconnectTimer) clearTimeout(chatESReconnectTimer);
-      chatESReconnectTimer = setTimeout(startChatSSE, 5000);
-    };
-  } catch(e){
-    if (chatESReconnectTimer) clearTimeout(chatESReconnectTimer);
-    chatESReconnectTimer = setTimeout(startChatSSE, 5000);
-  }
-}
-
-async function syncChat(initial){
-  try {
-    const r = await fetch('https://ntfy.sh/' + NTFY_CHAT + '/json?poll=1&since=all');
-    if (!r.ok) return;
-    const text = await r.text();
-    const lines = text.trim().split('\n').filter(Boolean);
-    const serverMsgs = [];
-    lines.forEach(line => {
-      try {
-        const outer = JSON.parse(line);
-        if (outer.event !== 'message' || !outer.message) return;
-        let data;
-        try { data = JSON.parse(outer.message); } catch(e){ return; }
-        if (!data || typeof data.text !== 'string') return;
-        serverMsgs.push({
-          id: outer.id || ('ntfy-' + Math.random()),
-          from: validName(String(data.from || 'Гость')),
-          text: String(data.text).slice(0, 500),
-          time: Number(data.time) || (outer.time ? outer.time * 1000 : Date.now()),
-          device: data.device || null
-        });
-      } catch(e){}
-    });
-    if (serverMsgs.length) chatConnected = true;
-    const byId = new Map();
-    chatMessages.forEach(m => { if (m && m.id && !m._pending) byId.set(m.id, m); });
-    serverMsgs.forEach(m => byId.set(m.id, m));
-    chatMessages.forEach(m => {
-      if (m && m._pending){
-        const hasServer = serverMsgs.find(i =>
-          i.device === DEVICE_ID && Math.abs(i.time - m.time) < 15000 && i.text === m.text
-        );
-        if (!hasServer) byId.set(m.id, m);
-      }
-    });
-    const before = chatMessages.length;
-    chatMessages = Array.from(byId.values()).sort((a,b) => (a.time||0) - (b.time||0)).slice(-500);
-    const added = chatMessages.length - before;
-    if (added !== 0){
-      saveChat();
-      renderChat();
-      if (added > 0 && !initial && !chatPageActive){
-        const me = senderName();
-        const newOnes = chatMessages.slice(-added).filter(m => m.from !== me && m.from !== 'system');
-        if (newOnes.length){ unreadChat += newOnes.length; updateUnreadBadge(); playPing(); }
-      }
-    }
-  } catch(e){ chatConnected = false; }
+  });
+  fbChatRef.limitToLast(200).on('child_removed', (snap) => {
+    chatMessages = chatMessages.filter(m => m.id !== snap.key);
+    renderChat();
+  });
+  fbDb.ref('.info/connected').on('value', (snap) => {
+    chatConnected = !!snap.val();
+    setSyncIndicator(chatConnected ? 'ok' : 'err', chatConnected ? 'Firebase OK' : 'Нет связи');
+  });
 }
 
 async function sendChat(text){
@@ -1260,39 +1122,27 @@ async function sendChat(text){
   const now = Date.now();
   if (now - lastChatSentAt < CHAT_SEND_COOLDOWN_MS) return;
   lastChatSentAt = now;
-  const localId = 'me-' + DEVICE_ID + '-' + now;
-  chatMessages.push({ id: localId, from: me, text, time: now, device: DEVICE_ID, _pending: true });
-  saveChat();
-  renderChat();
-  const box = $('chatMessages'); if (box) box.scrollTop = box.scrollHeight;
   try {
-    await fetch('https://ntfy.sh/' + NTFY_CHAT, {
-      method: 'POST',
-      body: JSON.stringify({ from: me, text, time: now, device: DEVICE_ID }),
-      headers: { 'X-Title': me }
-    });
-    chatConnected = true;
-    setTimeout(() => syncChat(false), 700);
-    setTimeout(() => syncChat(false), 2000);
-  } catch(e){}
+    await fbChatRef.push({ from: me, text, time: now });
+  } catch(e){ alert('Ошибка отправки: ' + e.message); }
 }
 $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); const inp = $('chatInput'); const text = inp.value; inp.value = ''; sendChat(text); inp.focus(); });
-$('chatClear').addEventListener('click', () => { if (userRole !== 'nikita') return; if (!confirm('Очистить?')) return; chatMessages = []; saveChat(); renderChat(); });
-function startChatPolling(){
-  if (chatPollTimer) clearInterval(chatPollTimer);
-  chatPollTimer = setInterval(() => syncChat(false), CHAT_POLL_INTERVAL_MS);
-}
+$('chatClear').addEventListener('click', async () => {
+  if (userRole !== 'nikita') return;
+  if (!confirm('Очистить чат у всех?')) return;
+  try { await fbChatRef.remove(); } catch(e){}
+  chatMessages = []; renderChat();
+});
 
 /* PRESENCE */
 function formatLastSeen(ts){
   const diff = Date.now() - ts;
-  if (diff < PRESENCE_ONLINE_THRESHOLD) return 'онлайн';
+  if (diff < 40000) return 'онлайн';
   const min = Math.floor(diff / 60000);
   if (min < 60) return 'был ' + min + ' мин назад';
   const hr = Math.floor(min / 60);
   if (hr < 24) return 'был ' + hr + ' ч назад';
-  const d = Math.floor(hr / 24);
-  return 'был ' + d + ' дн назад';
+  return 'был ' + Math.floor(hr / 24) + ' дн назад';
 }
 function renderPresenceLine(){
   const el = $('chatStatusLine'); if (!el) return;
@@ -1301,42 +1151,29 @@ function renderPresenceLine(){
   const parts = names.map(n => {
     const p = presenceMap[n];
     if (!p || !p.time) return '<span class="dot-offline"></span>' + n + ' был давно';
-    const isOnline = (Date.now() - p.time) < PRESENCE_ONLINE_THRESHOLD;
+    const isOnline = (Date.now() - p.time) < 40000;
     return '<span class="' + (isOnline ? 'dot-online' : 'dot-offline') + '"></span>' + n + ' — ' + formatLastSeen(p.time);
   });
   el.innerHTML = parts.join(' · ');
 }
-async function sendPresence(){
-  const me = senderName(); if (!me) return;
-  try { await fetch('https://ntfy.sh/' + NTFY_PRESENCE, { method: 'POST', body: JSON.stringify({ from: me, time: Date.now(), device: DEVICE_ID }), headers: { 'X-Title': 'presence' } }); } catch(e){}
-}
-async function pollPresence(){
-  try {
-    const r = await fetch('https://ntfy.sh/' + NTFY_PRESENCE + '/json?poll=1&since=1h');
-    if (!r.ok) return;
-    const text = await r.text();
-    text.trim().split('\n').forEach(line => {
-      if (!line) return;
-      try {
-        const outer = JSON.parse(line);
-        if (outer.event !== 'message' || !outer.message) return;
-        let data; try { data = JSON.parse(outer.message); } catch(e){ return; }
-        if (!data || (data.from !== 'Никита' && data.from !== 'Чёрный либерал')) return;
-        if (!presenceMap[data.from] || data.time > presenceMap[data.from].time){ presenceMap[data.from] = { time: data.time || Date.now(), device: data.device }; }
-      } catch(e){}
-    });
-    renderPresenceLine();
-  } catch(e){}
-}
-let presenceHeartbeatTimer = null, presencePollTimer = null;
+let presenceRef = null;
+let presenceHeartbeat = null;
 function startPresence(){
-  sendPresence();
-  if (presenceHeartbeatTimer) clearInterval(presenceHeartbeatTimer);
-  presenceHeartbeatTimer = setInterval(() => { if (senderName()) sendPresence(); }, PRESENCE_INTERVAL_MS);
-  if (presencePollTimer) clearInterval(presencePollTimer);
-  presencePollTimer = setInterval(pollPresence, 5000);
-  pollPresence();
-  renderPresenceLine();
+  fbPresenceRef.on('value', (snap) => {
+    const v = snap.val() || {};
+    Object.keys(v).forEach(k => { if (v[k] && v[k].time) presenceMap[k] = { time: v[k].time }; });
+    renderPresenceLine();
+  });
+  if (presenceHeartbeat) clearInterval(presenceHeartbeat);
+  presenceHeartbeat = setInterval(updatePresence, 15000);
+  updatePresence();
+}
+function updatePresence(){
+  const me = senderName(); if (!me) return;
+  if (presenceRef) try { presenceRef.onDisconnect().cancel(); } catch(e){}
+  presenceRef = fbPresenceRef.child(me);
+  presenceRef.set({ time: Date.now() });
+  presenceRef.onDisconnect().set({ time: Date.now() });
 }
 
 /* ФАЙЛЫ */
@@ -1356,8 +1193,7 @@ async function uploadBlobToHost(blob, filename, onProgress){
   const tasks = [
     (async () => { try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', blob, filename); const xhr = new XMLHttpRequest(); xhr.open('POST', 'https://catbox.moe/user/api.php'); xhr.upload.onprogress = (e) => { if (onProgress && e.lengthComputable) onProgress(e.loaded / e.total); }; return await new Promise((resolve, reject) => { xhr.onload = () => { if (xhr.status === 200){ const t = xhr.responseText.trim(); if (t.startsWith('http')) resolve(t); else reject(); } else reject(); }; xhr.onerror = () => reject(); xhr.timeout = 60000; xhr.ontimeout = () => reject(); xhr.send(fd); }); } catch(e){ return null; } })(),
     tryUpload('https://litterbox.catbox.moe/resources/internals/api.php', 'fileToUpload'),
-    tryUpload('https://0x0.st', 'file'),
-    tryUpload('https://uguu.se/upload.php', 'files[]')
+    tryUpload('https://0x0.st', 'file')
   ];
   try { return await Promise.any(tasks.map(p => p.then(r => { if (r) return r; throw new Error(); }))); } catch(e){ return null; }
 }
@@ -1373,9 +1209,7 @@ async function compressImage(file, maxSize = 700, quality = 0.75){
           if (w > maxSize || h > maxSize){ if (w > h){ h = Math.round(h * maxSize / w); w = maxSize; } else { w = Math.round(w * maxSize / h); h = maxSize; } }
           const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
           const ctx = canvas.getContext('2d'); ctx.fillStyle = '#0d0620'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
-          let out = canvas.toDataURL('image/jpeg', quality);
-          if (out.length > 400000) out = canvas.toDataURL('image/jpeg', 0.6);
-          resolve(out);
+          resolve(canvas.toDataURL('image/jpeg', quality));
         } catch(err){ const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); }
       };
       img.onerror = () => { const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); };
@@ -1410,10 +1244,10 @@ async function loadAllStaffPhotos(){
   for (const el of document.querySelectorAll('.staff-photo')){ const name = photoName(el); const img = el.querySelector('img'); if (!img) continue; if (custom[name]) continue; if (!el.dataset.wiki && DEFAULT_WIKI[name]) el.dataset.wiki = DEFAULT_WIKI[name]; if (el.dataset.wiki) promises.push(loadWikiPhoto(el, el.dataset.wiki)); }
   await Promise.race([Promise.allSettled(promises), new Promise(r => setTimeout(r, 6000))]);
 }
-function saveCustomText(key, field, value){ if (userRole !== 'nikita') return; const all = getCustomTexts(); if (!all[key]) all[key] = {}; all[key][field] = value; try { localStorage.setItem(LS_TEXTS, JSON.stringify(all)); } catch(e){} publishSnapshotDebounced(); }
+function saveCustomText(key, field, value){ if (userRole !== 'nikita') return; const all = getCustomTexts(); if (!all[key]) all[key] = {}; all[key][field] = value; try { localStorage.setItem(LS_TEXTS, JSON.stringify(all)); } catch(e){} }
 function applyCustomTexts(){ const texts = getCustomTexts(); document.querySelectorAll('.editable-field').forEach(el => { const k = el.dataset.key, f = el.dataset.field; if (texts[k] && texts[k][f]) el.textContent = texts[k][f]; else if (DEFAULT_TEXTS[k] && DEFAULT_TEXTS[k][f]) el.textContent = DEFAULT_TEXTS[k][f]; }); }
-async function saveCustomPhoto(name, dataUrl){ if (userRole !== 'nikita') return; let finalUrl = dataUrl; if (dataUrl && dataUrl.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю в облако...'); const up = await base64ToUrl(dataUrl, name + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); } else { setSyncIndicator('err', 'Фото локально'); finalUrl = dataUrl; } } const all = getCustomPhotos(); all[name] = finalUrl; try { localStorage.setItem(LS_PHOTOS, JSON.stringify(all)); } catch(e){} publishSnapshotDebounced(); }
-async function saveMediaCache(target, url){ if (userRole !== 'nikita') return; let finalUrl = url; if (url && url.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю...'); const up = await base64ToUrl(url, target + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); } else { setSyncIndicator('err', 'Флаг локально'); finalUrl = url; } } const c = getMediaCache(); c[target] = finalUrl; try { localStorage.setItem(LS_MEDIA, JSON.stringify(c)); } catch(e){} publishSnapshotDebounced(); }
+async function saveCustomPhoto(name, dataUrl){ if (userRole !== 'nikita') return; let finalUrl = dataUrl; if (dataUrl && dataUrl.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю...'); const up = await base64ToUrl(dataUrl, name + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Готово'); } else { setSyncIndicator('err', 'Локально'); finalUrl = dataUrl; } } const all = getCustomPhotos(); all[name] = finalUrl; try { localStorage.setItem(LS_PHOTOS, JSON.stringify(all)); } catch(e){} }
+async function saveMediaCache(target, url){ if (userRole !== 'nikita') return; let finalUrl = url; if (url && url.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю...'); const up = await base64ToUrl(url, target + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Готово'); } else { setSyncIndicator('err', 'Локально'); finalUrl = url; } } const c = getMediaCache(); c[target] = finalUrl; try { localStorage.setItem(LS_MEDIA, JSON.stringify(c)); } catch(e){} }
 function applyMedia(target, url){
   if (!url) return;
   const isFF = target === 'nikita_flag' || target === 'blacklib_flag';
@@ -1425,7 +1259,7 @@ function applyMedia(target, url){
 }
 function applyAllCachedMedia(){ const c = getMediaCache(); Object.keys(c).forEach(t => applyMedia(t, c[t])); }
 
-function addDonation(d, skipPublish){ if (!d.id) d.id = 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); const list = getDonations(); if (list.some(x => x.id === d.id)) return; list.push(d); saveDonations(list); renderAllFromDonations(); if (!skipPublish) publishSnapshotDebounced(); }
+function addDonation(d){ if (!d.id) d.id = 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); const list = getDonations(); if (list.some(x => x.id === d.id)) return; list.push(d); saveDonations(list); renderAllFromDonations(); }
 function renderAllFromDonations(){
   const list = getDonations();
   let nT=0,nC=0,bT=0,bC=0,nS=0,bS=0,allT=0,allC=0;
@@ -1462,39 +1296,6 @@ function renderTopDonors(){
     const am = document.createElement('div'); am.className = 'top-donor-amount'; am.textContent = fmt(d.amount);
     li.appendChild(r); li.appendChild(info); li.appendChild(am); box.appendChild(li);
   });
-}
-
-function buildSnapshot(){ return { version: 16, deviceId: DEVICE_ID, timestamp: Date.now(), texts: getCustomTexts(), photos: getCustomPhotos(), media: getMediaCache(), donations: getDonations() }; }
-async function uploadJsonSnapshot(jsonString){
-  try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: fd }); if (r.ok){ const url = (await r.text()).trim(); if (url.startsWith('http')) return url; } } catch(e){}
-  try { const fd = new FormData(); fd.append('file', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://0x0.st', { method: 'POST', body: fd }); if (r.ok){ const url = (await r.text()).trim(); if (url.startsWith('http')) return url; } } catch(e){}
-  return null;
-}
-let publishTimer = null, publishInProgress = false, publishPending = false, lastPublishedTs = 0;
-function publishSnapshotDebounced(){ if (publishTimer) clearTimeout(publishTimer); publishTimer = setTimeout(() => { publishSnapshot(); }, 1500); }
-async function publishSnapshot(force){
-  if (publishInProgress){ publishPending = true; return; }
-  publishInProgress = true;
-  setSyncIndicator('sending', 'Отправляю...');
-  try {
-    const snap = buildSnapshot();
-    if (!force && snap.timestamp - lastPublishedTs < 800 && lastPublishedTs > 0){ publishInProgress = false; setSyncIndicator('ok', 'Готово'); return; }
-    const url = await uploadJsonSnapshot(JSON.stringify(snap));
-    if (!url){ publishInProgress = false; setSyncIndicator('err', 'Ошибка'); return; }
-    lastPublishedTs = snap.timestamp;
-    await fetch('https://ntfy.sh/' + NTFY_STATE, { method: 'POST', body: JSON.stringify({ type: 'snapshot', url, time: snap.timestamp, device: DEVICE_ID }), headers: { 'X-Title': 'snap' } });
-    try { localStorage.setItem(LS_LAST_SNAP_TS, String(snap.timestamp)); localStorage.setItem(LS_LAST_SNAP_URL, url); } catch(e){}
-    setSyncIndicator('ok', 'Готово');
-  } catch(e){ setSyncIndicator('err', 'Ошибка'); }
-  finally { publishInProgress = false; if (publishPending){ publishPending = false; setTimeout(() => publishSnapshot(), 200); } }
-}
-let snapES = null;
-function startSnapshotSubscription(){
-  try {
-    snapES = new EventSource('https://ntfy.sh/' + NTFY_STATE + '/sse');
-    snapES.onopen = () => { setSyncIndicator('ok', 'Готово'); };
-    snapES.onerror = () => { setSyncIndicator('ok', 'Готово'); };
-  } catch(e){}
 }
 
 /* МОДАЛКА МЕДИА */
@@ -1547,10 +1348,8 @@ $('logoutBtn').addEventListener('click', () => { if (!confirm('Выйти из �
 function setRole(role){
   userRole = role; try { sessionStorage.setItem(SS_ROLE, role); } catch(e){}
   updateRoleBadge(); updateHostUI(); updateAccessUI(); updateLockUI(); updateChatSender(); updateChatGuestWarning(); applyEditPermissions(); renderChat();
-  if (senderName()) sendPresence();
+  if (senderName()) updatePresence();
   renderPresenceLine();
-  setTimeout(() => syncChat(false), 300);
-  setTimeout(startChatSSE, 100);
   if (role === 'nikita' || role === 'blacklib') requestNotifPermission();
 }
 function updateRoleBadge(){ const el = $('navRole'); if (!el) return; el.classList.remove('nikita','blacklib'); if (userRole === 'nikita'){ el.textContent = '👑 Никита'; el.classList.add('nikita'); } else if (userRole === 'blacklib'){ el.textContent = '🎙 Чёрный либерал'; el.classList.add('blacklib'); } else { el.textContent = '👀 Гость'; } }
@@ -1566,7 +1365,7 @@ async function submitForm(form, statusEl, successMsg, onSuccess){
   showStatus(statusEl, 'loading', 'Отправляем...'); applyAnon(form);
   let ok = false;
   try { const fd = new FormData(form); const r = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }); try { const data = await r.json(); ok = r.ok && (data.success === 'true' || data.success === true); } catch(_) { ok = r.ok; } } catch(err){ ok = false; }
-  if (ok){ showStatus(statusEl, 'success', '✅ ' + successMsg); try { if (onSuccess) onSuccess(new FormData(form)); } catch(e){} form.reset(); } else showStatus(statusEl, 'error', '❌ Не отправилось. Попробуй ещё раз.');
+  if (ok){ showStatus(statusEl, 'success', '✅ ' + successMsg); try { if (onSuccess) onSuccess(new FormData(form)); } catch(e){} form.reset(); } else showStatus(statusEl, 'error', '❌ Не отправилось.');
   if (btn){ btn.disabled = false; btn.textContent = orig; }
 }
 document.querySelectorAll('#donateForm .amt').forEach(b => { b.addEventListener('click', () => { document.querySelectorAll('#donateForm .amt').forEach(x => x.classList.remove('active')); b.classList.add('active'); $('amount').value = b.dataset.amt; }); });
@@ -1578,7 +1377,7 @@ $('donateForm').addEventListener('submit', async (e) => {
   const fd = new FormData(form); const amount = parseFloat(fd.get('Сумма')) || 0;
   if (amount <= 0){ showStatus(st, 'error', '❌ Укажи сумму'); return; }
   const name = (fd.get('Имя') || '').toString().trim() || 'Аноним'; const candSnapshot = currentCandidate || '';
-  await submitForm(form, st, 'Спасибо за поддержку!', () => { localStorage.setItem(LS_LAST_DONATE, String(Date.now())); addDonation({ candidate: candSnapshot, amount, name, time: Date.now(), source: 'user' }); publishSnapshotDebounced(); });
+  await submitForm(form, st, 'Спасибо за поддержку!', () => { localStorage.setItem(LS_LAST_DONATE, String(Date.now())); addDonation({ candidate: candSnapshot, amount, name, time: Date.now(), source: 'user' }); });
 });
 $('supportForm').addEventListener('submit', e => { e.preventDefault(); submitForm(e.target, $('supportStatus'), 'Отправлено!'); });
 document.querySelectorAll('.support-choice-btn').forEach(btn => { btn.addEventListener('click', () => { const c = btn.dataset.candidate; if (currentCandidate === c){ currentCandidate = ''; btn.classList.remove('selected'); } else { currentCandidate = c; document.querySelectorAll('.support-choice-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); } const h = $('donateCandidate'); if (h) h.value = currentCandidate; }); });
@@ -1600,7 +1399,7 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     chatPageActive = (tab.dataset.page === 'chat');
-    if (chatPageActive){ unreadChat = 0; updateUnreadBadge(); syncChat(false); setTimeout(() => { const b = $('chatMessages'); if (b) b.scrollTop = b.scrollHeight; }, 100); }
+    if (chatPageActive){ unreadChat = 0; updateUnreadBadge(); setTimeout(() => { const b = $('chatMessages'); if (b) b.scrollTop = b.scrollHeight; }, 100); }
     if (tab.dataset.page === 'donate') renderTopDonors();
   });
 });
@@ -1619,6 +1418,20 @@ $('tgCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ aler
 $('jitsiBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = 'https://' + selectedServer + '/inaogenty-' + Math.random().toString(36).slice(2,10); if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {}); window.open(link, '_blank'); setTimeout(() => alert('🔗 ' + link), 600); });
 $('joinCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = $('joinLink').value.trim(); if (!link){ alert('Вставь ссылку'); return; } window.open(link, '_blank'); });
 
+/* ADMIN */
+$('adminAdd').addEventListener('click', () => {
+  const amt = parseFloat($('adminAmount').value) || 0;
+  const dn = parseInt($('adminDonors').value) || 0;
+  const cand = $('adminCandidate').value;
+  const name = ($('adminDonorName').value || '').trim() || 'Аноним';
+  const st = $('adminStatus');
+  if (amt <= 0){ st.textContent = '⚠ Введи сумму'; st.className = 'admin-status err'; setTimeout(() => st.className = 'admin-status', 2500); return; }
+  addDonation({ candidate: cand, amount: amt, name, time: Date.now(), source: 'admin', count: dn });
+  st.textContent = '✅ Добавлено ' + fmt(amt); st.className = 'admin-status ok';
+  $('adminAmount').value = ''; $('adminDonors').value = '1'; $('adminDonorName').value = '';
+  setTimeout(() => st.className = 'admin-status', 3500);
+});
+
 /* СТАРТ */
 const year = new Date().getFullYear();
 if ($('welYear')) $('welYear').textContent = year;
@@ -1627,9 +1440,7 @@ if ($('footYear')) $('footYear').textContent = year;
 (function renderVersion(){
   const badge = $('versionBadge'), text = $('verText');
   if (badge && text){
-    text.textContent = 'Версия v' + SITE_VERSION + ' · ' + SITE_BUILD_TIME;
-    badge.classList.add('updating');
-    setTimeout(() => badge.classList.remove('updating'), 2000);
+    text.textContent = 'Версия v' + SITE_VERSION + ' (Firebase) · ' + SITE_BUILD_TIME;
   }
 })();
 
@@ -1659,29 +1470,14 @@ setTimeout(() => {
   makeFighterMediaEditable();
   applyEditPermissions();
   loadAllStaffPhotos();
-  startChatSSE();
-  startChatPolling();
-  syncChat(true);
+  subscribeChat();
   startPresence();
-  startSnapshotSubscription();
 }, 100);
 
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden){
-    syncChat(false);
-    pollPresence();
-    renderPresenceLine();
-    if (senderName()) sendPresence();
-    startChatSSE();
-  }
-});
-window.addEventListener('focus', () => { syncChat(false); pollPresence(); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden){ if (senderName()) updatePresence(); } });
+window.addEventListener('focus', () => { if (senderName()) updatePresence(); });
 
-setInterval(() => {
-  renderPresenceLine();
-  const now = Date.now();
-  Object.keys(presenceMap).forEach(k => { if (now - presenceMap[k].time > 3600000) delete presenceMap[k]; });
-}, 10000);
+setInterval(() => { renderPresenceLine(); }, 10000);
 </script>
 </body>
 </html>
