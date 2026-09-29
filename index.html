@@ -46,7 +46,7 @@ body:not(.is-nikita) .editable-field,body:not(.is-nikita) .staff-photo,body:not(
 .code-input:focus{border-color:var(--gold);box-shadow:0 0 30px -5px rgba(255,215,0,.5)}
 .code-input::placeholder{letter-spacing:4px;color:#8b76ad}
 .code-wrap{position:relative;z-index:1}
-.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0;line-height:1;transition:background .2s}
+.code-eye{position:absolute;right:.6rem;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.3);color:var(--gold);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:inherit;padding:0;line-height:1}
 .welcome-btn{padding:1.15rem 2rem;border:none;border-radius:1.1rem;font-weight:900;font-size:1.05rem;color:#0e0720;cursor:pointer;font-family:inherit;background:linear-gradient(120deg,#ffd966,#f0c14b);transition:transform .2s;width:100%;position:relative;z-index:1;margin-bottom:.7rem;box-shadow:0 20px 45px -12px rgba(255,215,0,.75)}
 .welcome-btn:hover{transform:translateY(-3px)}
 .welcome-status{min-height:1.2rem;font-size:.88rem;font-weight:800;text-align:center;position:relative;z-index:1;margin-top:.6rem}
@@ -139,7 +139,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,5.2vw,3.6rem);fon
 .fighter-stats .l{display:block;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:.4rem}
 .vs-badge{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;background:linear-gradient(120deg,#c9a3ff,#ffd966);-webkit-background-clip:text;background-clip:text;color:transparent;animation:vsBeat 2s ease-in-out infinite;padding:0 .5rem;align-self:center;margin-top:80px}
 @keyframes vsBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.program-card,.raised-box,.archive-panel,.form-wrap,.top-donors,.tg-field,.call-start,.countdown-wrap,.support-choice{max-width:960px;margin:0 auto 2rem;background:var(--card);border:1px solid rgba(255,215,0,.18);border-radius:2rem;padding:2.2rem 2.4rem;position:relative}
+.program-card,.raised-box,.form-wrap,.top-donors,.tg-field,.call-start,.countdown-wrap,.support-choice{max-width:960px;margin:0 auto 2rem;background:var(--card);border:1px solid rgba(255,215,0,.18);border-radius:2rem;padding:2.2rem 2.4rem;position:relative}
 .program-head{display:flex;align-items:center;gap:1rem;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(160,100,255,.14)}
 .program-icon{width:56px;height:56px;border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(140,80,220,.25));border:1px solid rgba(255,215,0,.4);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
 .program-head h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900}
@@ -273,15 +273,15 @@ body.is-nikita .editable-field.edit-mode:hover{background:rgba(255,215,0,.1);out
 .srv-btn.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(160,100,255,.15))}
 .srv-btn.active::after{content:'✓';position:absolute;top:1rem;right:1.1rem;color:var(--gold);font-weight:900;font-size:1.2rem}
 .bet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.5rem;max-width:1040px;margin:0 auto}
-.bet-card{background:var(--card);border:1px solid rgba(160,100,255,.22);border-radius:2rem;padding:2rem;transition:transform .3s,border-color .3s,box-shadow .3s}
-.bet-card:hover{transform:translateY(-5px);border-color:rgba(255,215,0,.45);box-shadow:0 20px 45px -20px rgba(255,215,0,.35)}
+.bet-card{background:var(--card);border:1px solid rgba(160,100,255,.22);border-radius:2rem;padding:2rem;transition:transform .3s,border-color .3s}
+.bet-card:hover{transform:translateY(-5px);border-color:rgba(255,215,0,.45)}
 .bet-event-head{display:flex;align-items:center;gap:1rem;padding-bottom:1.3rem;margin-bottom:1.4rem;border-bottom:1px solid rgba(160,100,255,.14)}
 .bet-event-icon{width:58px;height:58px;border-radius:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(140,80,220,.3));border:1px solid rgba(255,215,0,.45)}
 .bet-event-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900}
 .bet-event-sub{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:700;margin-top:.25rem}
 .bet-choice-label{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.8px;font-weight:800;margin-bottom:.8rem}
 .bet-choices{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.3rem}
-.bet-choice{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.2rem;border-radius:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.18);cursor:pointer;transition:background .2s;gap:.9rem}
+.bet-choice{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.2rem;border-radius:1rem;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.18);cursor:pointer;gap:.9rem}
 .bet-choice:hover{background:rgba(160,100,255,.12);border-color:rgba(255,215,0,.5)}
 .bet-choice-name{color:#f0e6ff;font-weight:800;font-size:.96rem}
 .bet-choice-odd{font-family:'Playfair Display',serif;font-weight:900;color:var(--gold);font-size:1.4rem;padding:.3rem .8rem;border-radius:.7rem;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.22);flex-shrink:0}
@@ -292,7 +292,7 @@ input::placeholder,textarea::placeholder{color:#6d5a8a}
 input:focus,textarea:focus{border-color:rgba(255,215,0,.7)}
 textarea{resize:vertical;min-height:100px}
 .input-label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:800;margin-bottom:.5rem}
-.btn{width:100%;padding:1.2rem;border:none;border-radius:1.1rem;font-weight:800;font-size:1.02rem;color:#fff;cursor:pointer;font-family:inherit;transition:transform .2s;background:linear-gradient(135deg,#7a3ac8,#b06eff);display:flex;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem}
+.btn{width:100%;padding:1.2rem;border:none;border-radius:1.1rem;font-weight:800;font-size:1.02rem;color:#fff;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,#7a3ac8,#b06eff);display:flex;align-items:center;justify-content:center;gap:.55rem;margin-top:.6rem}
 .btn:hover{transform:translateY(-3px)}
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .btn.donate{background:linear-gradient(135deg,#c93a3a,#ef4444,#ffd966)}
@@ -305,7 +305,7 @@ textarea{resize:vertical;min-height:100px}
 .status.error{display:block;background:rgba(220,80,80,.1);border:1px solid rgba(220,80,80,.45);color:#ff9b9b}
 .status.loading{display:block;background:rgba(160,100,255,.1);border:1px solid rgba(160,100,255,.45);color:#c9a3ff}
 .support-choice-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:stretch}
-.support-choice-btn{background:rgba(255,255,255,.03);border:2px solid rgba(160,100,255,.25);border-radius:1.5rem;padding:1.2rem .9rem;cursor:pointer;font-family:inherit;text-align:center;transition:border-color .25s;display:flex;flex-direction:column;align-items:center;gap:.7rem;position:relative}
+.support-choice-btn{background:rgba(255,255,255,.03);border:2px solid rgba(160,100,255,.25);border-radius:1.5rem;padding:1.2rem .9rem;cursor:pointer;font-family:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.7rem;position:relative}
 .support-choice-btn.selected{border-color:var(--gold);background:linear-gradient(155deg,rgba(255,215,0,.12),rgba(140,80,220,.15))}
 .support-choice-btn.selected::after{content:'✓';position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0e0720;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.9rem}
 .support-choice-flag{width:100%;height:90px;border-radius:.9rem;background:linear-gradient(135deg,#8c50dc,#b06eff);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px}
@@ -326,9 +326,6 @@ textarea{resize:vertical;min-height:100px}
 .party-total-count strong{color:var(--gold)}
 .top-donors-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
 .top-donor-row{display:flex;align-items:center;gap:1rem;padding:.85rem 1.1rem;background:rgba(255,255,255,.03);border:1px solid rgba(160,100,255,.18);border-radius:1rem}
-.top-donor-row.rank-1{border-color:rgba(255,215,0,.65)}
-.top-donor-row.rank-2{border-color:rgba(210,210,210,.55)}
-.top-donor-row.rank-3{border-color:rgba(205,127,50,.55)}
 .top-donor-rank{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--gold);min-width:34px;text-align:center;flex-shrink:0}
 .top-donor-info{flex:1;min-width:0}
 .top-donor-name{font-weight:800;color:#f0e6ff;font-size:.95rem;word-break:break-word}
@@ -373,6 +370,17 @@ textarea{resize:vertical;min-height:100px}
 .modal{max-width:580px;width:100%;background:linear-gradient(155deg,#1c1136,#0d0620);border:1px solid rgba(255,215,0,.35);border-radius:2.2rem;padding:2.4rem 2.2rem;position:relative;max-height:90vh;overflow-y:auto}
 .modal-close{position:absolute;top:1.1rem;right:1.1rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(160,100,255,.3);color:#a98fd0;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;font-family:inherit}
 .modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem}
+.modal-choice{background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(160,100,255,.1));border:1px solid rgba(255,215,0,.35);border-radius:1.2rem;padding:1.2rem 1.4rem;margin-bottom:1.6rem}
+.modal-choice-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem}
+.modal-choice-row:last-child{margin-bottom:0;padding-top:.8rem;border-top:1px dashed rgba(255,215,0,.25)}
+.modal-choice .label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.6px;font-weight:800}
+.modal-choice .value{font-family:'Playfair Display',serif;font-weight:900;color:var(--gold);font-size:1.1rem;margin-top:.25rem}
+.modal-choice .odd{font-family:'Playfair Display',serif;font-weight:900;color:var(--gold);font-size:2rem}
+.quick-bets{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1.2rem}
+.quick-bet{padding:.9rem .3rem;background:rgba(255,255,255,.04);border:1px solid rgba(160,100,255,.22);color:#d8cce8;border-radius:.75rem;cursor:pointer;font-weight:800;font-size:.88rem;font-family:inherit}
+.payout-box{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem;margin-bottom:1.4rem;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.35);border-radius:1rem}
+.payout-box .label{font-size:.78rem;color:#8ef0b0;font-weight:800;text-transform:uppercase}
+.payout-box .amount{font-family:'Playfair Display',serif;font-weight:900;color:#8ef0b0;font-size:1.5rem}
 .secret-overlay{position:fixed;inset:0;z-index:2000;background:rgba(4,2,10,.9);display:none;align-items:center;justify-content:center;padding:1.5rem}
 .secret-overlay.active{display:flex}
 .secret-box{max-width:400px;width:100%;background:linear-gradient(155deg,#1c1136,#0d0620);border:1px solid rgba(255,215,0,.45);border-radius:2rem;padding:2.2rem 2rem;position:relative}
@@ -382,9 +390,21 @@ textarea{resize:vertical;min-height:100px}
 .host-flag{position:fixed;bottom:18px;left:18px;z-index:999;width:12px;height:12px;border-radius:50%;background:rgba(255,215,0,0);pointer-events:none}
 .host-flag.on{background:var(--gold);box-shadow:0 0 15px var(--gold)}
 .host-flag.bl{background:#e6e6e6;box-shadow:0 0 15px #e6e6e6}
+.toast-container{position:fixed;top:80px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:.6rem;max-width:340px;pointer-events:none}
+.toast{background:linear-gradient(135deg,rgba(140,80,220,.96),rgba(80,40,140,.98));border:1px solid rgba(255,215,0,.55);border-radius:1.2rem;padding:1rem 1.2rem;color:#fff;box-shadow:0 20px 50px -15px rgba(0,0,0,.9),0 0 40px -15px rgba(255,215,0,.5);animation:toastIn .4s cubic-bezier(.34,1.3,.64,1);pointer-events:auto;cursor:pointer}
+.toast .t-title{font-weight:900;font-size:.85rem;color:#ffd966;margin-bottom:.25rem;font-family:'Playfair Display',serif;letter-spacing:.5px}
+.toast .t-text{font-size:.92rem;line-height:1.4;word-wrap:break-word;color:#f0eaff}
+.toast .t-time{font-size:.68rem;opacity:.7;margin-top:.3rem}
+@keyframes toastIn{from{opacity:0;transform:translateX(40px) scale(.9)}to{opacity:1;transform:translateX(0) scale(1)}}
+.toast.out{animation:toastOut .3s ease-out forwards}
+@keyframes toastOut{to{opacity:0;transform:translateX(40px) scale(.9);max-height:0;padding:0;margin:0;overflow:hidden}}
+@media(max-width:520px){.toast-container{left:12px;right:12px;top:70px;max-width:none}}
 footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6);margin-top:4rem;position:relative;z-index:2}
 .footer-copy{text-align:center;font-size:.82rem;color:#7a6292;line-height:1.8}
 .footer-copy strong{color:var(--gold);font-weight:800}
+.version-badge{display:flex;align-items:center;gap:.55rem;justify-content:center;margin-top:1rem;padding:.6rem 1.2rem;border-radius:100px;background:rgba(80,200,120,.08);border:1px solid rgba(80,200,120,.4);color:#8ef0b0;font-size:.75rem;font-weight:800;font-family:ui-monospace,monospace;letter-spacing:.5px;max-width:fit-content;margin-left:auto;margin-right:auto;transition:all .3s}
+.version-badge.updating{background:rgba(255,215,0,.1);border-color:rgba(255,215,0,.5);color:var(--gold)}
+.version-badge .ver-dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;animation:pulse 1.5s infinite}
 @media(max-width:900px){.staff-grid,.bet-grid{grid-template-columns:1fr}}
 @media(max-width:700px){
   .versus{grid-template-columns:1fr}
@@ -415,6 +435,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 <body class="locked">
 
 <div class="sync-indicator" id="syncIndicator"><span class="dot"></span><span id="syncText">Загрузка...</span></div>
+<div class="toast-container" id="toastContainer"></div>
 
 <div class="welcome" id="welcome">
   <div class="welcome-box">
@@ -428,7 +449,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <div class="welcome-divider">Введи код</div>
     <div class="code-wrap">
       <input type="password" class="code-input" id="welcomeCode" placeholder="● ● ● ● ● ●" maxlength="6" inputmode="numeric" autocomplete="off">
-      <button type="button" class="code-eye" id="welcomeEye" aria-label="Показать">👁</button>
+      <button type="button" class="code-eye" id="welcomeEye">👁</button>
     </div>
     <button class="welcome-btn" id="welcomeEnterBtn">🔓 Войти</button>
     <div class="welcome-status" id="welcomeStatus"></div>
@@ -484,7 +505,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       </div>
       <div class="final-score">
         <div class="score-side"><div class="score-avatar win">Н</div><div class="score-name">Никита</div><div class="score-big win">2</div><div class="score-label">Победа</div></div>
-        <div class="score-divider">:<small style="display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;font-weight:700">счёт</small></div>
+        <div class="score-divider">:</div>
         <div class="score-side"><div class="score-avatar lose">ЧЛ</div><div class="score-name">Чёрный либерал</div><div class="score-big lose">0</div><div class="score-label">Поражение</div></div>
       </div>
       <div class="verdict">🎉 <strong style="color:#8ef0b0">Победа Никиты</strong> — 2 : 0</div>
@@ -562,7 +583,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
       <div class="admin-status" id="publishStatus"></div>
 
       <div class="admin-section-title">💾 Скачать готовый файл</div>
-      <p class="admin-desc" style="font-size:.82rem">Скачает этот же сайт, но со всеми твоими фото, текстами, донатами и чатом внутри.</p>
+      <p class="admin-desc" style="font-size:.82rem">Скачает этот же сайт, но со всеми твоими фото, текстами, донатами внутри.</p>
       <div class="admin-buttons">
         <button class="admin-btn publish" id="downloadHtmlBtn">💾 Скачать HTML со всем содержимым</button>
       </div>
@@ -598,7 +619,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
         <div class="chat-avatar">ЧЛ</div>
         <div>
           <div class="chat-name">Никита ↔ Чёрный либерал</div>
-          <div class="chat-status" id="chatStatusLine">● подключение...</div>
+          <div class="chat-status" id="chatStatusLine">● синхронизация через облако</div>
         </div>
         <button class="chat-back" id="chatClear" style="display:none">Очистить</button>
       </div>
@@ -906,7 +927,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <div style="font-size:1.05rem;color:var(--gold);font-weight:900;text-align:center;margin-bottom:1.4rem;font-family:'Playfair Display',serif">Введи код</div>
     <div class="code-wrap">
       <input type="password" class="secret-input" id="secretInput" placeholder="------" maxlength="6" autocomplete="off" inputmode="numeric">
-      <button type="button" class="code-eye" id="secretEye" aria-label="Показать">👁</button>
+      <button type="button" class="code-eye" id="secretEye">👁</button>
     </div>
     <button class="secret-btn" id="secretBtn">Подтвердить</button>
     <div class="secret-status" id="secretStatus"></div>
@@ -923,10 +944,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
     <button type="button" class="big-btn gold" id="mediaUrlSave" style="margin-top:.3rem">📤 Сохранить URL</button>
     <div style="text-align:center;color:#5f4d7a;font-size:.84rem;font-weight:800;margin:1rem 0;letter-spacing:1px">— или —</div>
     <button type="button" class="big-btn secondary" id="mediaFileUpload">📁 Загрузить файл из телефона</button>
-    <p style="font-size:.78rem;color:#8b76ad;margin-top:1rem;line-height:1.6;font-style:italic">
-      <strong style="color:#ffd966;font-style:normal">URL</strong> — если уже есть ссылка.
-      <strong style="color:#ffd966;font-style:normal">Файл</strong> — сожмётся и зальётся в облако.
-    </p>
   </div>
 </div>
 
@@ -935,11 +952,18 @@ footer{border-top:1px solid var(--line);padding:3rem 0;background:rgba(8,6,16,.6
 <footer>
   <div class="wrap">
     <div class="footer-copy">© <span id="footYear">2026</span> инаогенты.ру · Автор <strong>Никита</strong></div>
+    <div class="version-badge" id="versionBadge">
+      <span class="ver-dot"></span>
+      <span id="verText">Версия загружается...</span>
+    </div>
   </div>
 </footer>
 
 <script>
 "use strict";
+const SITE_VERSION = '16';
+const SITE_BUILD_TIME = '29.09.2026 18:30';
+
 const GOAL = 300000;
 const DEBATE_TARGET_ISO = '2026-12-31T21:00:00';
 const _k = [0x7A, 0x1B, 0x5C, 0x2E, 0x9F, 0x42];
@@ -961,13 +985,13 @@ const LS_DEVICE = 'inaogenty_device_id_v1';
 const LS_LAST_SNAP_TS = 'inaogenty_last_snap_ts_v1';
 const LS_LAST_SNAP_URL = 'inaogenty_last_snap_url_v1';
 const LS_RECORDINGS = 'inaogenty_recordings_v1';
-const LS_CHAT = 'inaogenty_chat_v4';
+const LS_CHAT = 'inaogenty_chat_v6';
 const LS_LAST_DONATE = 'inaogenty_last_donate_v1';
 const DONATE_COOLDOWN_MS = 20000;
-const CHAT_SEND_COOLDOWN_MS = 400;
+const CHAT_SEND_COOLDOWN_MS = 300;
 const PRESENCE_INTERVAL_MS = 15000;
 const PRESENCE_ONLINE_THRESHOLD = 40000;
-const CHAT_POLL_INTERVAL_MS = 6000;
+const CHAT_POLL_INTERVAL_MS = 4000;
 
 let userRole = 'guest';
 const $ = (id) => document.getElementById(id);
@@ -1009,7 +1033,6 @@ function setSyncIndicator(state, text){
   el.className = 'sync-indicator ' + (state || '');
   if (t) t.textContent = text || (state === 'ok' ? 'Готово' : state === 'sending' ? 'Синхронизация...' : state === 'err' ? 'Ошибка' : 'Загрузка...');
 }
-
 function getCustomTexts(){ try { return JSON.parse(localStorage.getItem(LS_TEXTS)) || {}; } catch(e){ return {}; } }
 function getCustomPhotos(){ try { return JSON.parse(localStorage.getItem(LS_PHOTOS)) || {}; } catch(e){ return {}; } }
 function getMediaCache(){ try { return JSON.parse(localStorage.getItem(LS_MEDIA)) || {}; } catch(e){ return {}; } }
@@ -1018,9 +1041,7 @@ function getRecordings(){ try { return JSON.parse(localStorage.getItem(LS_RECORD
 function saveDonations(list){ try { localStorage.setItem(LS_DONATIONS, JSON.stringify(list.slice(-1000))); } catch(e){} }
 function saveRecordings(list){ try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(list.slice(0, 100))); } catch(e){} }
 
-/* ============================================================
-   ЧАТ — WebSocket + оптимистичное отображение
-   ============================================================ */
+/* ЧАТ */
 let chatMessages = [];
 try { chatMessages = JSON.parse(localStorage.getItem(LS_CHAT)) || []; } catch(e){ chatMessages = []; }
 chatMessages = chatMessages.filter(m => !m._pending || (Date.now() - m.time) < 30000);
@@ -1028,15 +1049,11 @@ chatMessages = chatMessages.filter(m => !m._pending || (Date.now() - m.time) < 3
 let chatPageActive = false, unreadChat = 0, chatConnected = false;
 let lastChatSentAt = 0;
 let chatPollTimer = null;
-let chatWS = null;
-let chatWSReconnectTimer = null;
-let chatWSConnected = false;
+let chatES = null;
+let chatESReconnectTimer = null;
 
 function saveChat(){ try { localStorage.setItem(LS_CHAT, JSON.stringify(chatMessages.slice(-500))); } catch(e){} }
-function validName(n){
-  if (n === 'Никита' || n === 'Чёрный либерал' || n === 'system') return n;
-  return 'Гость';
-}
+function validName(n){ if (n === 'Никита' || n === 'Чёрный либерал' || n === 'system') return n; return 'Гость'; }
 function senderName(){ if (userRole === 'nikita') return 'Никита'; if (userRole === 'blacklib') return 'Чёрный либерал'; return null; }
 function updateChatSender(){
   const inp = $('chatInput'), btn = $('chatSend'); if (!inp) return;
@@ -1050,22 +1067,9 @@ function updateChatGuestWarning(){
   const clr = $('chatClear');
   if (clr) clr.style.display = (userRole === 'nikita') ? 'inline-flex' : 'none';
 }
-function updateChatStatus(){
-  const l = $('chatStatusLine'); if (!l) return;
-  if (chatWSConnected){
-    l.innerHTML = '<span class="dot-online"></span>мгновенная связь (WebSocket)';
-    l.style.color = '#8ef0b0';
-  } else if (chatConnected){
-    l.innerHTML = '<span class="dot-online"></span>синхронизация (polling)';
-    l.style.color = '#8ef0b0';
-  } else {
-    l.innerHTML = '<span class="dot-offline"></span>подключение...';
-    l.style.color = '#8b76ad';
-  }
-}
 function renderChat(){
   const box = $('chatMessages'); if (!box) return;
-  const wasNearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 120;
+  const wasNearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 150;
   box.innerHTML = '';
   if (!chatMessages.length){
     const d = document.createElement('div'); d.className = 'chat-row sys';
@@ -1087,111 +1091,166 @@ function buildMsg(m){
   if (!isMe){ const n = document.createElement('div'); n.className = 'msg-name'; n.textContent = m.from; body.appendChild(n); }
   const b = document.createElement('div'); b.className = 'msg ' + (isMe ? 'me' : 'them');
   b.textContent = m.text;
-  if (m._pending){ b.style.opacity = '0.6'; }
+  if (m._pending) b.style.opacity = '0.55';
   const t = document.createElement('span'); t.className = 'msg-time';
-  const timeStr = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
-  t.textContent = timeStr + (m._pending ? ' ✓' : (isMe ? ' ✓✓' : ''));
-  b.appendChild(t); body.appendChild(b); row.appendChild(row); return row;
+  t.textContent = new Date(m.time).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}) + (m._pending ? ' · ⏳' : '');
+  b.appendChild(t); body.appendChild(b); row.appendChild(body); return row;
 }
 function updateUnreadBadge(){ const b = $('chatUnread'); if (!b) return; if (unreadChat > 0){ b.textContent = unreadChat > 99 ? '99+' : unreadChat; b.style.display = 'flex'; } else b.style.display = 'none'; }
+
+async function requestNotifPermission(){
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'default'){
+    try { await Notification.requestPermission(); } catch(e){}
+  }
+}
+function showSystemNotif(title, body){
+  try {
+    if (!('Notification' in window)) return;
+    if (Notification.permission !== 'granted') return;
+    if (!document.hidden) return;
+    const n = new Notification(title, { body: body.slice(0, 200), tag: 'chat-msg', renotify: true });
+    n.onclick = () => { window.focus(); navigateToChat(); n.close(); };
+  } catch(e){}
+}
+function showToast(title, text, time){
+  const cont = $('toastContainer'); if (!cont) return;
+  while (cont.children.length >= 3) cont.removeChild(cont.firstChild);
+  const el = document.createElement('div');
+  el.className = 'toast';
+  const t1 = document.createElement('div'); t1.className = 't-title'; t1.textContent = title;
+  const t2 = document.createElement('div'); t2.className = 't-text'; t2.textContent = text;
+  const t3 = document.createElement('div'); t3.className = 't-time'; t3.textContent = new Date(time || Date.now()).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  el.appendChild(t1); el.appendChild(t2); el.appendChild(t3);
+  el.onclick = () => { el.classList.add('out'); setTimeout(() => el.remove(), 300); navigateToChat(); };
+  cont.appendChild(el);
+  setTimeout(() => { if (el.parentNode){ el.classList.add('out'); setTimeout(() => el.remove(), 300); } }, 6000);
+}
+function navigateToChat(){
+  document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const page = $('page-chat'); if (page) page.classList.add('active');
+  const tab = document.querySelector('.nav-tab[data-page="chat"]'); if (tab) tab.classList.add('active');
+  chatPageActive = true; unreadChat = 0; updateUnreadBadge();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(() => { const box = $('chatMessages'); if (box) box.scrollTop = box.scrollHeight; }, 100);
+}
 function playPing(){ try { const ctx = window.AudioContext ? new window.AudioContext() : null; if (!ctx) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.type='sine'; o.frequency.value=880; g.gain.value=0.06; o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.15); } catch(e){} }
 
-// Обработка входящего сообщения из ntfy (WS или polling)
-function handleIncoming(outer){
-  let data;
-  try { data = JSON.parse(outer.message); } catch(e){ return; }
-  if (!data || typeof data.text !== 'string') return;
-
-  const msgId = outer.id || ('ntfy-' + Math.random());
-  const fromName = validName(String(data.from || 'Гость'));
-  const msgTime = Number(data.time) || (outer.time ? outer.time * 1000 : Date.now());
-
-  // Наше собственное эхо → заменяем pending
-  if (data.device === DEVICE_ID){
-    const pending = chatMessages.find(x => x._pending && x.text === data.text && Math.abs(x.time - msgTime) < 15000);
-    if (pending){
-      pending._pending = false;
-      pending.id = msgId;
-      saveChat();
-      renderChat();
-    }
-    return;
+function addMessage(msg, opts){
+  opts = opts || {};
+  if (msg.id && chatMessages.some(m => m.id === msg.id)) return false;
+  const dup = chatMessages.some(m =>
+    !m._pending && m.from === msg.from && m.text === msg.text &&
+    Math.abs((m.time || 0) - (msg.time || 0)) < 5000 &&
+    (msg.device ? m.device === msg.device : true)
+  );
+  if (dup) return false;
+  if (msg.device === DEVICE_ID){
+    chatMessages = chatMessages.filter(m => !(m._pending && m.text === msg.text && m.from === msg.from));
   }
-
-  if (chatMessages.some(x => x.id === msgId)) return;
-
-  // Проверяем дубликаты (одинаковый текст + время от того же источника)
-  const dupe = chatMessages.find(x => x.from === fromName && x.text === data.text && Math.abs(x.time - msgTime) < 3000);
-  if (dupe) return;
-
-  chatMessages.push({ id: msgId, from: fromName, text: String(data.text).slice(0,500), time: msgTime, device: data.device || null });
-  chatMessages.sort((a,b) => (a.time||0) - (b.time||0));
-  chatMessages = chatMessages.slice(-500);
+  chatMessages.push(msg);
+  chatMessages = chatMessages.sort((a,b) => (a.time||0) - (b.time||0)).slice(-500);
   saveChat();
   renderChat();
-
   const me = senderName();
-  if (fromName !== me && fromName !== 'system' && !chatPageActive){
+  if (!opts.silent && msg.from !== me && msg.from !== 'system'){
     unreadChat++;
     updateUnreadBadge();
     playPing();
+    if (navigator.vibrate) try { navigator.vibrate([80, 40, 80]); } catch(e){}
+    if (!chatPageActive){
+      showToast(msg.from, msg.text, msg.time);
+      showSystemNotif(msg.from, msg.text);
+    }
   }
-  const box = $('chatMessages'); if (box && chatPageActive) box.scrollTop = box.scrollHeight;
+  return true;
 }
 
-// WebSocket — мгновенная доставка
-function startChatWebSocket(){
-  if (chatWS && (chatWS.readyState === WebSocket.OPEN || chatWS.readyState === WebSocket.CONNECTING)) return;
+function startChatSSE(){
+  if (chatES && chatES.readyState !== EventSource.CLOSED) return;
   try {
-    chatWS = new WebSocket('wss://ntfy.sh/' + NTFY_CHAT + '/ws');
-    chatWS.onopen = () => {
-      chatWSConnected = true;
+    chatES = new EventSource('https://ntfy.sh/' + NTFY_CHAT + '/sse');
+    chatES.onopen = () => { chatConnected = true; };
+    chatES.onmessage = (ev) => {
       chatConnected = true;
-      updateChatStatus();
-      console.log('[chat] WebSocket подключён');
-    };
-    chatWS.onmessage = (ev) => {
       try {
         const outer = JSON.parse(ev.data);
-        if (!outer || outer.event !== 'message' || !outer.message) return;
-        handleIncoming(outer);
+        if (!outer || !outer.message) return;
+        let data;
+        try { data = JSON.parse(outer.message); } catch(e){ return; }
+        if (!data || typeof data.text !== 'string') return;
+        if (data.device === DEVICE_ID) return;
+        addMessage({
+          id: outer.id || ('sse-' + Math.random()),
+          from: validName(String(data.from || 'Гость')),
+          text: String(data.text).slice(0, 500),
+          time: Number(data.time) || Date.now(),
+          device: data.device || null
+        });
       } catch(e){}
     };
-    chatWS.onerror = () => { chatWSConnected = false; updateChatStatus(); };
-    chatWS.onclose = () => {
-      chatWSConnected = false;
-      updateChatStatus();
-      if (chatWSReconnectTimer) clearTimeout(chatWSReconnectTimer);
-      chatWSReconnectTimer = setTimeout(startChatWebSocket, 2000);
+    chatES.onerror = () => {
+      chatConnected = false;
+      try { chatES.close(); } catch(e){}
+      chatES = null;
+      if (chatESReconnectTimer) clearTimeout(chatESReconnectTimer);
+      chatESReconnectTimer = setTimeout(startChatSSE, 5000);
     };
   } catch(e){
-    chatWSConnected = false;
-    if (chatWSReconnectTimer) clearTimeout(chatWSReconnectTimer);
-    chatWSReconnectTimer = setTimeout(startChatWebSocket, 3000);
+    if (chatESReconnectTimer) clearTimeout(chatESReconnectTimer);
+    chatESReconnectTimer = setTimeout(startChatSSE, 5000);
   }
 }
 
-// Polling — резерв
 async function syncChat(initial){
   try {
-    const url = 'https://ntfy.sh/' + NTFY_CHAT + '/json?poll=1&since=15m';
-    const r = await fetch(url);
+    const r = await fetch('https://ntfy.sh/' + NTFY_CHAT + '/json?poll=1&since=all');
     if (!r.ok) return;
     const text = await r.text();
     const lines = text.trim().split('\n').filter(Boolean);
-    const before = chatMessages.length;
+    const serverMsgs = [];
     lines.forEach(line => {
       try {
         const outer = JSON.parse(line);
         if (outer.event !== 'message' || !outer.message) return;
-        handleIncoming(outer);
+        let data;
+        try { data = JSON.parse(outer.message); } catch(e){ return; }
+        if (!data || typeof data.text !== 'string') return;
+        serverMsgs.push({
+          id: outer.id || ('ntfy-' + Math.random()),
+          from: validName(String(data.from || 'Гость')),
+          text: String(data.text).slice(0, 500),
+          time: Number(data.time) || (outer.time ? outer.time * 1000 : Date.now()),
+          device: data.device || null
+        });
       } catch(e){}
     });
-    if (chatMessages.length !== before || lines.length > 0){
-      chatConnected = true;
-      updateChatStatus();
+    if (serverMsgs.length) chatConnected = true;
+    const byId = new Map();
+    chatMessages.forEach(m => { if (m && m.id && !m._pending) byId.set(m.id, m); });
+    serverMsgs.forEach(m => byId.set(m.id, m));
+    chatMessages.forEach(m => {
+      if (m && m._pending){
+        const hasServer = serverMsgs.find(i =>
+          i.device === DEVICE_ID && Math.abs(i.time - m.time) < 15000 && i.text === m.text
+        );
+        if (!hasServer) byId.set(m.id, m);
+      }
+    });
+    const before = chatMessages.length;
+    chatMessages = Array.from(byId.values()).sort((a,b) => (a.time||0) - (b.time||0)).slice(-500);
+    const added = chatMessages.length - before;
+    if (added !== 0){
+      saveChat();
+      renderChat();
+      if (added > 0 && !initial && !chatPageActive){
+        const me = senderName();
+        const newOnes = chatMessages.slice(-added).filter(m => m.from !== me && m.from !== 'system');
+        if (newOnes.length){ unreadChat += newOnes.length; updateUnreadBadge(); playPing(); }
+      }
     }
-  } catch(e){ chatConnected = false; updateChatStatus(); }
+  } catch(e){ chatConnected = false; }
 }
 
 async function sendChat(text){
@@ -1201,16 +1260,11 @@ async function sendChat(text){
   const now = Date.now();
   if (now - lastChatSentAt < CHAT_SEND_COOLDOWN_MS) return;
   lastChatSentAt = now;
-
-  // Оптимистично — сразу показываем
-  const optMsg = { id: 'pending-' + DEVICE_ID + '-' + now, from: me, text, time: now, device: DEVICE_ID, _pending: true };
-  chatMessages.push(optMsg);
-  chatMessages.sort((a,b) => (a.time||0) - (b.time||0));
+  const localId = 'me-' + DEVICE_ID + '-' + now;
+  chatMessages.push({ id: localId, from: me, text, time: now, device: DEVICE_ID, _pending: true });
   saveChat();
   renderChat();
   const box = $('chatMessages'); if (box) box.scrollTop = box.scrollHeight;
-
-  // Шлём в ntfy
   try {
     await fetch('https://ntfy.sh/' + NTFY_CHAT, {
       method: 'POST',
@@ -1218,24 +1272,18 @@ async function sendChat(text){
       headers: { 'X-Title': me }
     });
     chatConnected = true;
-    updateChatStatus();
-    // Через 500мс синк — реальный ID заменит pending
-    setTimeout(() => syncChat(false), 500);
+    setTimeout(() => syncChat(false), 700);
     setTimeout(() => syncChat(false), 2000);
   } catch(e){}
 }
-
 $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); const inp = $('chatInput'); const text = inp.value; inp.value = ''; sendChat(text); inp.focus(); });
 $('chatClear').addEventListener('click', () => { if (userRole !== 'nikita') return; if (!confirm('Очистить?')) return; chatMessages = []; saveChat(); renderChat(); });
-
 function startChatPolling(){
   if (chatPollTimer) clearInterval(chatPollTimer);
-  chatPollTimer = setInterval(() => { if (!chatWSConnected) syncChat(false); }, CHAT_POLL_INTERVAL_MS);
+  chatPollTimer = setInterval(() => syncChat(false), CHAT_POLL_INTERVAL_MS);
 }
 
-/* ============================================================
-   PRESENCE
-   ============================================================ */
+/* PRESENCE */
 function formatLastSeen(ts){
   const diff = Date.now() - ts;
   if (diff < PRESENCE_ONLINE_THRESHOLD) return 'онлайн';
@@ -1252,13 +1300,11 @@ function renderPresenceLine(){
   const names = me ? ['Никита', 'Чёрный либерал'].filter(n => n !== me) : ['Никита', 'Чёрный либерал'];
   const parts = names.map(n => {
     const p = presenceMap[n];
-    if (!p || !p.time) return '<span class="dot-offline"></span>' + n + ' — был давно';
+    if (!p || !p.time) return '<span class="dot-offline"></span>' + n + ' был давно';
     const isOnline = (Date.now() - p.time) < PRESENCE_ONLINE_THRESHOLD;
     return '<span class="' + (isOnline ? 'dot-online' : 'dot-offline') + '"></span>' + n + ' — ' + formatLastSeen(p.time);
   });
-  // Дописываем статус связи
-  const connStatus = chatWSConnected ? ' ⚡' : (chatConnected ? '' : ' ⚠');
-  el.innerHTML = parts.join(' · ') + connStatus;
+  el.innerHTML = parts.join(' · ');
 }
 async function sendPresence(){
   const me = senderName(); if (!me) return;
@@ -1276,16 +1322,13 @@ async function pollPresence(){
         if (outer.event !== 'message' || !outer.message) return;
         let data; try { data = JSON.parse(outer.message); } catch(e){ return; }
         if (!data || (data.from !== 'Никита' && data.from !== 'Чёрный либерал')) return;
-        if (!presenceMap[data.from] || data.time > presenceMap[data.from].time){
-          presenceMap[data.from] = { time: data.time || Date.now(), device: data.device };
-        }
+        if (!presenceMap[data.from] || data.time > presenceMap[data.from].time){ presenceMap[data.from] = { time: data.time || Date.now(), device: data.device }; }
       } catch(e){}
     });
     renderPresenceLine();
   } catch(e){}
 }
-let presenceHeartbeatTimer = null;
-let presencePollTimer = null;
+let presenceHeartbeatTimer = null, presencePollTimer = null;
 function startPresence(){
   sendPresence();
   if (presenceHeartbeatTimer) clearInterval(presenceHeartbeatTimer);
@@ -1296,9 +1339,7 @@ function startPresence(){
   renderPresenceLine();
 }
 
-/* ============================================================
-   ЗАГРУЗКА ФАЙЛОВ
-   ============================================================ */
+/* ФАЙЛЫ */
 async function uploadBlobToHost(blob, filename, onProgress){
   const tryUpload = async (url, fieldName) => {
     try {
@@ -1307,7 +1348,7 @@ async function uploadBlobToHost(blob, filename, onProgress){
       if (!r.ok) return null;
       const text = (await r.text()).trim();
       let result = null;
-      if (text.startsWith('{')){ try { const j = JSON.parse(text); result = j.url || (j.data && j.data.url) || (j.files && j.files[0] && j.files[0].url) || null; if (result && result.includes('tmpfiles.org/') && !result.includes('/dl/')) result = result.replace('tmpfiles.org/', 'tmpfiles.org/dl/'); } catch(e){} }
+      if (text.startsWith('{')){ try { const j = JSON.parse(text); result = j.url || (j.data && j.data.url) || (j.files && j.files[0] && j.files[0].url) || null; } catch(e){} }
       if (!result && text.startsWith('http')) result = text.split('\n')[0];
       return (result && result.startsWith('http')) ? result : null;
     } catch(e){ return null; }
@@ -1316,11 +1357,7 @@ async function uploadBlobToHost(blob, filename, onProgress){
     (async () => { try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', blob, filename); const xhr = new XMLHttpRequest(); xhr.open('POST', 'https://catbox.moe/user/api.php'); xhr.upload.onprogress = (e) => { if (onProgress && e.lengthComputable) onProgress(e.loaded / e.total); }; return await new Promise((resolve, reject) => { xhr.onload = () => { if (xhr.status === 200){ const t = xhr.responseText.trim(); if (t.startsWith('http')) resolve(t); else reject(); } else reject(); }; xhr.onerror = () => reject(); xhr.timeout = 60000; xhr.ontimeout = () => reject(); xhr.send(fd); }); } catch(e){ return null; } })(),
     tryUpload('https://litterbox.catbox.moe/resources/internals/api.php', 'fileToUpload'),
     tryUpload('https://0x0.st', 'file'),
-    tryUpload('https://uguu.se/upload.php', 'files[]'),
-    tryUpload('https://pomf.lain.la/upload.php', 'files[]'),
-    tryUpload('https://x0.at', 'file'),
-    (async () => { try { const fd = new FormData(); fd.append('image', blob, filename); const r = await fetch('https://api.imgbb.com/1/upload?key=6d207e02198a847aa98d0a2a901485a5', { method: 'POST', body: fd }); if (!r.ok) return null; const j = await r.json(); return (j && j.data && j.data.url) || null; } catch(e){ return null; } })(),
-    (async () => { try { const fd = new FormData(); fd.append('file', blob, filename); const r = await fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd }); if (!r.ok) return null; const j = await r.json(); return (j && j.data && j.data.url) ? j.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/') : null; } catch(e){ return null; } })()
+    tryUpload('https://uguu.se/upload.php', 'files[]')
   ];
   try { return await Promise.any(tasks.map(p => p.then(r => { if (r) return r; throw new Error(); }))); } catch(e){ return null; }
 }
@@ -1338,7 +1375,6 @@ async function compressImage(file, maxSize = 700, quality = 0.75){
           const ctx = canvas.getContext('2d'); ctx.fillStyle = '#0d0620'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
           let out = canvas.toDataURL('image/jpeg', quality);
           if (out.length > 400000) out = canvas.toDataURL('image/jpeg', 0.6);
-          if (out.length > 800000) out = canvas.toDataURL('image/jpeg', 0.45);
           resolve(out);
         } catch(err){ const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); }
       };
@@ -1374,47 +1410,10 @@ async function loadAllStaffPhotos(){
   for (const el of document.querySelectorAll('.staff-photo')){ const name = photoName(el); const img = el.querySelector('img'); if (!img) continue; if (custom[name]) continue; if (!el.dataset.wiki && DEFAULT_WIKI[name]) el.dataset.wiki = DEFAULT_WIKI[name]; if (el.dataset.wiki) promises.push(loadWikiPhoto(el, el.dataset.wiki)); }
   await Promise.race([Promise.allSettled(promises), new Promise(r => setTimeout(r, 6000))]);
 }
-
-function saveCustomText(key, field, value){
-  if (userRole !== 'nikita') return;
-  const all = getCustomTexts(); if (!all[key]) all[key] = {}; all[key][field] = value;
-  try { localStorage.setItem(LS_TEXTS, JSON.stringify(all)); } catch(e){}
-  publishSnapshotDebounced();
-}
-function applyCustomTexts(){
-  const texts = getCustomTexts();
-  document.querySelectorAll('.editable-field').forEach(el => {
-    const k = el.dataset.key, f = el.dataset.field;
-    if (texts[k] && texts[k][f]) el.textContent = texts[k][f];
-    else if (DEFAULT_TEXTS[k] && DEFAULT_TEXTS[k][f]) el.textContent = DEFAULT_TEXTS[k][f];
-  });
-}
-async function saveCustomPhoto(name, dataUrl){
-  if (userRole !== 'nikita') return;
-  let finalUrl = dataUrl;
-  if (dataUrl && dataUrl.startsWith('data:')){
-    setSyncIndicator('sending', 'Загружаю в облако...');
-    const up = await base64ToUrl(dataUrl, name + '.jpg');
-    if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); }
-    else { setSyncIndicator('err', 'Фото локально'); finalUrl = dataUrl; }
-  }
-  const all = getCustomPhotos(); all[name] = finalUrl;
-  try { localStorage.setItem(LS_PHOTOS, JSON.stringify(all)); } catch(e){}
-  publishSnapshotDebounced();
-}
-async function saveMediaCache(target, url){
-  if (userRole !== 'nikita') return;
-  let finalUrl = url;
-  if (url && url.startsWith('data:')){
-    setSyncIndicator('sending', 'Загружаю...');
-    const up = await base64ToUrl(url, target + '.jpg');
-    if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); }
-    else { setSyncIndicator('err', 'Флаг локально'); finalUrl = url; }
-  }
-  const c = getMediaCache(); c[target] = finalUrl;
-  try { localStorage.setItem(LS_MEDIA, JSON.stringify(c)); } catch(e){}
-  publishSnapshotDebounced();
-}
+function saveCustomText(key, field, value){ if (userRole !== 'nikita') return; const all = getCustomTexts(); if (!all[key]) all[key] = {}; all[key][field] = value; try { localStorage.setItem(LS_TEXTS, JSON.stringify(all)); } catch(e){} publishSnapshotDebounced(); }
+function applyCustomTexts(){ const texts = getCustomTexts(); document.querySelectorAll('.editable-field').forEach(el => { const k = el.dataset.key, f = el.dataset.field; if (texts[k] && texts[k][f]) el.textContent = texts[k][f]; else if (DEFAULT_TEXTS[k] && DEFAULT_TEXTS[k][f]) el.textContent = DEFAULT_TEXTS[k][f]; }); }
+async function saveCustomPhoto(name, dataUrl){ if (userRole !== 'nikita') return; let finalUrl = dataUrl; if (dataUrl && dataUrl.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю в облако...'); const up = await base64ToUrl(dataUrl, name + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); } else { setSyncIndicator('err', 'Фото локально'); finalUrl = dataUrl; } } const all = getCustomPhotos(); all[name] = finalUrl; try { localStorage.setItem(LS_PHOTOS, JSON.stringify(all)); } catch(e){} publishSnapshotDebounced(); }
+async function saveMediaCache(target, url){ if (userRole !== 'nikita') return; let finalUrl = url; if (url && url.startsWith('data:')){ setSyncIndicator('sending', 'Загружаю...'); const up = await base64ToUrl(url, target + '.jpg'); if (up && !up.startsWith('data:')){ finalUrl = up; setSyncIndicator('ok', 'Загружено'); } else { setSyncIndicator('err', 'Флаг локально'); finalUrl = url; } } const c = getMediaCache(); c[target] = finalUrl; try { localStorage.setItem(LS_MEDIA, JSON.stringify(c)); } catch(e){} publishSnapshotDebounced(); }
 function applyMedia(target, url){
   if (!url) return;
   const isFF = target === 'nikita_flag' || target === 'blacklib_flag';
@@ -1426,12 +1425,7 @@ function applyMedia(target, url){
 }
 function applyAllCachedMedia(){ const c = getMediaCache(); Object.keys(c).forEach(t => applyMedia(t, c[t])); }
 
-function addDonation(d, skipPublish){
-  if (!d.id) d.id = 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-  const list = getDonations(); if (list.some(x => x.id === d.id)) return;
-  list.push(d); saveDonations(list); renderAllFromDonations();
-  if (!skipPublish) publishSnapshotDebounced();
-}
+function addDonation(d, skipPublish){ if (!d.id) d.id = 'd_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); const list = getDonations(); if (list.some(x => x.id === d.id)) return; list.push(d); saveDonations(list); renderAllFromDonations(); if (!skipPublish) publishSnapshotDebounced(); }
 function renderAllFromDonations(){
   const list = getDonations();
   let nT=0,nC=0,bT=0,bC=0,nS=0,bS=0,allT=0,allC=0;
@@ -1457,7 +1451,7 @@ function renderTopDonors(){
   box.innerHTML = '';
   if (!list.length){ const li = document.createElement('li'); li.className = 'top-donors-empty'; li.textContent = '💤 Пока нет донатов'; box.appendChild(li); return; }
   list.slice(0, 10).forEach((d, i) => {
-    const li = document.createElement('li'); li.className = 'top-donor-row' + (i < 3 ? ' rank-' + (i+1) : '');
+    const li = document.createElement('li'); li.className = 'top-donor-row';
     const r = document.createElement('div'); r.className = 'top-donor-rank'; r.textContent = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
     const info = document.createElement('div'); info.className = 'top-donor-info';
     const nm = document.createElement('div'); nm.className = 'top-donor-name'; nm.textContent = d.name || 'Аноним';
@@ -1470,13 +1464,10 @@ function renderTopDonors(){
   });
 }
 
-function buildSnapshot(){
-  return { version: 14, deviceId: DEVICE_ID, timestamp: Date.now(), texts: getCustomTexts(), photos: getCustomPhotos(), media: getMediaCache(), donations: getDonations(), recordings: getRecordings() };
-}
+function buildSnapshot(){ return { version: 16, deviceId: DEVICE_ID, timestamp: Date.now(), texts: getCustomTexts(), photos: getCustomPhotos(), media: getMediaCache(), donations: getDonations() }; }
 async function uploadJsonSnapshot(jsonString){
   try { const fd = new FormData(); fd.append('reqtype', 'fileupload'); fd.append('fileToUpload', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: fd }); if (r.ok){ const url = (await r.text()).trim(); if (url.startsWith('http')) return url; } } catch(e){}
   try { const fd = new FormData(); fd.append('file', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://0x0.st', { method: 'POST', body: fd }); if (r.ok){ const url = (await r.text()).trim(); if (url.startsWith('http')) return url; } } catch(e){}
-  try { const fd = new FormData(); fd.append('file', new Blob([jsonString], { type: 'application/json' }), 's.json'); const r = await fetch('https://tmpfiles.org/api/v1/upload', { method: 'POST', body: fd }); if (r.ok){ const j = await r.json(); if (j && j.data && j.data.url) return j.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/'); } } catch(e){}
   return null;
 }
 let publishTimer = null, publishInProgress = false, publishPending = false, lastPublishedTs = 0;
@@ -1487,7 +1478,7 @@ async function publishSnapshot(force){
   setSyncIndicator('sending', 'Отправляю...');
   try {
     const snap = buildSnapshot();
-    if (!force && snap.timestamp - lastPublishedTs < 800 && lastPublishedTs > 0){ publishInProgress = false; setSyncIndicator('ok', 'Готово'); if (publishPending){ publishPending = false; setTimeout(() => publishSnapshot(), 100); } return; }
+    if (!force && snap.timestamp - lastPublishedTs < 800 && lastPublishedTs > 0){ publishInProgress = false; setSyncIndicator('ok', 'Готово'); return; }
     const url = await uploadJsonSnapshot(JSON.stringify(snap));
     if (!url){ publishInProgress = false; setSyncIndicator('err', 'Ошибка'); return; }
     lastPublishedTs = snap.timestamp;
@@ -1497,107 +1488,24 @@ async function publishSnapshot(force){
   } catch(e){ setSyncIndicator('err', 'Ошибка'); }
   finally { publishInProgress = false; if (publishPending){ publishPending = false; setTimeout(() => publishSnapshot(), 200); } }
 }
-let applyingSnapshot = false;
-let lastSnapTsSeen = parseInt(localStorage.getItem(LS_LAST_SNAP_TS) || '0');
-async function downloadAndApplySnapshot(url, time, force){
-  if (applyingSnapshot || !url) return;
-  if (!force){ const lastApplied = parseInt(localStorage.getItem(LS_LAST_SNAP_TS) || '0'); if (time && time <= lastApplied) return; }
-  applyingSnapshot = true;
-  setSyncIndicator('sending', 'Обновляю...');
-  try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 8000);
-    const r = await fetch(url, { cache: 'force-cache', signal: ctrl.signal });
-    clearTimeout(t);
-    if (!r.ok) throw new Error('HTTP');
-    const snap = await r.json();
-    if (!snap){ applyingSnapshot = false; setSyncIndicator('ok', 'Готово'); return; }
-    if (snap.deviceId === DEVICE_ID && !force){ applyingSnapshot = false; setSyncIndicator('ok', 'Готово'); return; }
-    if (snap.texts) try { localStorage.setItem(LS_TEXTS, JSON.stringify(snap.texts)); } catch(e){}
-    if (snap.photos) try { localStorage.setItem(LS_PHOTOS, JSON.stringify(snap.photos)); } catch(e){}
-    if (snap.media) try { localStorage.setItem(LS_MEDIA, JSON.stringify(snap.media)); } catch(e){}
-    if (snap.donations) try { localStorage.setItem(LS_DONATIONS, JSON.stringify(snap.donations)); } catch(e){}
-    if (snap.recordings) try { localStorage.setItem(LS_RECORDINGS, JSON.stringify(snap.recordings)); } catch(e){}
-    try { localStorage.setItem(LS_LAST_SNAP_TS, String(snap.timestamp || Date.now())); localStorage.setItem(LS_LAST_SNAP_URL, url); lastSnapTsSeen = snap.timestamp || Date.now(); } catch(e){}
-    applyCustomTexts(); applyAllCachedMedia(); renderAllFromDonations();
-    setSyncIndicator('ok', 'Обновлено');
-  } catch(e){ setSyncIndicator('ok', 'Готово'); }
-  finally { applyingSnapshot = false; }
-}
 let snapES = null;
 function startSnapshotSubscription(){
   try {
     snapES = new EventSource('https://ntfy.sh/' + NTFY_STATE + '/sse');
     snapES.onopen = () => { setSyncIndicator('ok', 'Готово'); };
-    snapES.onmessage = (ev) => {
-      try {
-        const outer = JSON.parse(ev.data);
-        if (!outer || !outer.message) return;
-        const msg = JSON.parse(outer.message);
-        if (msg && msg.type === 'snapshot' && msg.url && msg.device !== DEVICE_ID){
-          if (msg.time && msg.time <= lastSnapTsSeen) return;
-          lastSnapTsSeen = msg.time || Date.now();
-          downloadAndApplySnapshot(msg.url, msg.time, false);
-        }
-      } catch(e){}
-    };
     snapES.onerror = () => { setSyncIndicator('ok', 'Готово'); };
   } catch(e){}
 }
-async function loadLatestSnapshot(){
-  try {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 5000);
-    const r = await fetch('https://ntfy.sh/' + NTFY_STATE + '/json?poll=1&since=10m', { signal: ctrl.signal });
-    clearTimeout(t);
-    const text = await r.text();
-    let latest = null;
-    text.trim().split('\n').forEach(line => { if (!line) return; try { const outer = JSON.parse(line); if (outer.event !== 'message' || !outer.message) return; const msg = JSON.parse(outer.message); if (msg && msg.type === 'snapshot' && msg.url) { if (!latest || (msg.time || 0) > (latest.time || 0)) latest = msg; } } catch(e){} });
-    if (latest && latest.device !== DEVICE_ID){
-      if (latest.time && latest.time <= lastSnapTsSeen) return;
-      lastSnapTsSeen = latest.time || Date.now();
-      downloadAndApplySnapshot(latest.url, latest.time, true);
-    }
-  } catch(e){}
-}
-function applyBootstrapOnLoad(){
-  const boot = window.__BOOTSTRAP__;
-  if (!boot || typeof boot !== 'object') return;
-  const bootTs = boot.timestamp || 0;
-  const localTs = parseInt(localStorage.getItem(LS_LAST_SNAP_TS) || '0');
-  if (bootTs > localTs || !localStorage.getItem(LS_TEXTS)){
-    try {
-      if (boot.texts) localStorage.setItem(LS_TEXTS, JSON.stringify(boot.texts));
-      if (boot.photos) localStorage.setItem(LS_PHOTOS, JSON.stringify(boot.photos));
-      if (boot.media) localStorage.setItem(LS_MEDIA, JSON.stringify(boot.media));
-      if (boot.donations) localStorage.setItem(LS_DONATIONS, JSON.stringify(boot.donations));
-      if (boot.recordings) localStorage.setItem(LS_RECORDINGS, JSON.stringify(boot.recordings));
-      localStorage.setItem(LS_LAST_SNAP_TS, String(bootTs));
-    } catch(e){}
-  }
-}
 
-/* ============================================================
-   МОДАЛКА МЕДИА
-   ============================================================ */
+/* МОДАЛКА МЕДИА */
 let mediaModalCallbackUrl = null, mediaModalCallbackFile = null;
-function openMediaModal(label, onUrl, onFile){
-  if (userRole !== 'nikita'){ alert('🔒 Только Никита'); return; }
-  mediaModalCallbackUrl = onUrl; mediaModalCallbackFile = onFile;
-  $('mediaModal').classList.add('active');
-  $('mediaModalSub').textContent = label;
-  $('mediaUrlInput').value = '';
-}
+function openMediaModal(label, onUrl, onFile){ if (userRole !== 'nikita'){ alert('🔒 Только Никита'); return; } mediaModalCallbackUrl = onUrl; mediaModalCallbackFile = onFile; $('mediaModal').classList.add('active'); $('mediaModalSub').textContent = label; $('mediaUrlInput').value = ''; }
 const _mModal = $('mediaModal');
 if (_mModal){
-  $('mediaModalClose').addEventListener('click', () => { _mModal.classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; });
-  _mModal.addEventListener('click', e => { if (e.target === _mModal){ _mModal.classList.remove('active'); mediaModalCallbackUrl = null; mediaModalCallbackFile = null; } });
+  $('mediaModalClose').addEventListener('click', () => { _mModal.classList.remove('active'); });
+  _mModal.addEventListener('click', e => { if (e.target === _mModal) _mModal.classList.remove('active'); });
   $('mediaUrlSave').addEventListener('click', () => { const url = $('mediaUrlInput').value.trim(); if (!url){ alert('Вставь ссылку'); return; } if (!/^https?:\/\//i.test(url)){ alert('Ссылка должна начинаться с http'); return; } if (mediaModalCallbackUrl) mediaModalCallbackUrl(url); _mModal.classList.remove('active'); });
-  $('mediaFileUpload').addEventListener('click', () => {
-    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
-    inp.onchange = async () => { const f = inp.files && inp.files[0]; if (!f) return; $('mediaModalSub').textContent = '🗜 Сжимаю...'; try { const b64 = await compressImage(f, 700, 0.75); if (mediaModalCallbackFile) mediaModalCallbackFile(b64); $('mediaModalSub').textContent = '✅'; setTimeout(() => _mModal.classList.remove('active'), 600); } catch(err){ alert('Ошибка'); } };
-    inp.click();
-  });
+  $('mediaFileUpload').addEventListener('click', () => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.onchange = async () => { const f = inp.files && inp.files[0]; if (!f) return; $('mediaModalSub').textContent = '🗜 Сжимаю...'; try { const b64 = await compressImage(f, 700, 0.75); if (mediaModalCallbackFile) mediaModalCallbackFile(b64); $('mediaModalSub').textContent = '✅'; setTimeout(() => _mModal.classList.remove('active'), 600); } catch(err){ alert('Ошибка'); } }; inp.click(); });
 }
 
 function applyEditPermissions(){
@@ -1608,33 +1516,15 @@ function applyEditPermissions(){
   document.querySelectorAll('.editable-field').forEach(el => el.classList.toggle('edit-mode', canEditNikita));
   document.querySelectorAll('.fighter-flag,.fighter-emblem,.staff-flag').forEach(el => el.classList.toggle('editable', canEditNikita));
 }
-function makePhotosReplaceable(){
-  document.querySelectorAll('.staff-photo').forEach(el => {
-    el.addEventListener('click', () => {
-      if (userRole !== 'nikita') return;
-      const name = photoName(el);
-      openMediaModal('фото: ' + name,
-        (url) => { const img = el.querySelector('img'); if (img){ img.src = url; img.classList.add('loaded'); } saveCustomPhoto(name, url); },
-        (b64) => { const img = el.querySelector('img'); if (img){ img.src = b64; img.classList.add('loaded'); } saveCustomPhoto(name, b64); });
-    });
-  });
-}
-function makeTextsEditable(){
-  document.querySelectorAll('.editable-field').forEach(el => {
-    el.addEventListener('click', () => { if (userRole !== 'nikita' || el.getAttribute('contenteditable') === 'true') return; el.setAttribute('contenteditable', 'true'); el.focus(); const r = document.createRange(); r.selectNodeContents(el); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); });
-    el.addEventListener('blur', () => { if (el.getAttribute('contenteditable') !== 'true') return; el.removeAttribute('contenteditable'); saveCustomText(el.dataset.key, el.dataset.field, el.textContent.trim()); });
-    el.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); el.blur(); } if (e.key === 'Escape') el.blur(); });
-  });
-}
+function makePhotosReplaceable(){ document.querySelectorAll('.staff-photo').forEach(el => { el.addEventListener('click', () => { if (userRole !== 'nikita') return; const name = photoName(el); openMediaModal('фото: ' + name, (url) => { const img = el.querySelector('img'); if (img){ img.src = url; img.classList.add('loaded'); } saveCustomPhoto(name, url); }, (b64) => { const img = el.querySelector('img'); if (img){ img.src = b64; img.classList.add('loaded'); } saveCustomPhoto(name, b64); }); }); }); }
+function makeTextsEditable(){ document.querySelectorAll('.editable-field').forEach(el => { el.addEventListener('click', () => { if (userRole !== 'nikita' || el.getAttribute('contenteditable') === 'true') return; el.setAttribute('contenteditable', 'true'); el.focus(); const r = document.createRange(); r.selectNodeContents(el); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }); el.addEventListener('blur', () => { if (el.getAttribute('contenteditable') !== 'true') return; el.removeAttribute('contenteditable'); saveCustomText(el.dataset.key, el.dataset.field, el.textContent.trim()); }); el.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); el.blur(); } if (e.key === 'Escape') el.blur(); }); }); }
 function makeFighterMediaEditable(){
-  document.querySelectorAll('.fighter-flag').forEach(flag => { const id = flag.dataset.fighter; flag.addEventListener('click', () => { if (userRole !== 'nikita') return; openMediaModal('флаг: ' + id, (url) => { applyMedia(id + '_flag', url); saveMediaCache(id + '_flag', url); }, (b64) => { applyMedia(id + '_flag', b64); saveMediaCache(id + '_flag', b64); }); }); });
-  document.querySelectorAll('.fighter-emblem').forEach(emb => { const id = emb.dataset.fighter; emb.addEventListener('click', () => { if (userRole !== 'nikita') return; openMediaModal('герб: ' + id, (url) => { applyMedia(id + '_emblem', url); saveMediaCache(id + '_emblem', url); }, (b64) => { applyMedia(id + '_emblem', b64); saveMediaCache(id + '_emblem', b64); }); }); });
+  document.querySelectorAll('.fighter-flag').forEach(flag => { const id = flag.dataset.fighter; flag.addEventListener('click', () => { if (userRole !== 'nikita') return; openMediaModal('флаг', (url) => { applyMedia(id + '_flag', url); saveMediaCache(id + '_flag', url); }, (b64) => { applyMedia(id + '_flag', b64); saveMediaCache(id + '_flag', b64); }); }); });
+  document.querySelectorAll('.fighter-emblem').forEach(emb => { const id = emb.dataset.fighter; emb.addEventListener('click', () => { if (userRole !== 'nikita') return; openMediaModal('герб', (url) => { applyMedia(id + '_emblem', url); saveMediaCache(id + '_emblem', url); }, (b64) => { applyMedia(id + '_emblem', b64); saveMediaCache(id + '_emblem', b64); }); }); });
   document.querySelectorAll('.staff-flag').forEach(el => { const id = el.dataset.staffFlag; el.addEventListener('click', () => { if (userRole !== 'nikita') return; const target = id === 'staff-n' ? 'staff_n_flag' : 'staff_bl_flag'; openMediaModal('флаг штаба', (url) => { applyMedia(target, url); saveMediaCache(target, url); }, (b64) => { applyMedia(target, b64); saveMediaCache(target, b64); }); }); });
 }
 
-/* ============================================================
-   ВХОД
-   ============================================================ */
+/* ВХОД */
 const secretOverlay = $('secretOverlay');
 const secretTrigger = $('secretTrigger');
 const hostFlag = $('hostFlag');
@@ -1643,7 +1533,6 @@ if (secretTrigger){ secretTrigger.addEventListener('click', (e) => { e.preventDe
 function openSecretModal(){ secretOverlay.classList.add('active'); $('secretInput').value = ''; $('secretStatus').textContent = ''; $('secretStatus').className = 'secret-status'; setTimeout(() => $('secretInput').focus(), 200); }
 $('secretClose').addEventListener('click', () => secretOverlay.classList.remove('active'));
 secretOverlay.addEventListener('click', (e) => { if (e.target === secretOverlay) secretOverlay.classList.remove('active'); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && secretOverlay.classList.contains('active')) secretOverlay.classList.remove('active'); });
 function checkCode(val){ if (val === CODE_NIKITA) return 'nikita'; if (val === CODE_BLACKLIB) return 'blacklib'; return null; }
 $('secretBtn').addEventListener('click', () => { const val = $('secretInput').value.trim(); const role = checkCode(val); if (role){ setRole(role); $('secretStatus').textContent = role === 'nikita' ? '✅ Никита' : '✅ Чёрный либерал'; $('secretStatus').className = 'secret-status ok'; setTimeout(() => secretOverlay.classList.remove('active'), 900); } else { $('secretStatus').textContent = '❌ Неверный код'; $('secretStatus').className = 'secret-status err'; $('secretInput').value = ''; } });
 $('secretInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('secretBtn').click(); });
@@ -1655,22 +1544,21 @@ const secretEye = $('secretEye'); if (secretEye) secretEye.addEventListener('cli
 function hideWelcome(){ const w = $('welcome'); if (!w) return; w.classList.add('hidden'); document.body.classList.remove('locked'); }
 function showWelcome(){ const w = $('welcome'); if (!w) return; w.classList.remove('hidden'); document.body.classList.add('locked'); try { sessionStorage.removeItem(SS_ROLE); } catch(e){} $('welcomeCode').value = ''; if ($('welcomeCode')) $('welcomeCode').type = 'password'; if (welcomeEye) welcomeEye.textContent = '👁'; const st = $('welcomeStatus'); if (st){ st.textContent = ''; st.className = 'welcome-status'; } setRole('guest'); }
 $('logoutBtn').addEventListener('click', () => { if (!confirm('Выйти из аккаунта?')) return; showWelcome(); });
-
 function setRole(role){
   userRole = role; try { sessionStorage.setItem(SS_ROLE, role); } catch(e){}
   updateRoleBadge(); updateHostUI(); updateAccessUI(); updateLockUI(); updateChatSender(); updateChatGuestWarning(); applyEditPermissions(); renderChat();
   if (senderName()) sendPresence();
   renderPresenceLine();
   setTimeout(() => syncChat(false), 300);
+  setTimeout(startChatSSE, 100);
+  if (role === 'nikita' || role === 'blacklib') requestNotifPermission();
 }
 function updateRoleBadge(){ const el = $('navRole'); if (!el) return; el.classList.remove('nikita','blacklib'); if (userRole === 'nikita'){ el.textContent = '👑 Никита'; el.classList.add('nikita'); } else if (userRole === 'blacklib'){ el.textContent = '🎙 Чёрный либерал'; el.classList.add('blacklib'); } else { el.textContent = '👀 Гость'; } }
 function updateHostUI(){ hostFlag.classList.remove('on','bl'); if (userRole === 'nikita') hostFlag.classList.add('on'); if (userRole === 'blacklib') hostFlag.classList.add('on','bl'); }
 function updateAccessUI(){ const box = $('accessBox'), icon = $('accessIcon'), title = $('accessTitle'), desc = $('accessDesc'), badge = $('accessBadge'); if (!box) return; box.classList.remove('verified','blacklib-mode','locked'); if (userRole === 'nikita'){ box.classList.add('verified'); icon.textContent = '👑'; title.textContent = 'Ты — Никита'; desc.textContent = 'Полный доступ.'; badge.textContent = '👑 Организатор'; } else if (userRole === 'blacklib'){ box.classList.add('blacklib-mode'); icon.textContent = '🎙'; title.textContent = 'Ты — Чёрный либерал'; desc.textContent = 'Доступ оппонента.'; badge.textContent = '🎙 Оппонент'; } else { box.classList.add('locked'); icon.textContent = '🔒'; title.textContent = 'Звонок заблокирован'; desc.textContent = 'Только участники.'; badge.textContent = '🔒 Гость'; } updateLockUI(); }
 function updateLockUI(){ const w = $('lockWrapper'); if (!w) return; const can = (userRole === 'nikita' || userRole === 'blacklib'); w.classList.toggle('locked', !can); }
 
-/* ============================================================
-   ФОРМЫ
-   ============================================================ */
+/* ФОРМЫ */
 function showStatus(el, type, msg){ el.className = 'status ' + type; el.textContent = msg; if (type !== 'loading') setTimeout(() => el.className = 'status', 9000); }
 function applyAnon(form){ const n = form.querySelector('input[name="Имя"]'); if (n && n.value.trim() === '') n.value = 'Аноним'; }
 async function submitForm(form, statusEl, successMsg, onSuccess){
@@ -1699,71 +1587,11 @@ document.querySelectorAll('.bet-choice').forEach(ch => { ch.addEventListener('cl
 function closeModal(){ modal.classList.remove('active'); document.body.style.overflow = ''; }
 $('modalClose').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 document.querySelectorAll('.quick-bet').forEach(b => { b.addEventListener('click', () => { $('betAmount').value = b.dataset.amt; const a = parseFloat(b.dataset.amt) || 0; $('payoutAmount').textContent = Math.round(a*currentOdd).toLocaleString('ru-RU') + ' ₽'; }); });
 $('betAmount').addEventListener('input', function(){ const a = parseFloat(this.value) || 0; $('payoutAmount').textContent = Math.round(a*currentOdd).toLocaleString('ru-RU') + ' ₽'; });
 $('betForm').addEventListener('submit', e => { e.preventDefault(); submitForm(e.target, $('betStatus'), 'Ставка принята!'); setTimeout(closeModal, 2000); });
-$('adminAdd').addEventListener('click', () => {
-  if (userRole !== 'nikita') return;
-  const amt = parseFloat($('adminAmount').value) || 0;
-  const dn = parseInt($('adminDonors').value) || 0;
-  const cand = $('adminCandidate').value;
-  const name = ($('adminDonorName').value || '').trim() || 'Аноним';
-  const st = $('adminStatus');
-  if (amt <= 0){ st.textContent = '⚠ Введи сумму'; st.className = 'admin-status err'; setTimeout(() => st.className = 'admin-status', 2500); return; }
-  addDonation({ candidate: cand, amount: amt, name, time: Date.now(), source: 'admin', count: dn });
-  publishSnapshotDebounced();
-  st.textContent = '✅ Добавлено ' + fmt(amt); st.className = 'admin-status ok';
-  $('adminAmount').value = ''; $('adminDonors').value = '1'; $('adminDonorName').value = '';
-  setTimeout(() => st.className = 'admin-status', 3500);
-});
-$('publishBtn').addEventListener('click', async () => {
-  if (userRole !== 'nikita') return;
-  const st = $('publishStatus');
-  st.textContent = '📦 Публикую...'; st.className = 'admin-status';
-  try {
-    setSyncIndicator('sending', 'Конвертирую...');
-    const photos = getCustomPhotos();
-    await Promise.allSettled(Object.keys(photos).map(async (k) => { if (photos[k] && photos[k].startsWith('data:')){ const up = await base64ToUrl(photos[k], k + '.jpg'); if (up && !up.startsWith('data:')) photos[k] = up; } }));
-    localStorage.setItem(LS_PHOTOS, JSON.stringify(photos));
-    const media = getMediaCache();
-    await Promise.allSettled(Object.keys(media).map(async (k) => { if (media[k] && media[k].startsWith('data:')){ const up = await base64ToUrl(media[k], k + '.jpg'); if (up && !up.startsWith('data:')) media[k] = up; } }));
-    localStorage.setItem(LS_MEDIA, JSON.stringify(media));
-    await publishSnapshot(true);
-    st.textContent = '✅ Опубликовано!'; st.className = 'admin-status ok';
-    setTimeout(() => st.className = 'admin-status', 8000);
-  } catch(e){ st.textContent = '❌ Ошибка'; st.className = 'admin-status err'; }
-});
-async function downloadSelfContainedHTML(){
-  const st = $('downloadHtmlStatus');
-  if (userRole !== 'nikita'){ alert('Только Никита'); return; }
-  st.className = 'admin-status'; st.textContent = '📦 Собираю...';
-  try {
-    const photos = getCustomPhotos();
-    await Promise.allSettled(Object.keys(photos).map(async (k) => { if (photos[k] && photos[k].startsWith('data:')){ const up = await base64ToUrl(photos[k], k + '.jpg'); if (up && !up.startsWith('data:')) photos[k] = up; } }));
-    localStorage.setItem(LS_PHOTOS, JSON.stringify(photos));
-    let html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    html = html.replace(/<script>window\.__BOOTSTRAP__[\s\S]*?<\/script>\s*/g, '');
-    const snap = buildSnapshot();
-    const json = JSON.stringify(snap).replace(/<\//g, '<\\/');
-    const boot = '<script>window.__BOOTSTRAP__=' + json + ';<\/script>\n';
-    if (html.includes('</body>')) html = html.replace('</body>', boot + '</body>');
-    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url;
-    const now = new Date(); const pad = (n) => String(n).padStart(2,'0');
-    a.download = 'inaogenty-' + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + '-' + pad(now.getHours()) + pad(now.getMinutes()) + '.html';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    st.className = 'admin-status ok'; st.textContent = '✅ Скачано!';
-    setTimeout(() => { st.className = 'admin-status'; st.textContent = ''; }, 5000);
-  } catch(e){ st.className = 'admin-status err'; st.textContent = '❌ ' + e.message; }
-}
-$('downloadHtmlBtn').addEventListener('click', downloadSelfContainedHTML);
 
-/* ============================================================
-   ТАБЫ
-   ============================================================ */
+/* ТАБЫ */
 document.querySelectorAll('.nav-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.section-page').forEach(p => p.classList.remove('active'));
@@ -1772,35 +1600,39 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     chatPageActive = (tab.dataset.page === 'chat');
-    if (chatPageActive){ unreadChat = 0; updateUnreadBadge(); syncChat(false); setTimeout(() => { const b = $('chatMessages'); if (b) b.scrollTop = b.scrollHeight; }, 100); const inp = $('chatInput'); if (inp && !inp.disabled) setTimeout(() => inp.focus(), 300); }
+    if (chatPageActive){ unreadChat = 0; updateUnreadBadge(); syncChat(false); setTimeout(() => { const b = $('chatMessages'); if (b) b.scrollTop = b.scrollHeight; }, 100); }
     if (tab.dataset.page === 'donate') renderTopDonors();
   });
 });
 
-/* ============================================================
-   ОБРАТНЫЙ ОТСЧЁТ + ЧАСЫ
-   ============================================================ */
+/* ОБРАТНЫЙ ОТСЧЁТ + ЧАСЫ */
 const DEBATE_TARGET = new Date(DEBATE_TARGET_ISO).getTime();
 function updateCountdown(){ const diff = Math.max(0, DEBATE_TARGET - Date.now()); const d = Math.floor(diff/86400000); const h = Math.floor((diff%86400000)/3600000); const m = Math.floor((diff%3600000)/60000); const s = Math.floor((diff%60000)/1000); const set = (id,v) => { const e=$(id); if(e) e.textContent=v; }; set('cdDays', String(d).padStart(2,'0')); set('cdHours', String(h).padStart(2,'0')); set('cdMinutes', String(m).padStart(2,'0')); set('cdSeconds', String(s).padStart(2,'0')); set('tickerCountdown', d+'д '+h+'ч '+m+'м'); const line = $('eventDateLine'); if (line){ if (diff <= 0) line.innerHTML = '🎉 <strong>Дебаты идут прямо сейчас!</strong>'; else { const dt = new Date(DEBATE_TARGET); line.innerHTML = 'Начало: <strong>' + dt.toLocaleDateString('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' }) + ' · ' + dt.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + '</strong>'; } } }
 setInterval(updateCountdown, 1000); updateCountdown();
 function updateLiveTime(){ const el = $('liveTime'); if (el) el.textContent = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
 setInterval(updateLiveTime, 1000); updateLiveTime();
 
-/* Звонки */
+/* ЗВОНКИ */
 let selectedServer = 'meet.jit.si';
 document.querySelectorAll('.srv-btn[data-server]').forEach(btn => { btn.addEventListener('click', () => { document.querySelectorAll('.srv-btn[data-server]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); selectedServer = btn.dataset.server; }); });
 $('tgCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const nick = $('tgTarget').value.trim().replace(/^@/,'').toLowerCase(); if (!nick || !/^[a-zA-Z0-9_]{3,32}$/.test(nick)){ alert('Ник латиницей'); return; } localStorage.setItem('inaogenty_tg_last', nick); window.open('https://t.me/' + encodeURIComponent(nick), '_blank'); });
 $('jitsiBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = 'https://' + selectedServer + '/inaogenty-' + Math.random().toString(36).slice(2,10); if (navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {}); window.open(link, '_blank'); setTimeout(() => alert('🔗 ' + link), 600); });
 $('joinCallBtn').addEventListener('click', () => { if (userRole === 'guest'){ alert('🔒 Только участники'); return; } const link = $('joinLink').value.trim(); if (!link){ alert('Вставь ссылку'); return; } window.open(link, '_blank'); });
 
-/* ============================================================
-   СТАРТ
-   ============================================================ */
+/* СТАРТ */
 const year = new Date().getFullYear();
 if ($('welYear')) $('welYear').textContent = year;
 if ($('footYear')) $('footYear').textContent = year;
 
-applyBootstrapOnLoad();
+(function renderVersion(){
+  const badge = $('versionBadge'), text = $('verText');
+  if (badge && text){
+    text.textContent = 'Версия v' + SITE_VERSION + ' · ' + SITE_BUILD_TIME;
+    badge.classList.add('updating');
+    setTimeout(() => badge.classList.remove('updating'), 2000);
+  }
+})();
+
 applyCustomTexts();
 applyAllCachedMedia();
 renderAllFromDonations();
@@ -1812,7 +1644,6 @@ updateLockUI();
 updateChatSender();
 updateChatGuestWarning();
 applyEditPermissions();
-updateChatStatus();
 setSyncIndicator('ok', 'Готово');
 
 (function(){
@@ -1828,34 +1659,29 @@ setTimeout(() => {
   makeFighterMediaEditable();
   applyEditPermissions();
   loadAllStaffPhotos();
-  // Запуск чата — WebSocket + polling
-  startChatWebSocket();
+  startChatSSE();
   startChatPolling();
   syncChat(true);
   startPresence();
   startSnapshotSubscription();
 }, 100);
 
-setTimeout(() => { loadLatestSnapshot(); }, 500);
-
-// Синхронизация при возврате на вкладку
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden){
     syncChat(false);
     pollPresence();
     renderPresenceLine();
     if (senderName()) sendPresence();
-    if (!chatWSConnected) startChatWebSocket();
+    startChatSSE();
   }
 });
-window.addEventListener('focus', () => { syncChat(false); pollPresence(); if (!chatWSConnected) startChatWebSocket(); });
+window.addEventListener('focus', () => { syncChat(false); pollPresence(); });
 
-// Обновляем "был X мин назад" каждые 5 сек
 setInterval(() => {
   renderPresenceLine();
   const now = Date.now();
   Object.keys(presenceMap).forEach(k => { if (now - presenceMap[k].time > 3600000) delete presenceMap[k]; });
-}, 5000);
+}, 10000);
 </script>
 </body>
 </html>
